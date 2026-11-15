@@ -4,15 +4,17 @@
 <meta charset="utf-8">
 <script>
   // ================== ENLACES DE DESCARGA ==================
-  // Los dos .exe se descargan de tu GitHub (misma release).
+  // Todos los archivos se descargan de tu GitHub (misma release).
   window.XPEAK_LINKS = {
     hollowdays: 'https://github.com/xpeakentertainment/XPEAKGAMES/releases/latest/download/HollowDays.exe',
-    partytime: 'https://github.com/xpeakentertainment/XPEAKGAMES/releases/latest/download/TADC-Party-Time-1_4-Patch.exe'
+    partytime: 'https://github.com/xpeakentertainment/XPEAKGAMES/releases/latest/download/TADC-Party-Time-1_4-Patch.exe',
+    hxwindows: 'https://github.com/xpeakentertainment/XPEAKGAMES/releases/latest/download/HardwareExchange.exe',
+    hxandroid: 'https://github.com/xpeakentertainment/XPEAKGAMES/releases/latest/download/HardwareExchange.apk'
   };
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>X-Peak Entertainment</title>
-<meta name="description" content="X-Peak Entertainment es un estudio independiente de videojuegos. Juegos: Hollow Days y The Amazing Digital Circus: Party Time!">
+<meta name="description" content="X-Peak Entertainment es un estudio independiente de videojuegos. Juegos: Hollow Days, The Amazing Digital Circus: Party Time! y Hardware Exchange.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23161c36'/%3E%3Cpath d='M10 54 L32 22 L54 54Z' fill='%23eef1f8'/%3E%3Cpath d='M10 54 L44 6 M54 54 L20 6' stroke='%23ff7a4d' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E">
 <style>
 @font-face { font-family: 'Unbounded'; src: url(fonts/unbounded-latin-500-normal.woff2) format('woff2'); font-weight: 500; font-display: swap; }
@@ -23,6 +25,8 @@
 @font-face { font-family: 'Manrope'; src: url(fonts/manrope-latin-700-normal.woff2) format('woff2'); font-weight: 700; font-display: swap; }
 @font-face { font-family: 'Black Ops One'; src: url(fonts/black-ops-one-latin-400-normal.woff2) format('woff2'); font-display: swap; }
 @font-face { font-family: 'Lilita One'; src: url(fonts/lilita-one-latin-400-normal.woff2) format('woff2'); font-display: swap; }
+@font-face { font-family: 'Chakra Petch'; src: url(fonts/chakra-petch-latin-500-normal.woff2) format('woff2'); font-weight: 500; font-display: swap; }
+@font-face { font-family: 'Chakra Petch'; src: url(fonts/chakra-petch-latin-700-normal.woff2) format('woff2'); font-weight: 700; font-display: swap; }
 
 :root {
   --night: #141a33;     /* sky over the summit */
@@ -81,7 +85,7 @@ section[id] { scroll-margin-top: 80px; }
 .head { display: flex; align-items: end; justify-content: space-between; gap: 20px; margin-bottom: 34px; }
 h2 { font: 700 clamp(30px, 3.6vw, 44px)/1.1 var(--display); margin: 0; }
 .head p { margin: 0; color: var(--mist); max-width: 26em; }
-.shelf { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px; }
+.shelf { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
 .card { position: relative; text-align: left; padding: 0; border: 0; cursor: pointer; color: inherit; background: var(--ridge); border-radius: 18px; overflow: hidden;
   box-shadow: 0 24px 50px rgba(0,0,0,.35); transition: transform .25s ease, box-shadow .25s ease; display: flex; flex-direction: column; }
 .card:hover { transform: translateY(-6px); box-shadow: 0 34px 60px rgba(0,0,0,.45); }
@@ -100,6 +104,11 @@ h2 { font: 700 clamp(30px, 3.6vw, 44px)/1.1 var(--display); margin: 0; }
 .card-pt { border-bottom: 4px solid #f2b531; }
 .card-hd .badge svg { width: 230px; height: auto; filter: drop-shadow(0 4px 12px rgba(0,0,0,.7)); }
 .card-pt .badge b { font: 400 30px/1.05 'Lilita One', var(--display); color: #fff6dc; text-shadow: 0 3px 0 #9b1b22, 0 6px 16px rgba(0,0,0,.6); display: block; max-width: 12em; }
+.card-hx { border-bottom: 4px solid #ff9a4d; }
+.hxmark { display: flex; align-items: center; gap: 12px; }
+.hxmark svg { width: 52px; height: 52px; flex: none; color: #e7eaf3; filter: drop-shadow(0 3px 10px rgba(0,0,0,.6)); }
+.hxmark b { font: 700 28px/.9 'Chakra Petch', var(--display); color: #e7eaf3; text-shadow: 0 3px 14px rgba(0,0,0,.7); }
+.hxmark b span { display: block; color: #ff9a4d; }
 
 /* ---------- about ---------- */
 .about { background: var(--ridge); padding: 90px 0; }
@@ -181,6 +190,33 @@ footer .r { margin-left: auto; }
 .t-pt .note { background: #ffe9b0; }
 .t-pt ul.feats li::marker { color: #c81f2d; }
 
+/* Hardware Exchange frame: a circuit board, copper traces and the gold contacts of a RAM stick */
+.t-hx { background: #141826; color: #e6e9f2; border: 2px solid #3b4663;
+  background-image: linear-gradient(rgba(255,154,77,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,154,77,.05) 1px, transparent 1px); background-size: 34px 34px; }
+.t-hx::before { content: ''; display: block; height: 12px; background: repeating-linear-gradient(90deg, #d7b45e 0 9px, #141826 9px 13px); border-bottom: 2px solid #3b4663; }
+.t-hx .close { background: #ff9a4d; color: #22140a; top: 26px; }
+.t-hx .f-hero::after { background: linear-gradient(0deg, rgba(20,24,38,.95) 0%, rgba(20,24,38,0) 62%); }
+.t-hx .f-hero .title .hxmark svg { width: 72px; height: 72px; }
+.t-hx .f-hero .title .hxmark b { font-size: clamp(34px, 4.6vw, 58px); }
+.t-hx h3 { font: 700 23px/1.2 'Chakra Petch', var(--display); color: #ff9a4d; }
+.t-hx .lead { color: #f1f3f9; }
+.t-hx p, .t-hx li { color: #c9cfe0; }
+.t-hx .shots button { border: 1px solid #3b4663; }
+.t-hx .dlbox { background: #1c2232; border: 1px solid #3b4663; }
+.t-hx .dlbox h3 { color: #e6e9f2; }
+.t-hx .dlbtn { background: #ff9a4d; color: #22140a; font: 700 18px/1.2 'Chakra Petch', var(--display); box-shadow: 0 4px 0 #a85a24; }
+.t-hx .dlbtn:hover { background: #ffb27a; }
+.t-hx .dlbtn.android { background: #3ddc97; color: #0b2a1e; box-shadow: 0 4px 0 #1f8a5c; }
+.t-hx .dlbtn.android:hover { background: #63e8ad; }
+.t-hx .dlbtn span small { font-family: var(--body); }
+.t-hx .facts dt { color: #e6e9f2; }
+.t-hx .facts dd { color: #c9cfe0; }
+.t-hx .note { background: #1c2232; border-left: 3px solid #ff9a4d; color: #c9cfe0; }
+.t-hx .note b { color: #e6e9f2; }
+.t-hx .note.android { border-left-color: #3ddc97; }
+.t-hx ul.feats li::marker { color: #ff9a4d; }
+.t-hx .legal { color: #8f99b3; }
+
 /* big screenshot viewer */
 .lb { position: fixed; inset: 0; z-index: 60; background: rgba(6,8,18,.94); display: none; align-items: center; justify-content: center; padding: 5vh 5vw; }
 .lb.open { display: flex; }
@@ -206,6 +242,7 @@ footer .r { margin-left: auto; }
 .t-pt .dlbtn.alt:hover { background: rgba(242,181,49,.15); }
 @media (max-width: 900px) { .t-pt .trio { display: none; } .card .cover > img.photo { width: 44%; } }
 
+@media (max-width: 1100px) { .shelf { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 900px) {
   .bar nav { display: none; }
   .shelf, .about .wrap, .f-body { grid-template-columns: 1fr; }
@@ -222,6 +259,14 @@ footer .r { margin-left: auto; }
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="hxlogo" viewBox="0 0 64 64">
+    <g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M18 6v6M26 6v6M38 6v6M46 6v6M18 52v6M26 52v6M38 52v6M46 52v6M6 18h6M6 26h6M6 38h6M6 46h6M52 18h6M52 26h6M52 38h6M52 46h6"/></g>
+    <rect x="12" y="12" width="40" height="40" rx="5" fill="#141826"/>
+    <rect x="12" y="12" width="40" height="40" rx="5" fill="none" stroke="currentColor" stroke-width="3"/>
+    <g fill="none" stroke="#ff9a4d" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 27h20l-5-5M43 37H23l5 5"/></g>
+  </symbol>
+</svg>
 
 <header class="bar" id="bar">
   <div class="wrap">
@@ -308,6 +353,18 @@ footer .r { margin-left: auto; }
             <h3>The Amazing Digital Circus: Party Time!</h3>
             <p>Un party game de tablero en el circo digital. Dados, Bubbles, Gloinks y 25 minijuegos para hacer la puñeta a tus amigos.</p>
             <div class="chips"><span class="chip">Windows</span><span class="chip">1 a 4 jugadores</span><span class="chip">Fangame</span></div>
+            <span class="go">Ver juego</span>
+          </div>
+        </button>
+        <button class="card card-hx" type="button" data-open="hardware-exchange">
+          <div class="cover">
+            <img src="img/hx-cover.jpg" alt="Un PC montado en Hardware Exchange, con la caja pintada de morado y luces RGB">
+            <div class="badge"><div class="hxmark"><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#hxlogo"/></svg><b>Hardware <span>Exchange</span></b></div></div>
+          </div>
+          <div class="meta">
+            <h3>Hardware Exchange</h3>
+            <p>Monta tu PC con más de 2.500 componentes, píntalo a tu gusto y descubre a cuántos FPS movería tus juegos.</p>
+            <div class="chips"><span class="chip">Windows</span><span class="chip">Android</span><span class="chip">Simulador</span></div>
             <span class="go">Ver juego</span>
           </div>
         </button>
@@ -451,6 +508,56 @@ footer .r { margin-left: auto; }
       </div>
     </div>
   </article>
+
+  <article class="frame t-hx" data-game="hardware-exchange" hidden>
+    <button class="close" type="button" aria-label="Cerrar">✕</button>
+    <div class="f-hero">
+      <img src="img/hx-hero.jpg" alt="">
+      <div class="title"><div class="hxmark"><svg viewBox="0 0 64 64" role="img" aria-label="Hardware Exchange"><use href="#hxlogo"/></svg><b>Hardware <span>Exchange</span></b></div></div>
+    </div>
+    <div class="f-body">
+      <div>
+        <p class="lead">Monta tu propio PC pieza a pieza y comprueba si de verdad funcionaría. Elige entre más de 2.500 componentes, píntalo como quieras y descubre a cuántos FPS movería tus juegos favoritos.</p>
+        <p>Cada pieza se ve en 3D: la puedes girar, darle la vuelta y acercarte hasta ver los pines del procesador. Si algo no encaja, como un procesador Intel en una placa para AMD, una gráfica que no cabe en la caja o una fuente que se queda corta, el juego te lo dice y te explica por qué.</p>
+        <h3>Capturas</h3>
+        <div class="shots" data-shots="hx"></div>
+        <h3>Qué tiene</h3>
+        <ul class="feats">
+          <li>Más de 2.500 componentes: procesadores, placas base, RAM, gráficas, discos, fuentes, cajas, disipadores, ventiladores y monitores.</li>
+          <li>Buscador con filtros por marca (NVIDIA, AMD, Intel, ASUS, MSI, Corsair…), tipo, precio y compatibilidad.</li>
+          <li>El PC montado en 3D dentro de su caja, y cada pieza por separado.</li>
+          <li>Pintura y luces RGB: caja, gráfica, RAM, ventiladores, cables y efectos de luz.</li>
+          <li>Avisos de compatibilidad, consumo, temperatura y cuellos de botella.</li>
+          <li>FPS estimados en 115 juegos según resolución, calidad, trazado de rayos y escalado.</li>
+          <li>5 ranuras de guardado, música y cinco idiomas.</li>
+        </ul>
+      </div>
+      <aside class="side">
+        <div class="dlbox">
+          <h3>Descargar</h3>
+          <p>Gratis. Un solo archivo, sin instalador en PC.</p>
+          <a class="dlbtn" data-link="hxwindows" href="#">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square" aria-hidden="true"><path d="M12 3v12M6 10l6 6 6-6M4 20h16"/></svg>
+            <span>Descargar para Windows<small>HardwareExchange.exe, 65 MB</small></span>
+          </a>
+          <a class="dlbtn android" data-link="hxandroid" href="#">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square" aria-hidden="true"><path d="M12 3v12M6 10l6 6 6-6M4 20h16"/></svg>
+            <span>Descargar para Android<small>HardwareExchange.apk, menos de 1 MB</small></span>
+          </a>
+        </div>
+        <dl class="facts">
+          <dt>Windows</dt><dd>10 u 11 de 64 bits</dd>
+          <dt>Android</dt><dd>7.0 o superior</dd>
+          <dt>Controles</dt><dd>Ratón o pantalla táctil</dd>
+          <dt>Idiomas</dt><dd>Español, inglés, francés, alemán y portugués</dd>
+          <dt>Guardado</dt><dd>5 ranuras</dd>
+        </dl>
+        <div class="note"><b>¿Windows te avisa al abrirlo?</b>Es normal con los juegos independientes que no tienen firma digital de pago. Pulsa «Más información» y luego «Ejecutar de todas formas». Solo pasa la primera vez.</div>
+        <div class="note android"><b>¿Cómo se instala en Android?</b>Abre el archivo descargado. Android te pedirá permiso para instalar apps que no vienen de Google Play: dáselo y vuelve. Si Play Protect muestra un aviso, elige instalar igualmente.</div>
+        <p class="legal">Los nombres de componentes, marcas y juegos pertenecen a sus dueños. Precios, consumos y FPS son estimaciones.</p>
+      </aside>
+    </div>
+  </article>
 </div>
 
 <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Captura ampliada">
@@ -465,8 +572,9 @@ footer .r { margin-left: auto; }
 const SHOTS = {
   hd: ['fort', 'millbrook', 'noche', 'combate', 'valle', 'cooperativo', 'mapa', 'hospital', 'creador'].map(f => ({ big: `img/hd-${f}.jpg`, small: `img/hd-${f}-p.jpg` })),
   pt: Array.from({ length: 8 }, (_, i) => ({ big: `img/partytime-${i + 1}.jpg`, small: `img/partytime-${i + 1}-p.jpg` })),
+  hx: ['menu', 'montaje', 'buscador', 'pieza', 'pintar', 'juegos', 'fps', 'errores'].map(f => ({ big: `img/hx-${f}.jpg`, small: `img/hx-${f}-p.jpg` })),
 };
-const live = { hd: [], pt: [] };
+const live = { hd: [], pt: [], hx: [] };
 for (const k in SHOTS) {
   const box = document.querySelector(`[data-shots="${k}"]`);
   SHOTS[k].forEach(s => {
@@ -511,7 +619,7 @@ function closeGame(fromHistory) {
 document.querySelectorAll('[data-open]').forEach(c => c.addEventListener('click', () => openGame(c.dataset.open)));
 veil.querySelectorAll('.close').forEach(b => b.addEventListener('click', () => closeGame()));
 veil.addEventListener('click', e => { if (e.target === veil) closeGame(); });
-function fromHash() { const id = location.hash.slice(1); if (id === 'hollow-days' || id === 'party-time') openGame(id, false); else closeGame(true); }
+function fromHash() { const id = location.hash.slice(1); if (['hollow-days', 'party-time', 'hardware-exchange'].includes(id)) openGame(id, false); else closeGame(true); }
 addEventListener('popstate', fromHash); fromHash();
 
 // ---------- big screenshot viewer ----------
