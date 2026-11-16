@@ -9,12 +9,14 @@
     hollowdays: 'https://github.com/xpeakentertainment/XPEAKGAMES/releases/latest/download/HollowDays.exe',
     partytime: 'https://github.com/xpeakentertainment/XPEAKGAMES/releases/latest/download/TADC-Party-Time-1_4-Patch.exe',
     hxwindows: 'https://github.com/xpeakentertainment/XPEAKGAMES/releases/latest/download/HardwareExchange.exe',
-    hxandroid: 'https://github.com/xpeakentertainment/XPEAKGAMES/releases/latest/download/HardwareExchange.apk'
+    hxandroid: 'https://github.com/xpeakentertainment/XPEAKGAMES/releases/latest/download/HardwareExchange.apk',
+    rtwindows: 'https://github.com/xpeakentertainment/XPEAKGAMES/releases/latest/download/RagebaitTravel.exe',
+    rtandroid: 'https://github.com/xpeakentertainment/XPEAKGAMES/releases/latest/download/RagebaitTravel.apk'
   };
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>X-Peak Entertainment</title>
-<meta name="description" content="X-Peak Entertainment es un estudio independiente de videojuegos. Juegos: Hollow Days, The Amazing Digital Circus: Party Time! y Hardware Exchange.">
+<meta name="description" content="X-Peak Entertainment es un estudio independiente de videojuegos. Juegos: RAGEBAIT TRAVEL, Hollow Days, The Amazing Digital Circus: Party Time! y Hardware Exchange.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23161c36'/%3E%3Cpath d='M10 54 L32 22 L54 54Z' fill='%23eef1f8'/%3E%3Cpath d='M10 54 L44 6 M54 54 L20 6' stroke='%23ff7a4d' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E">
 <style>
 @font-face { font-family: 'Unbounded'; src: url(fonts/unbounded-latin-500-normal.woff2) format('woff2'); font-weight: 500; font-display: swap; }
@@ -27,6 +29,7 @@
 @font-face { font-family: 'Lilita One'; src: url(fonts/lilita-one-latin-400-normal.woff2) format('woff2'); font-display: swap; }
 @font-face { font-family: 'Chakra Petch'; src: url(fonts/chakra-petch-latin-500-normal.woff2) format('woff2'); font-weight: 500; font-display: swap; }
 @font-face { font-family: 'Chakra Petch'; src: url(fonts/chakra-petch-latin-700-normal.woff2) format('woff2'); font-weight: 700; font-display: swap; }
+@font-face { font-family: 'Titan One'; src: url(fonts/titan-one-latin-400-normal.woff2) format('woff2'); font-display: swap; }
 
 :root {
   --night: #141a33;     /* sky over the summit */
@@ -109,6 +112,21 @@ h2 { font: 700 clamp(30px, 3.6vw, 44px)/1.1 var(--display); margin: 0; }
 .hxmark svg { width: 52px; height: 52px; flex: none; color: #e7eaf3; filter: drop-shadow(0 3px 10px rgba(0,0,0,.6)); }
 .hxmark b { font: 700 28px/.9 'Chakra Petch', var(--display); color: #e7eaf3; text-shadow: 0 3px 14px rgba(0,0,0,.7); }
 .hxmark b span { display: block; color: #ff9a4d; }
+/* RAGEBAIT TRAVEL: the newest game gets the full-width card; tilted candy title like its loading screen */
+.card.feature { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); }
+.card.feature .meta { padding: 34px 38px; justify-content: center; gap: 14px; }
+.card.feature h3 { font-size: 30px; }
+.card.feature p { font-size: 17px; max-width: 30em; }
+.card.feature .go { margin-top: 6px; }
+.card-rt { background: #2b1747; border-bottom: 4px solid #ff4fa3; }
+.card-rt .cover::after { background: linear-gradient(0deg, rgba(27,13,48,.8) 0%, rgba(27,13,48,0) 48%); }
+.card-rt .chip { background: rgba(255,246,232,.1); }
+.card-rt .chip.new { background: #ff4fa3; color: #fff; }
+.card-rt .go { color: #ffd23f; }
+.card-rt .badge { left: 24px; bottom: 20px; }
+.rtmark { display: inline-flex; flex-direction: column; align-items: flex-start; transform: rotate(-5deg); font-family: 'Titan One', var(--display); font-weight: 400; line-height: .86; }
+.rtmark .r1 { font-size: 46px; background: linear-gradient(180deg, #ffb13b 0%, #ff5a2a 48%, #e0122f 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-stroke: 2px #1b0d30; filter: drop-shadow(0 4px 0 #1b0d30); }
+.rtmark .r2 { font-size: 38px; color: #ffd23f; -webkit-text-stroke: 2px #1b0d30; filter: drop-shadow(0 4px 0 #1b0d30); margin-left: 24%; transform: rotate(3deg); }
 
 /* ---------- about ---------- */
 .about { background: var(--ridge); padding: 90px 0; }
@@ -217,6 +235,31 @@ footer .r { margin-left: auto; }
 .t-hx ul.feats li::marker { color: #ff9a4d; }
 .t-hx .legal { color: #8f99b3; }
 
+/* RAGEBAIT TRAVEL frame: grape panels, candy-stripe edge and the chunky yellow and aqua buttons of the game */
+.t-rt { background: #2b1747; color: #fff6e8; border: 4px solid #1b0d30; }
+.t-rt::before { content: ''; display: block; height: 14px; background: repeating-linear-gradient(-45deg, #ff4fa3 0 14px, #fff6e8 14px 28px); border-bottom: 3px solid #1b0d30; }
+.t-rt .close { background: #ffd23f; color: #1b0d30; top: 30px; box-shadow: 0 4px 0 #c99a10; }
+.t-rt .f-hero::after { background: linear-gradient(0deg, rgba(43,23,71,.92) 0%, rgba(43,23,71,0) 58%); }
+.t-rt .f-hero .title .rtmark .r1 { font-size: clamp(32px, 6.4vw, 84px); -webkit-text-stroke-width: 3px; filter: drop-shadow(0 6px 0 #1b0d30); }
+.t-rt .f-hero .title .rtmark .r2 { font-size: clamp(26px, 5.2vw, 68px); -webkit-text-stroke-width: 3px; filter: drop-shadow(0 6px 0 #1b0d30); }
+.t-rt h3 { font: 400 25px/1.2 'Titan One', var(--display); color: #ff4fa3; }
+.t-rt .lead { color: #fff6e8; }
+.t-rt p, .t-rt li { color: #e3d6f2; }
+.t-rt .shots button { border: 3px solid #1b0d30; border-radius: 10px; }
+.t-rt .dlbox { background: #1b0d30; border-radius: 18px; }
+.t-rt .dlbox h3 { color: #ffd23f; }
+.t-rt .dlbtn { background: #ffd23f; color: #1b0d30; font: 400 19px/1.2 'Titan One', var(--display); border-radius: 14px; box-shadow: 0 5px 0 #c99a10; }
+.t-rt .dlbtn:hover { background: #ffe066; }
+.t-rt .dlbtn.android { background: #3fe0d0; box-shadow: 0 5px 0 #1d9a8e; }
+.t-rt .dlbtn.android:hover { background: #6ff0e3; }
+.t-rt .dlbtn span small { font-family: var(--body); }
+.t-rt .facts dt { color: #fff6e8; }
+.t-rt .facts dd { color: #e3d6f2; }
+.t-rt .note { background: #3a1f5e; border-left: 4px solid #ff4fa3; color: #e3d6f2; }
+.t-rt .note b { color: #fff6e8; }
+.t-rt .note.android { border-left-color: #3fe0d0; }
+.t-rt ul.feats li::marker { color: #ffd23f; }
+
 /* big screenshot viewer */
 .lb { position: fixed; inset: 0; z-index: 60; background: rgba(6,8,18,.94); display: none; align-items: center; justify-content: center; padding: 5vh 5vw; }
 .lb.open { display: flex; }
@@ -245,7 +288,10 @@ footer .r { margin-left: auto; }
 @media (max-width: 1100px) { .shelf { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 900px) {
   .bar nav { display: none; }
-  .shelf, .about .wrap, .f-body { grid-template-columns: 1fr; }
+  .shelf, .about .wrap, .f-body, .card.feature { grid-template-columns: 1fr; }
+  .card.feature .meta { padding: 20px 24px 24px; }
+  .card.feature h3 { font-size: 23px; }
+  .rtmark .r1 { font-size: 30px; } .rtmark .r2 { font-size: 25px; }
   .head { flex-direction: column; align-items: start; }
   .f-hero { aspect-ratio: 16 / 9; }
   .f-body { padding: 26px 22px 30px; gap: 24px; }
@@ -309,6 +355,18 @@ footer .r { margin-left: auto; }
         <p>Pulsa en un juego para ver de qué va, sus capturas y la descarga.</p>
       </div>
       <div class="shelf">
+        <button class="card card-rt feature" type="button" data-open="ragebait-travel">
+          <div class="cover">
+            <img src="img/rt-cover.jpg" alt="El protagonista de RAGEBAIT TRAVEL corriendo por una pasarela con un ventilador gigante al lado">
+            <div class="badge"><div class="rtmark" aria-hidden="true"><span class="r1">RAGEBAIT</span><span class="r2">TRAVEL</span></div></div>
+          </div>
+          <div class="meta">
+            <h3>RAGEBAIT TRAVEL</h3>
+            <p>Un recorrido de obstáculos de más de 7 kilómetros que empieza como un paseo y acaba siendo una locura. Corre, salta y no te caigas: solo hay 5 checkpoints.</p>
+            <div class="chips"><span class="chip new">Nuevo</span><span class="chip">Windows</span><span class="chip">Android</span><span class="chip">Plataformas</span></div>
+            <span class="go">Ver juego</span>
+          </div>
+        </button>
         <button class="card card-hd" type="button" data-open="hollow-days">
           <div class="cover">
             <img src="img/hd-fort.jpg" alt="Fort Kessler, el refugio de Hollow Days, visto desde el aire">
@@ -396,6 +454,56 @@ footer .r { margin-left: auto; }
 
 <!-- ===== game frames ===== -->
 <div class="veil" id="veil" role="dialog" aria-modal="true" aria-label="Juego">
+
+  <article class="frame t-rt" data-game="ragebait-travel" hidden>
+    <button class="close" type="button" aria-label="Cerrar">✕</button>
+    <div class="f-hero">
+      <img src="img/rt-hero.jpg" alt="">
+      <div class="title"><div class="rtmark" role="img" aria-label="RAGEBAIT TRAVEL"><span class="r1">RAGEBAIT</span><span class="r2">TRAVEL</span></div></div>
+    </div>
+    <div class="f-body">
+      <div>
+        <p class="lead">Un recorrido de obstáculos gigante, de más de 7 kilómetros, que empieza como un paseo y acaba siendo una locura. Corre, salta, tírate en plancha y, sobre todo, no te caigas: solo hay 5 checkpoints.</p>
+        <p>Cada zona es más difícil que la anterior: trampolines, bolas rodando por rampas, ventiladores que te empujan, hielo que resbala, suelos que se caen y saltos que parecen imposibles. Si sales del juego se guarda tu posición, y al volver apareces justo donde lo dejaste.</p>
+        <h3>Capturas</h3>
+        <div class="shots" data-shots="rt"></div>
+        <h3>Qué tiene</h3>
+        <ul class="feats">
+          <li>Un solo recorrido de más de 7 km en 6 zonas, de fácil a demencial.</li>
+          <li>Solo 5 checkpoints, con un contador de los metros que faltan para el siguiente.</li>
+          <li>Más de 20 tipos de obstáculos: trampolines, bolas, ventiladores, hielo, péndulos, barredoras, plataformas que se mueven, giran o desaparecen, cintas transportadoras, prensas, cañones y más.</li>
+          <li>Correr, saltar y tirarse en plancha para llegar más lejos.</li>
+          <li>Guardado automático: vuelves justo donde lo dejaste.</li>
+          <li>Mando de Xbox o PlayStation, teclado y ratón, o controles táctiles que puedes mover y cambiar de tamaño.</li>
+          <li>Volumen de música y efectos por separado, y cinco idiomas.</li>
+        </ul>
+      </div>
+      <aside class="side">
+        <div class="dlbox">
+          <h3>Descargar</h3>
+          <p>Gratis. Un solo archivo, sin instalador en PC.</p>
+          <a class="dlbtn" data-link="rtwindows" href="#">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square" aria-hidden="true"><path d="M12 3v12M6 10l6 6 6-6M4 20h16"/></svg>
+            <span>Descargar para Windows<small>RagebaitTravel.exe, 65 MB</small></span>
+          </a>
+          <a class="dlbtn android" data-link="rtandroid" href="#">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square" aria-hidden="true"><path d="M12 3v12M6 10l6 6 6-6M4 20h16"/></svg>
+            <span>Descargar para Android<small>RagebaitTravel.apk, menos de 1 MB</small></span>
+          </a>
+        </div>
+        <dl class="facts">
+          <dt>Windows</dt><dd>10 u 11 de 64 bits</dd>
+          <dt>Android</dt><dd>7.0 o superior</dd>
+          <dt>Jugadores</dt><dd>1</dd>
+          <dt>Controles</dt><dd>Teclado y ratón, mando o pantalla táctil</dd>
+          <dt>Idiomas</dt><dd>Español, inglés, francés, alemán y portugués</dd>
+          <dt>Guardado</dt><dd>Automático</dd>
+        </dl>
+        <div class="note"><b>¿Windows te avisa al abrirlo?</b>Es normal con los juegos independientes que no tienen firma digital de pago. Pulsa «Más información» y luego «Ejecutar de todas formas». Solo pasa la primera vez.</div>
+        <div class="note android"><b>¿Cómo se instala en Android?</b>Abre el archivo descargado. Android te pedirá permiso para instalar apps que no vienen de Google Play: dáselo y vuelve. Si Play Protect muestra un aviso, elige instalar igualmente.</div>
+      </aside>
+    </div>
+  </article>
 
   <article class="frame t-hd" data-game="hollow-days" hidden>
     <button class="close" type="button" aria-label="Cerrar">✕</button>
@@ -573,8 +681,9 @@ const SHOTS = {
   hd: ['fort', 'millbrook', 'noche', 'combate', 'valle', 'cooperativo', 'mapa', 'hospital', 'creador'].map(f => ({ big: `img/hd-${f}.jpg`, small: `img/hd-${f}-p.jpg` })),
   pt: Array.from({ length: 8 }, (_, i) => ({ big: `img/partytime-${i + 1}.jpg`, small: `img/partytime-${i + 1}-p.jpg` })),
   hx: ['menu', 'montaje', 'buscador', 'pieza', 'pintar', 'juegos', 'fps', 'errores'].map(f => ({ big: `img/hx-${f}.jpg`, small: `img/hx-${f}-p.jpg` })),
+  rt: ['inicio', 'bolas', 'ventiladores', 'barredora', 'contador', 'checkpoint', 'noche', 'locura', 'movil'].map(f => ({ big: `img/rt-${f}.jpg`, small: `img/rt-${f}-p.jpg` })),
 };
-const live = { hd: [], pt: [], hx: [] };
+const live = { hd: [], pt: [], hx: [], rt: [] };
 for (const k in SHOTS) {
   const box = document.querySelector(`[data-shots="${k}"]`);
   SHOTS[k].forEach(s => {
@@ -598,7 +707,7 @@ document.querySelectorAll('[data-link]').forEach(a => {
   else a.href = url;
 });
 
-// ---------- open / close a game frame (also from the address: #hollow-days, #party-time) ----------
+// ---------- open / close a game frame (also from the address: #ragebait-travel, #hollow-days, #party-time, #hardware-exchange) ----------
 const veil = document.getElementById('veil');
 let lastFocus = null;
 function openGame(id, push) {
@@ -619,7 +728,7 @@ function closeGame(fromHistory) {
 document.querySelectorAll('[data-open]').forEach(c => c.addEventListener('click', () => openGame(c.dataset.open)));
 veil.querySelectorAll('.close').forEach(b => b.addEventListener('click', () => closeGame()));
 veil.addEventListener('click', e => { if (e.target === veil) closeGame(); });
-function fromHash() { const id = location.hash.slice(1); if (['hollow-days', 'party-time', 'hardware-exchange'].includes(id)) openGame(id, false); else closeGame(true); }
+function fromHash() { const id = location.hash.slice(1); if (['ragebait-travel', 'hollow-days', 'party-time', 'hardware-exchange'].includes(id)) openGame(id, false); else closeGame(true); }
 addEventListener('popstate', fromHash); fromHash();
 
 // ---------- big screenshot viewer ----------
