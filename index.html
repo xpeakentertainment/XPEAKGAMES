@@ -11,12 +11,13 @@
     hxwindows: 'https://github.com/xpeakentertainment/XPEAKGAMES/releases/latest/download/HardwareExchange.exe',
     hxandroid: 'https://github.com/xpeakentertainment/XPEAKGAMES/releases/latest/download/HardwareExchange.apk',
     rtwindows: 'https://github.com/xpeakentertainment/XPEAKGAMES/releases/latest/download/RagebaitTravel.exe',
-    rtandroid: 'https://github.com/xpeakentertainment/XPEAKGAMES/releases/latest/download/RagebaitTravel.apk'
+    rtandroid: 'https://github.com/xpeakentertainment/XPEAKGAMES/releases/latest/download/RagebaitTravel.apk',
+    bfswindows: 'https://github.com/xpeakentertainment/XPEAKGAMES/releases/latest/download/BasketballFromScratch.exe'
   };
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>X-Peak Entertainment</title>
-<meta name="description" content="X-Peak Entertainment es un estudio independiente de videojuegos. Juegos: RAGEBAIT TRAVEL, Hollow Days, The Amazing Digital Circus: Party Time! y Hardware Exchange.">
+<meta name="description" content="X-Peak Entertainment es un estudio independiente de videojuegos. Juegos: Basketball: From Scratch, RAGEBAIT TRAVEL, Hollow Days, The Amazing Digital Circus: Party Time! y Hardware Exchange.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23161c36'/%3E%3Cpath d='M10 54 L32 22 L54 54Z' fill='%23eef1f8'/%3E%3Cpath d='M10 54 L44 6 M54 54 L20 6' stroke='%23ff7a4d' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E">
 <style>
 @font-face { font-family: 'Unbounded'; src: url(fonts/unbounded-latin-500-normal.woff2) format('woff2'); font-weight: 500; font-display: swap; }
@@ -27,6 +28,7 @@
 @font-face { font-family: 'Manrope'; src: url(fonts/manrope-latin-700-normal.woff2) format('woff2'); font-weight: 700; font-display: swap; }
 @font-face { font-family: 'Black Ops One'; src: url(fonts/black-ops-one-latin-400-normal.woff2) format('woff2'); font-display: swap; }
 @font-face { font-family: 'Lilita One'; src: url(fonts/lilita-one-latin-400-normal.woff2) format('woff2'); font-display: swap; }
+@font-face { font-family: 'Anton'; src: url(fonts/anton-latin-400-normal.woff2) format('woff2'); font-display: swap; }
 @font-face { font-family: 'Chakra Petch'; src: url(fonts/chakra-petch-latin-500-normal.woff2) format('woff2'); font-weight: 500; font-display: swap; }
 @font-face { font-family: 'Chakra Petch'; src: url(fonts/chakra-petch-latin-700-normal.woff2) format('woff2'); font-weight: 700; font-display: swap; }
 @font-face { font-family: 'Titan One'; src: url(fonts/titan-one-latin-400-normal.woff2) format('woff2'); font-display: swap; }
@@ -88,7 +90,7 @@ section[id] { scroll-margin-top: 80px; }
 .head { display: flex; align-items: end; justify-content: space-between; gap: 20px; margin-bottom: 34px; }
 h2 { font: 700 clamp(30px, 3.6vw, 44px)/1.1 var(--display); margin: 0; }
 .head p { margin: 0; color: var(--mist); max-width: 26em; }
-.shelf { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
+.shelf { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; }
 .card { position: relative; text-align: left; padding: 0; border: 0; cursor: pointer; color: inherit; background: var(--ridge); border-radius: 18px; overflow: hidden;
   box-shadow: 0 24px 50px rgba(0,0,0,.35); transition: transform .25s ease, box-shadow .25s ease; display: flex; flex-direction: column; }
 .card:hover { transform: translateY(-6px); box-shadow: 0 34px 60px rgba(0,0,0,.45); }
@@ -112,7 +114,7 @@ h2 { font: 700 clamp(30px, 3.6vw, 44px)/1.1 var(--display); margin: 0; }
 .hxmark svg { width: 52px; height: 52px; flex: none; color: #e7eaf3; filter: drop-shadow(0 3px 10px rgba(0,0,0,.6)); }
 .hxmark b { font: 700 28px/.9 'Chakra Petch', var(--display); color: #e7eaf3; text-shadow: 0 3px 14px rgba(0,0,0,.7); }
 .hxmark b span { display: block; color: #ff9a4d; }
-/* RAGEBAIT TRAVEL: the newest game gets the full-width card; tilted candy title like its loading screen */
+/* the newest game gets the full-width card */
 .card.feature { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); }
 .card.feature .meta { padding: 34px 38px; justify-content: center; gap: 14px; }
 .card.feature h3 { font-size: 30px; }
@@ -121,7 +123,6 @@ h2 { font: 700 clamp(30px, 3.6vw, 44px)/1.1 var(--display); margin: 0; }
 .card-rt { background: #2b1747; border-bottom: 4px solid #ff4fa3; }
 .card-rt .cover::after { background: linear-gradient(0deg, rgba(27,13,48,.8) 0%, rgba(27,13,48,0) 48%); }
 .card-rt .chip { background: rgba(255,246,232,.1); }
-.card-rt .chip.new { background: #ff4fa3; color: #fff; }
 .card-rt .go { color: #ffd23f; }
 .card-rt .badge { left: 24px; bottom: 20px; }
 .rtmark { display: inline-flex; flex-direction: column; align-items: flex-start; transform: rotate(-5deg); font-family: 'Titan One', var(--display); font-weight: 400; line-height: .86; }
@@ -235,6 +236,39 @@ footer .r { margin-left: auto; }
 .t-hx ul.feats li::marker { color: #ff9a4d; }
 .t-hx .legal { color: #8f99b3; }
 
+/* Basketball: From Scratch: the coach's whiteboard and the arena scoreboard of the game */
+.card-bfs { background: #141c2e; border-bottom: 4px solid #f26b1d; }
+.card-bfs .cover::after { background: linear-gradient(0deg, rgba(15,21,35,.86) 0%, rgba(15,21,35,0) 50%); }
+.card-bfs .badge { left: 24px; bottom: 18px; }
+.card-bfs .chip { background: rgba(244,241,232,.1); }
+.card-bfs .chip.new { background: #f26b1d; color: #fff; }
+.card-bfs .go { color: #ffd23f; }
+.bfsmark { display: inline-block; font-family: 'Anton', var(--display); font-weight: 400; color: #f4f1e8; line-height: .92; text-shadow: 0 4px 18px rgba(0,0,0,.55); }
+.bfsmark span { display: block; font-size: 26px; letter-spacing: .01em; }
+.bfsmark b { display: block; font-weight: 400; font-size: 52px; }
+.bfsmark b::after { content: ''; display: block; height: 6px; margin-top: 6px; border-radius: 4px; background: #f26b1d; transform: rotate(-1.4deg); width: 78%; }
+.t-bfs { background: #0f1523; color: #f4f1e8; border: 4px solid #070b14; }
+.t-bfs::before { content: ''; display: block; height: 12px; background: repeating-linear-gradient(90deg, #f26b1d 0 46px, #0f1523 46px 52px); }
+.t-bfs .close { background: #f26b1d; color: #fff; top: 26px; }
+.t-bfs .f-hero::after { background: linear-gradient(0deg, rgba(15,21,35,.94) 0%, rgba(15,21,35,0) 58%); }
+.t-bfs .f-hero .title .bfsmark span { font-size: clamp(22px, 3vw, 40px); }
+.t-bfs .f-hero .title .bfsmark b { font-size: clamp(44px, 7.4vw, 104px); }
+.t-bfs h3 { font: 400 26px/1.2 'Anton', var(--display); color: #f26b1d; letter-spacing: .01em; }
+.t-bfs .lead { color: #f4f1e8; }
+.t-bfs p, .t-bfs li { color: #c9d0dc; }
+.t-bfs .shots button { border: 2px solid #2a3550; border-radius: 8px; }
+.t-bfs .dlbox { background: #f3f4f1; color: #1f2a44; border: 6px solid #b7bdc4; border-radius: 10px; }
+.t-bfs .dlbox h3 { color: #1f2a44; }
+.t-bfs .dlbox p { color: #5d667a; }
+.t-bfs .dlbtn { background: #f26b1d; color: #fff; border: 2.5px solid #c9520e; font: 400 20px/1.15 'Anton', var(--display); letter-spacing: .02em; box-shadow: 0 4px 0 #1f2a44; }
+.t-bfs .dlbtn:hover { background: #ff7c2e; }
+.t-bfs .dlbtn span small { font-family: var(--body); font-weight: 600; letter-spacing: 0; }
+.t-bfs .facts dt { color: #f4f1e8; }
+.t-bfs .facts dd { color: #c9d0dc; }
+.t-bfs .note { background: #fff3a8; color: #1f2a44; transform: rotate(-.6deg); box-shadow: 0 6px 14px rgba(0,0,0,.3); border-radius: 2px; }
+.t-bfs .note b { color: #1f2a44; }
+.t-bfs ul.feats li::marker { color: #f26b1d; }
+
 /* RAGEBAIT TRAVEL frame: grape panels, candy-stripe edge and the chunky yellow and aqua buttons of the game */
 .t-rt { background: #2b1747; color: #fff6e8; border: 4px solid #1b0d30; }
 .t-rt::before { content: ''; display: block; height: 14px; background: repeating-linear-gradient(-45deg, #ff4fa3 0 14px, #fff6e8 14px 28px); border-bottom: 3px solid #1b0d30; }
@@ -285,10 +319,11 @@ footer .r { margin-left: auto; }
 .t-pt .dlbtn.alt:hover { background: rgba(242,181,49,.15); }
 @media (max-width: 900px) { .t-pt .trio { display: none; } .card .cover > img.photo { width: 44%; } }
 
-@media (max-width: 1100px) { .shelf { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
 @media (max-width: 900px) {
   .bar nav { display: none; }
   .shelf, .about .wrap, .f-body, .card.feature { grid-template-columns: 1fr; }
+  .bfsmark span { font-size: 19px; } .bfsmark b { font-size: 36px; }
   .card.feature .meta { padding: 20px 24px 24px; }
   .card.feature h3 { font-size: 23px; }
   .rtmark .r1 { font-size: 30px; } .rtmark .r2 { font-size: 25px; }
@@ -355,7 +390,19 @@ footer .r { margin-left: auto; }
         <p>Pulsa en un juego para ver de qué va, sus capturas y la descarga.</p>
       </div>
       <div class="shelf">
-        <button class="card card-rt feature" type="button" data-open="ragebait-travel">
+        <button class="card card-bfs feature" type="button" data-open="basketball-from-scratch">
+          <div class="cover">
+            <img src="img/bfs-cover.jpg" alt="Un uno contra uno en La Jaula: el jugador hace un crossover a su rival">
+            <div class="badge"><div class="bfsmark" aria-hidden="true"><span>Basketball:</span><b>From Scratch</b></div></div>
+          </div>
+          <div class="meta">
+            <h3>Basketball: From Scratch</h3>
+            <p>Empiezas en la cancha de tu barrio sin nada. Retos 1 contra 1 por dinero, un ojeador que se fija en ti, pruebas con un club y, si das la talla, la liga profesional.</p>
+            <div class="chips"><span class="chip new">Nuevo</span><span class="chip">Windows</span><span class="chip">Mando</span><span class="chip">Deportes</span></div>
+            <span class="go">Ver juego</span>
+          </div>
+        </button>
+        <button class="card card-rt" type="button" data-open="ragebait-travel">
           <div class="cover">
             <img src="img/rt-cover.jpg" alt="El protagonista de RAGEBAIT TRAVEL corriendo por una pasarela con un ventilador gigante al lado">
             <div class="badge"><div class="rtmark" aria-hidden="true"><span class="r1">RAGEBAIT</span><span class="r2">TRAVEL</span></div></div>
@@ -363,7 +410,7 @@ footer .r { margin-left: auto; }
           <div class="meta">
             <h3>RAGEBAIT TRAVEL</h3>
             <p>Un recorrido de obstáculos de más de 7 kilómetros que empieza como un paseo y acaba siendo una locura. Corre, salta y no te caigas: solo hay 5 checkpoints.</p>
-            <div class="chips"><span class="chip new">Nuevo</span><span class="chip">Windows</span><span class="chip">Android</span><span class="chip">Plataformas</span></div>
+            <div class="chips"><span class="chip">Windows</span><span class="chip">Android</span><span class="chip">Plataformas</span></div>
             <span class="go">Ver juego</span>
           </div>
         </button>
@@ -454,6 +501,50 @@ footer .r { margin-left: auto; }
 
 <!-- ===== game frames ===== -->
 <div class="veil" id="veil" role="dialog" aria-modal="true" aria-label="Juego">
+
+  <article class="frame t-bfs" data-game="basketball-from-scratch" hidden>
+    <button class="close" type="button" aria-label="Cerrar">✕</button>
+    <div class="f-hero">
+      <img src="img/bfs-hero.jpg" alt="">
+      <div class="title"><div class="bfsmark" role="img" aria-label="Basketball: From Scratch"><span>Basketball:</span><b>From Scratch</b></div></div>
+    </div>
+    <div class="f-body">
+      <div>
+        <p class="lead">Un simulador de baloncesto que empieza desde cero: creas a tu jugador y te despiertas a las 8:30 en tu piso, con una cancha al otro lado de la calle.</p>
+        <p>Desayunas, te vistes y bajas a entrenar. Otros jugadores de calle te retan a uno contra uno a 5 puntos, a veces con dinero de por medio. Si ganas a menudo, un ojeador empieza a venir a verte, te invita a las pruebas de un club y, de ahí, a la liga, con entrenamientos, charlas en el descanso, un entrenador que te sienta si juegas mal y ofertas para llegar a profesional.</p>
+        <h3>Capturas</h3>
+        <div class="shots" data-shots="bfs"></div>
+        <h3>Qué tiene</h3>
+        <ul class="feats">
+          <li>Creador de jugador: nombre, dorsal, edad, posición, altura, complexión, piel, ojos, cejas, nariz, boca, pelo y barba.</li>
+          <li>Un día a día de verdad: comer, ducharse, vestirse, gimnasio, barbería, tienda de ropa y zapatillas, bar y autobús a otras canchas.</li>
+          <li>Retos 1 contra 1 en la calle: las canastas valen 1 y los triples 2, y tras un robo o un rebote hay que sacar el balón.</li>
+          <li>Partidos 5 contra 5 con dobles, triples, faltas, tiros libres, 2+1, posesión de 24 segundos y prórroga.</li>
+          <li>Nueve regates que se combinan: crossover, entre las piernas, por la espalda, giro, step-back, hesitación, eurostep, amagos y más.</li>
+          <li>Vida de equipo: entrenamientos, charla en el descanso, cambios del entrenador, compañeros cortados, entrenadores destituidos, eliminatorias y contratos.</li>
+          <li>Tres ranuras de guardado, cinco idiomas y mando de Xbox o PlayStation.</li>
+        </ul>
+      </div>
+      <aside class="side">
+        <div class="dlbox">
+          <h3>Descargar</h3>
+          <p>Gratis. Un solo archivo, sin instalador.</p>
+          <a class="dlbtn" data-link="bfswindows" href="#">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square" aria-hidden="true"><path d="M12 3v12M6 10l6 6 6-6M4 20h16"/></svg>
+            <span>Descargar para Windows<small>BasketballFromScratch.exe, 65 MB</small></span>
+          </a>
+        </div>
+        <dl class="facts">
+          <dt>Windows</dt><dd>10 u 11 de 64 bits</dd>
+          <dt>Jugadores</dt><dd>1</dd>
+          <dt>Controles</dt><dd>Teclado y ratón o mando</dd>
+          <dt>Idiomas</dt><dd>Español, inglés, francés, alemán y portugués</dd>
+          <dt>Guardado</dt><dd>Tres ranuras</dd>
+        </dl>
+        <div class="note"><b>¿Windows te avisa al abrirlo?</b> Es normal con los juegos independientes que no tienen firma digital de pago. Pulsa «Más información» y luego «Ejecutar de todas formas». Solo pasa la primera vez.</div>
+      </aside>
+    </div>
+  </article>
 
   <article class="frame t-rt" data-game="ragebait-travel" hidden>
     <button class="close" type="button" aria-label="Cerrar">✕</button>
@@ -681,9 +772,10 @@ const SHOTS = {
   hd: ['fort', 'millbrook', 'noche', 'combate', 'valle', 'cooperativo', 'mapa', 'hospital', 'creador'].map(f => ({ big: `img/hd-${f}.jpg`, small: `img/hd-${f}-p.jpg` })),
   pt: Array.from({ length: 8 }, (_, i) => ({ big: `img/partytime-${i + 1}.jpg`, small: `img/partytime-${i + 1}-p.jpg` })),
   hx: ['menu', 'montaje', 'buscador', 'pieza', 'pintar', 'juegos', 'fps', 'errores'].map(f => ({ big: `img/hx-${f}.jpg`, small: `img/hx-${f}-p.jpg` })),
+  bfs: ['calle', 'liga', 'creador', 'casa', 'barrio', 'movil', 'pro', 'menu'].map(f => ({ big: `img/bfs-${f}.jpg`, small: `img/bfs-${f}-p.jpg` })),
   rt: ['inicio', 'bolas', 'ventiladores', 'barredora', 'contador', 'checkpoint', 'noche', 'locura', 'movil'].map(f => ({ big: `img/rt-${f}.jpg`, small: `img/rt-${f}-p.jpg` })),
 };
-const live = { hd: [], pt: [], hx: [], rt: [] };
+const live = { hd: [], pt: [], hx: [], rt: [], bfs: [] };
 for (const k in SHOTS) {
   const box = document.querySelector(`[data-shots="${k}"]`);
   SHOTS[k].forEach(s => {
@@ -707,7 +799,7 @@ document.querySelectorAll('[data-link]').forEach(a => {
   else a.href = url;
 });
 
-// ---------- open / close a game frame (also from the address: #ragebait-travel, #hollow-days, #party-time, #hardware-exchange) ----------
+// ---------- open / close a game frame (also from the address: #basketball-from-scratch, #ragebait-travel, #hollow-days, #party-time, #hardware-exchange) ----------
 const veil = document.getElementById('veil');
 let lastFocus = null;
 function openGame(id, push) {
@@ -728,7 +820,7 @@ function closeGame(fromHistory) {
 document.querySelectorAll('[data-open]').forEach(c => c.addEventListener('click', () => openGame(c.dataset.open)));
 veil.querySelectorAll('.close').forEach(b => b.addEventListener('click', () => closeGame()));
 veil.addEventListener('click', e => { if (e.target === veil) closeGame(); });
-function fromHash() { const id = location.hash.slice(1); if (['ragebait-travel', 'hollow-days', 'party-time', 'hardware-exchange'].includes(id)) openGame(id, false); else closeGame(true); }
+function fromHash() { const id = location.hash.slice(1); if (['basketball-from-scratch', 'ragebait-travel', 'hollow-days', 'party-time', 'hardware-exchange'].includes(id)) openGame(id, false); else closeGame(true); }
 addEventListener('popstate', fromHash); fromHash();
 
 // ---------- big screenshot viewer ----------
