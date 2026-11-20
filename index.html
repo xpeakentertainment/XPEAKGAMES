@@ -13,12 +13,13 @@
     rtwindows: 'https://github.com/xpeakentertainment/XPEAKGAMES/releases/latest/download/RagebaitTravel.exe',
     rtandroid: 'https://github.com/xpeakentertainment/XPEAKGAMES/releases/latest/download/RagebaitTravel.apk',
     bfswindows: 'https://github.com/xpeakentertainment/XPEAKGAMES/releases/latest/download/BasketballFromScratch.exe',
-    thuwindows: 'https://github.com/xpeakentertainment/XPEAKGAMES/releases/latest/download/TheHundredteller.exe'
+    thuwindows: 'https://github.com/xpeakentertainment/XPEAKGAMES/releases/latest/download/TheHundredteller.exe',
+    fwandroid: 'https://github.com/xpeakentertainment/XPEAKGAMES/releases/latest/download/Frogwars.apk'
   };
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>X-Peak Entertainment</title>
-<meta name="description" content="X-Peak Entertainment es un estudio independiente de videojuegos. Juegos: Basketball: From Scratch, RAGEBAIT TRAVEL, Hollow Days, The Amazing Digital Circus: Party Time! y Hardware Exchange.">
+<meta name="description" content="X-Peak Entertainment es un estudio independiente de videojuegos. Juegos: Frogwars, El Cuentacien, Basketball: From Scratch, RAGEBAIT TRAVEL, Hollow Days, The Amazing Digital Circus: Party Time! y Hardware Exchange.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23161c36'/%3E%3Cpath d='M10 54 L32 22 L54 54Z' fill='%23eef1f8'/%3E%3Cpath d='M10 54 L44 6 M54 54 L20 6' stroke='%23ff7a4d' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E">
 <style>
 @font-face { font-family: 'Unbounded'; src: url(fonts/unbounded-latin-500-normal.woff2) format('woff2'); font-weight: 500; font-display: swap; }
@@ -35,6 +36,7 @@
 @font-face { font-family: 'Titan One'; src: url(fonts/titan-one-latin-400-normal.woff2) format('woff2'); font-display: swap; }
 @font-face { font-family: 'IM Fell English'; src: url(fonts/im-fell-english-latin-400-normal.woff2) format('woff2'); font-display: swap; }
 @font-face { font-family: 'IM Fell English'; src: url(fonts/im-fell-english-latin-400-italic.woff2) format('woff2'); font-style: italic; font-display: swap; }
+@font-face { font-family: 'Pixelify Sans'; src: url(fonts/pixelify-sans-latin-700-normal.woff2) format('woff2'); font-weight: 700; font-display: swap; }
 
 :root {
   --night: #141a33;     /* sky over the summit */
@@ -302,6 +304,42 @@ footer .r { margin-left: auto; }
 .t-thu .note { background: #17120e; color: #bdb5a6; border-left: 3px solid #9a3a2c; border-radius: 2px; }
 .t-thu .note b { color: #ece4d3; }
 .t-thu ul.feats li::marker { color: #9a3a2c; }
+
+/* FROGWARS: night pond, pixel lettering, chunky black outlines like the game's buttons */
+.card-fw { background: #0f2a23; border-bottom: 4px solid #5fd35b; }
+.card-fw .cover::after { background: linear-gradient(0deg, rgba(11,32,28,.92) 0%, rgba(11,32,28,0) 50%); }
+.card-fw .badge { left: 26px; bottom: 22px; }
+.card-fw h3 { font: 700 30px/1.1 'Pixelify Sans', var(--display); letter-spacing: 1px; color: #eaf7e4; }
+.card-fw p { color: #b9d3c4; }
+.card-fw .chip { background: rgba(95,211,91,.1); color: #d6f0cf; border-radius: 0; }
+.card-fw .chip.new { background: #5fd35b; color: #0d2a0e; }
+.card-fw .go { color: #ffd54a; }
+.card-thu .chip.new, .card-fw .chip.new { font-weight: 800; }
+.fwmark { display: inline-block; line-height: 1; }
+.fwmark b { display: block; font: 700 58px/1 'Pixelify Sans', var(--display); letter-spacing: 4px; color: #5fd35b; text-shadow: 3px 3px 0 #1f6b2a, 6px 6px 0 #000; }
+.fwmark i { display: inline-block; margin-top: 10px; font: 700 15px/1 'Pixelify Sans', var(--display); font-style: normal; letter-spacing: 1px; color: #2b0d03; background: #ff7a4d; padding: 5px 8px; box-shadow: 3px 3px 0 #000; }
+.t-fw { background: #0f2a23; color: #e3efe0; border: 4px solid #000; border-radius: 0; box-shadow: 0 0 0 2px #1f6b2a; }
+.t-fw::before { content: ''; display: block; height: 12px; background: repeating-linear-gradient(90deg, #5fd35b 0 12px, #1f6b2a 12px 24px); border-bottom: 4px solid #000; }
+.t-fw .close { background: #ffd54a; color: #1b1300; border-radius: 0; box-shadow: 0 4px 0 #000; top: 28px; font-weight: 800; }
+.t-fw .f-hero::after { background: linear-gradient(0deg, rgba(15,42,35,.95) 0%, rgba(15,42,35,0) 58%); }
+.t-fw .f-hero .title .fwmark b { font-size: clamp(46px, 8vw, 110px); }
+.t-fw .f-hero .title .fwmark i { font-size: clamp(14px, 1.6vw, 20px); }
+.t-fw h3 { font: 700 24px/1.2 'Pixelify Sans', var(--display); letter-spacing: .5px; color: #ffd54a; }
+.t-fw .lead { color: #f0f8ec; }
+.t-fw p, .t-fw li { color: #b9d3c4; }
+.t-fw .shots button { border: 3px solid #000; border-radius: 0; box-shadow: 3px 3px 0 #000; }
+.t-fw .dlbox { background: #0b201c; border: 4px solid #000; border-radius: 0; }
+.t-fw .dlbox h3 { color: #eaf7e4; }
+.t-fw .dlbox p { color: #8fb3a2; margin: 0; }
+.t-fw .dlbtn { background: #5fd35b; color: #0d2a0e; border: 4px solid #000; border-radius: 0; box-shadow: 0 5px 0 #000; font: 700 19px/1.2 'Pixelify Sans', var(--display); }
+.t-fw .dlbtn:hover { background: #7be276; }
+.t-fw .dlbtn span small { font-family: var(--body); font-weight: 600; }
+.t-fw .facts dt { color: #eaf7e4; }
+.t-fw .facts dd { color: #b9d3c4; }
+.t-fw .note { background: #0b201c; color: #b9d3c4; border-left: 4px solid #5fd35b; border-radius: 0; }
+.t-fw .note b { color: #eaf7e4; }
+.t-fw ul.feats li::marker { color: #5fd35b; }
+@media (max-width: 900px) { .fwmark b { font-size: 40px; } .fwmark i { font-size: 13px; } }
 /* an odd card at the end of the shelf takes the whole row */
 .shelf > .card:not(.feature):last-child:nth-child(even) { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); }
 .shelf > .card:not(.feature):last-child:nth-child(even) .meta { padding: 30px 34px; justify-content: center; }
@@ -430,7 +468,19 @@ footer .r { margin-left: auto; }
         <p>Pulsa en un juego para ver de qué va, sus capturas y la descarga.</p>
       </div>
       <div class="shelf">
-        <button class="card card-thu feature" type="button" data-open="el-cuentacien">
+        <button class="card card-fw feature" type="button" data-open="frogwars">
+          <div class="cover">
+            <img src="img/fw-cover.jpg" alt="Ranas de colores peleando con espada y lengua en un mapa de selva de Frogwars">
+            <div class="badge"><div class="fwmark" aria-hidden="true"><b>FROGWARS</b><i>Temporada 1 · ¡X-PEAK Lanzamiento!</i></div></div>
+          </div>
+          <div class="meta">
+            <h3>Frogwars</h3>
+            <p>Batallas de ranas con espada y lengua, en horizontal: Battle Royale, duelos, equipos y captura la bandera. Online contra gente de verdad con tu cuenta de Discord, y un pase de batalla gratis de 100 niveles.</p>
+            <div class="chips"><span class="chip new">Nuevo</span><span class="chip">Android</span><span class="chip">Online</span><span class="chip">Acción</span></div>
+            <span class="go">Ver juego</span>
+          </div>
+        </button>
+        <button class="card card-thu" type="button" data-open="el-cuentacien">
           <div class="cover">
             <img src="img/thu-cover.jpg" alt="El Cuentacien, con un reloj en el pecho, alarga una mano con garras hacia ti a la luz de la linterna">
             <div class="badge"><div class="thumark" aria-hidden="true"><b>El Cuentacien</b> <i>The Hundredteller</i></div></div>
@@ -553,6 +603,51 @@ footer .r { margin-left: auto; }
 
 <!-- ===== game frames ===== -->
 <div class="veil" id="veil" role="dialog" aria-modal="true" aria-label="Juego">
+
+  <article class="frame t-fw" data-game="frogwars" hidden>
+    <button class="close" type="button" aria-label="Cerrar">✕</button>
+    <div class="f-hero">
+      <img src="img/fw-hero.jpg" alt="">
+      <div class="title"><div class="fwmark" role="img" aria-label="Frogwars"><b>FROGWARS</b><i>Temporada 1 · ¡X-PEAK Lanzamiento!</i></div></div>
+    </div>
+    <div class="f-body">
+      <div>
+        <p class="lead">Ranas armadas con espada y lengua se pelean en un estanque isométrico hasta que solo queda una. Partidas rápidas en horizontal para Android, contra bots o contra gente de verdad.</p>
+        <p>Saltas tocando el suelo, arrastras la espada o la lengua para apuntar y llevas tres habilidades: bombas, rayos, congelación, cohetes, clones y muchas más. Online te emparejas con jugadores reales usando tu cuenta de Discord, juegas en grupo con tus amigos y subes el pase de batalla de la Temporada 1, ¡X-PEAK Lanzamiento!</p>
+        <h3>Capturas</h3>
+        <div class="shots" data-shots="fw"></div>
+        <h3>Qué tiene</h3>
+        <ul class="feats">
+          <li>Ocho modos: Battle Royale, duelos de 1 contra 1, 2 contra 2 y 3 contra 3, Battle Royale por dúos y tríos, FrogFlag (captura la bandera) y lucha en equipo de 5 contra 5.</li>
+          <li>19 mapas: pantano, desierto, nieve, volcán, ciudad, espacio, océano, laberinto y más.</li>
+          <li>Online con jugadores reales: búsqueda por modo, partidas clasificatorias con ELO, grupo con amigos y ranking. Si falta gente, los huecos se rellenan con bots.</li>
+          <li>Más de 50 skins, más de 40 habilidades que se mejoran por niveles, efectos de eliminación y emotes.</li>
+          <li>Tres cajas para conseguir skins, habilidades y efectos: Caja Básica, Caja Épica y Caja de Campeón.</li>
+          <li>Pase de batalla gratis de 100 niveles con skins, emotes y armas exclusivas. El emote «¡Viva X-PEAK!» se reclama gratis en la tienda.</li>
+          <li>Seis idiomas, y también sin conexión: contra bots o en el campo de entrenamiento.</li>
+        </ul>
+      </div>
+      <aside class="side">
+        <div class="dlbox">
+          <h3>Descargar</h3>
+          <p>Gratis. Solo para Android.</p>
+          <a class="dlbtn" data-link="fwandroid" href="#">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square" aria-hidden="true"><path d="M12 3v12M6 10l6 6 6-6M4 20h16"/></svg>
+            <span>Descargar para Android<small>Frogwars.apk, 4 MB</small></span>
+          </a>
+        </div>
+        <dl class="facts">
+          <dt>Android</dt><dd>7.0 o superior</dd>
+          <dt>Jugadores</dt><dd>1 sin conexión, o de 2 a 10 online</dd>
+          <dt>Controles</dt><dd>Pantalla táctil, en horizontal</dd>
+          <dt>Idiomas</dt><dd>Español, inglés, francés, alemán, portugués e italiano</dd>
+          <dt>Online</dt><dd>Con cuenta de Discord</dd>
+          <dt>Temporada</dt><dd>1 · ¡X-PEAK Lanzamiento!</dd>
+        </dl>
+        <div class="note"><b>¿Cómo se instala en Android?</b> Abre el archivo descargado. Android te pedirá permiso para instalar apps que no vienen de Google Play: dáselo y vuelve. Si Play Protect muestra un aviso, elige instalar igualmente.</div>
+      </aside>
+    </div>
+  </article>
 
   <article class="frame t-thu" data-game="el-cuentacien" hidden>
     <button class="close" type="button" aria-label="Cerrar">✕</button>
@@ -869,11 +964,12 @@ const SHOTS = {
   hd: ['fort', 'millbrook', 'noche', 'combate', 'valle', 'cooperativo', 'mapa', 'hospital', 'creador'].map(f => ({ big: `img/hd-${f}.jpg`, small: `img/hd-${f}-p.jpg` })),
   pt: Array.from({ length: 8 }, (_, i) => ({ big: `img/partytime-${i + 1}.jpg`, small: `img/partytime-${i + 1}-p.jpg` })),
   hx: ['menu', 'montaje', 'buscador', 'pieza', 'pintar', 'juegos', 'fps', 'errores'].map(f => ({ big: `img/hx-${f}.jpg`, small: `img/hx-${f}-p.jpg` })),
+  fw: ['batalla', 'equipos', 'bandera', 'armas', 'lobby', 'cajas', 'apertura', 'pase', 'taquilla'].map(f => ({ big: `img/fw-${f}.jpg`, small: `img/fw-${f}-p.jpg` })),
   thu: ['plaza', 'cuenta', 'reloj', 'linterna', 'armario', 'cama', 'sala', 'ruleta', 'amanecer'].map(f => ({ big: `img/thu-${f}.jpg`, small: `img/thu-${f}-p.jpg` })),
   bfs: ['calle', 'liga', 'creador', 'casa', 'barrio', 'movil', 'pro', 'menu'].map(f => ({ big: `img/bfs-${f}.jpg`, small: `img/bfs-${f}-p.jpg` })),
   rt: ['inicio', 'bolas', 'ventiladores', 'barredora', 'contador', 'checkpoint', 'noche', 'locura', 'movil'].map(f => ({ big: `img/rt-${f}.jpg`, small: `img/rt-${f}-p.jpg` })),
 };
-const live = { hd: [], pt: [], hx: [], rt: [], bfs: [], thu: [] };
+const live = { hd: [], pt: [], hx: [], rt: [], bfs: [], thu: [], fw: [] };
 for (const k in SHOTS) {
   const box = document.querySelector(`[data-shots="${k}"]`);
   SHOTS[k].forEach(s => {
@@ -897,7 +993,7 @@ document.querySelectorAll('[data-link]').forEach(a => {
   else a.href = url;
 });
 
-// ---------- open / close a game frame (also from the address: #el-cuentacien, #basketball-from-scratch, #ragebait-travel, #hollow-days, #party-time, #hardware-exchange) ----------
+// ---------- open / close a game frame (also from the address: #frogwars, #el-cuentacien, #basketball-from-scratch, #ragebait-travel, #hollow-days, #party-time, #hardware-exchange) ----------
 const veil = document.getElementById('veil');
 let lastFocus = null;
 function openGame(id, push) {
@@ -918,7 +1014,7 @@ function closeGame(fromHistory) {
 document.querySelectorAll('[data-open]').forEach(c => c.addEventListener('click', () => openGame(c.dataset.open)));
 veil.querySelectorAll('.close').forEach(b => b.addEventListener('click', () => closeGame()));
 veil.addEventListener('click', e => { if (e.target === veil) closeGame(); });
-function fromHash() { const id = location.hash.slice(1); if (['el-cuentacien', 'basketball-from-scratch', 'ragebait-travel', 'hollow-days', 'party-time', 'hardware-exchange'].includes(id)) openGame(id, false); else closeGame(true); }
+function fromHash() { const id = location.hash.slice(1); if (['frogwars', 'el-cuentacien', 'basketball-from-scratch', 'ragebait-travel', 'hollow-days', 'party-time', 'hardware-exchange'].includes(id)) openGame(id, false); else closeGame(true); }
 addEventListener('popstate', fromHash); fromHash();
 
 // ---------- big screenshot viewer ----------
