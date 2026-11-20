@@ -12,7 +12,8 @@
     hxandroid: 'https://github.com/xpeakentertainment/XPEAKGAMES/releases/latest/download/HardwareExchange.apk',
     rtwindows: 'https://github.com/xpeakentertainment/XPEAKGAMES/releases/latest/download/RagebaitTravel.exe',
     rtandroid: 'https://github.com/xpeakentertainment/XPEAKGAMES/releases/latest/download/RagebaitTravel.apk',
-    bfswindows: 'https://github.com/xpeakentertainment/XPEAKGAMES/releases/latest/download/BasketballFromScratch.exe'
+    bfswindows: 'https://github.com/xpeakentertainment/XPEAKGAMES/releases/latest/download/BasketballFromScratch.exe',
+    thuwindows: 'https://github.com/xpeakentertainment/XPEAKGAMES/releases/latest/download/TheHundredteller.exe'
   };
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -32,6 +33,8 @@
 @font-face { font-family: 'Chakra Petch'; src: url(fonts/chakra-petch-latin-500-normal.woff2) format('woff2'); font-weight: 500; font-display: swap; }
 @font-face { font-family: 'Chakra Petch'; src: url(fonts/chakra-petch-latin-700-normal.woff2) format('woff2'); font-weight: 700; font-display: swap; }
 @font-face { font-family: 'Titan One'; src: url(fonts/titan-one-latin-400-normal.woff2) format('woff2'); font-display: swap; }
+@font-face { font-family: 'IM Fell English'; src: url(fonts/im-fell-english-latin-400-normal.woff2) format('woff2'); font-display: swap; }
+@font-face { font-family: 'IM Fell English'; src: url(fonts/im-fell-english-latin-400-italic.woff2) format('woff2'); font-style: italic; font-display: swap; }
 
 :root {
   --night: #141a33;     /* sky over the summit */
@@ -268,6 +271,40 @@ footer .r { margin-left: auto; }
 .t-bfs .note { background: #fff3a8; color: #1f2a44; transform: rotate(-.6deg); box-shadow: 0 6px 14px rgba(0,0,0,.3); border-radius: 2px; }
 .t-bfs .note b { color: #1f2a44; }
 .t-bfs ul.feats li::marker { color: #f26b1d; }
+/* ---------- El Cuentacien: candlelight, bone and rust ---------- */
+.card-thu { background: #0d0b09; border-bottom: 4px solid #9a3a2c; }
+.card-thu .cover::after { background: linear-gradient(0deg, rgba(13,11,9,.94) 0%, rgba(13,11,9,0) 52%); }
+.card-thu .badge { left: 26px; bottom: 20px; }
+.card-thu h3 { font-family: 'IM Fell English', Georgia, serif; font-weight: 400; letter-spacing: .01em; color: #ece4d3; }
+.card-thu p { color: #bdb5a6; }
+.card-thu .chip { background: rgba(216,209,194,.08); color: #d8d1c2; }
+.card-thu .chip.new { background: #9a3a2c; color: #f6ecdb; }
+.card-thu .go { color: #e3ab5c; }
+.thumark { display: inline-block; font-family: 'IM Fell English', Georgia, serif; color: #ece4d3; line-height: .92; text-shadow: 0 2px 22px rgba(0,0,0,.95); }
+.thumark b { display: block; font-weight: 400; font-size: 54px; letter-spacing: .005em; }
+.thumark i { display: block; font-size: 21px; color: #e3ab5c; margin-top: 8px; letter-spacing: .02em; }
+.t-thu { background: #0d0b09; color: #d8d1c2; border: 1px solid rgba(216,209,194,.16); }
+.t-thu .close { background: #1c1612; color: #e3ab5c; box-shadow: 0 0 0 1px rgba(227,171,92,.4); }
+.t-thu .f-hero::after { background: linear-gradient(0deg, rgba(13,11,9,.97) 0%, rgba(13,11,9,0) 62%); }
+.t-thu .f-hero .title .thumark b { font-size: clamp(44px, 7.4vw, 104px); }
+.t-thu .f-hero .title .thumark i { font-size: clamp(17px, 2.2vw, 28px); }
+.t-thu h3 { font: 400 28px/1.2 'IM Fell English', Georgia, serif; color: #e3ab5c; }
+.t-thu .lead { color: #ece4d3; }
+.t-thu p, .t-thu li { color: #bdb5a6; }
+.t-thu .shots button { border-radius: 2px; box-shadow: 0 0 0 1px rgba(216,209,194,.14); }
+.t-thu .dlbox { background: #16110d; border: 1px solid rgba(227,171,92,.32); border-radius: 4px; }
+.t-thu .dlbox h3 { color: #ece4d3; }
+.t-thu .dlbox p { color: #9a9284; margin: 0; }
+.t-thu .dlbtn { background: #e3ab5c; color: #170f07; border-radius: 3px; }
+.t-thu .dlbtn:hover { background: #f1bf76; }
+.t-thu .facts dt { color: #ece4d3; }
+.t-thu .facts dd { color: #a39b8d; }
+.t-thu .note { background: #17120e; color: #bdb5a6; border-left: 3px solid #9a3a2c; border-radius: 2px; }
+.t-thu .note b { color: #ece4d3; }
+.t-thu ul.feats li::marker { color: #9a3a2c; }
+/* an odd card at the end of the shelf takes the whole row */
+.shelf > .card:not(.feature):last-child:nth-child(even) { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); }
+.shelf > .card:not(.feature):last-child:nth-child(even) .meta { padding: 30px 34px; justify-content: center; }
 
 /* RAGEBAIT TRAVEL frame: grape panels, candy-stripe edge and the chunky yellow and aqua buttons of the game */
 .t-rt { background: #2b1747; color: #fff6e8; border: 4px solid #1b0d30; }
@@ -324,6 +361,9 @@ footer .r { margin-left: auto; }
   .bar nav { display: none; }
   .shelf, .about .wrap, .f-body, .card.feature { grid-template-columns: 1fr; }
   .bfsmark span { font-size: 19px; } .bfsmark b { font-size: 36px; }
+  .thumark b { font-size: 38px; } .thumark i { font-size: 17px; }
+  .shelf > .card:not(.feature):last-child:nth-child(even) { grid-template-columns: 1fr; }
+  .shelf > .card:not(.feature):last-child:nth-child(even) .meta { padding: 20px 24px 24px; }
   .card.feature .meta { padding: 20px 24px 24px; }
   .card.feature h3 { font-size: 23px; }
   .rtmark .r1 { font-size: 30px; } .rtmark .r2 { font-size: 25px; }
@@ -390,7 +430,19 @@ footer .r { margin-left: auto; }
         <p>Pulsa en un juego para ver de qué va, sus capturas y la descarga.</p>
       </div>
       <div class="shelf">
-        <button class="card card-bfs feature" type="button" data-open="basketball-from-scratch">
+        <button class="card card-thu feature" type="button" data-open="el-cuentacien">
+          <div class="cover">
+            <img src="img/thu-cover.jpg" alt="El Cuentacien, con un reloj en el pecho, alarga una mano con garras hacia ti a la luz de la linterna">
+            <div class="badge"><div class="thumark" aria-hidden="true"><b>El Cuentacien</b> <i>The Hundredteller</i></div></div>
+          </div>
+          <div class="meta">
+            <h3>El Cuentacien</h3>
+            <p>Una noche al año, algo sale de los arbustos de la plaza, se apoya en una pared y cuenta hasta cien. Escóndete de verdad y aguanta hasta que amanezca. Solo, o online con hasta 10 amigos.</p>
+            <div class="chips"><span class="chip new">Nuevo</span><span class="chip">Windows</span><span class="chip">Online</span><span class="chip">Terror</span></div>
+            <span class="go">Ver juego</span>
+          </div>
+        </button>
+        <button class="card card-bfs" type="button" data-open="basketball-from-scratch">
           <div class="cover">
             <img src="img/bfs-cover.jpg" alt="Un uno contra uno en La Jaula: el jugador hace un crossover a su rival">
             <div class="badge"><div class="bfsmark" aria-hidden="true"><span>Basketball:</span><b>From Scratch</b></div></div>
@@ -398,7 +450,7 @@ footer .r { margin-left: auto; }
           <div class="meta">
             <h3>Basketball: From Scratch</h3>
             <p>Empiezas en la cancha de tu barrio sin nada. Retos 1 contra 1 por dinero, un ojeador que se fija en ti, pruebas con un club y, si das la talla, la liga profesional.</p>
-            <div class="chips"><span class="chip new">Nuevo</span><span class="chip">Windows</span><span class="chip">Mando</span><span class="chip">Deportes</span></div>
+            <div class="chips"><span class="chip">Windows</span><span class="chip">Mando</span><span class="chip">Deportes</span></div>
             <span class="go">Ver juego</span>
           </div>
         </button>
@@ -501,6 +553,51 @@ footer .r { margin-left: auto; }
 
 <!-- ===== game frames ===== -->
 <div class="veil" id="veil" role="dialog" aria-modal="true" aria-label="Juego">
+
+  <article class="frame t-thu" data-game="el-cuentacien" hidden>
+    <button class="close" type="button" aria-label="Cerrar">✕</button>
+    <div class="f-hero">
+      <img src="img/thu-hero.jpg" alt="">
+      <div class="title"><div class="thumark" role="img" aria-label="El Cuentacien (The Hundredteller)"><b>El Cuentacien</b> <i>The Hundredteller</i></div></div>
+    </div>
+    <div class="f-body">
+      <div>
+        <p class="lead">Un juego de terror en primera persona. En un pueblo perdido, una noche al año, a las 00:00 sale de los arbustos de la plaza una criatura con un reloj en lugar de corazón. Se apoya en una pared y cuenta hasta cien. Tienes hasta las 08:00 para que no te encuentre.</p>
+        <p>No hay botón de esconderse: te metes debajo de una cama, cierras la puerta de un armario o te agachas entre el heno. Te oye andar, coger cosas y abrir puertas deprisa, y si quieres también tu voz por el micrófono: cuanto más alto hablas, desde más lejos te oye. Cuando está cerca, tu corazón se acelera, y eso también lo oye.</p>
+        <h3>Capturas</h3>
+        <div class="shots" data-shots="thu"></div>
+        <h3>Qué tiene</h3>
+        <ul class="feats">
+          <li>El pueblo cambia cada noche: la plaza y la iglesia siguen en su sitio, pero las casas, cobertizos, granjas y escondites se colocan de otra forma.</li>
+          <li>Escondites de verdad: debajo de camas y mesas, dentro de armarios, entre el heno, el maíz y los arbustos, detrás de cajas y carros.</li>
+          <li>Linterna con batería limitada. La única luz encendida del pueblo es la farola de la fuente.</li>
+          <li>Hasta nueve vecinos que también se esconden, y a los que también puede encontrar.</li>
+          <li>Antes de cada noche puedes ajustar al Cuentacien: agresividad, velocidad, oído, vista, cuánto insiste en buscarte y más.</li>
+          <li>Online por salas con código, hasta 10 jugadores: una ruleta elige quién es el Cuentacien y el resto se esconde. Se entra con tu cuenta de Discord.</li>
+          <li>Cinco idiomas y mando de Xbox o PlayStation. Mejor con auriculares.</li>
+        </ul>
+      </div>
+      <aside class="side">
+        <div class="dlbox">
+          <h3>Descargar</h3>
+          <p>Gratis. Un solo archivo, sin instalador.</p>
+          <a class="dlbtn" data-link="thuwindows" href="#">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square" aria-hidden="true"><path d="M12 3v12M6 10l6 6 6-6M4 20h16"/></svg>
+            <span>Descargar para Windows<small>TheHundredteller.exe, 85 MB</small></span>
+          </a>
+        </div>
+        <dl class="facts">
+          <dt>Windows</dt><dd>10 u 11 de 64 bits</dd>
+          <dt>Jugadores</dt><dd>1, o de 2 a 10 online</dd>
+          <dt>Controles</dt><dd>Teclado y ratón o mando</dd>
+          <dt>Idiomas</dt><dd>Español, inglés, francés, alemán y portugués</dd>
+          <dt>Micrófono</dt><dd>Opcional</dd>
+          <dt>Online</dt><dd>Con cuenta de Discord</dd>
+        </dl>
+        <div class="note"><b>¿Windows te avisa al abrirlo?</b> Es normal con los juegos independientes que no tienen firma digital de pago. Pulsa «Más información» y luego «Ejecutar de todas formas». Solo pasa la primera vez.</div>
+      </aside>
+    </div>
+  </article>
 
   <article class="frame t-bfs" data-game="basketball-from-scratch" hidden>
     <button class="close" type="button" aria-label="Cerrar">✕</button>
@@ -772,10 +869,11 @@ const SHOTS = {
   hd: ['fort', 'millbrook', 'noche', 'combate', 'valle', 'cooperativo', 'mapa', 'hospital', 'creador'].map(f => ({ big: `img/hd-${f}.jpg`, small: `img/hd-${f}-p.jpg` })),
   pt: Array.from({ length: 8 }, (_, i) => ({ big: `img/partytime-${i + 1}.jpg`, small: `img/partytime-${i + 1}-p.jpg` })),
   hx: ['menu', 'montaje', 'buscador', 'pieza', 'pintar', 'juegos', 'fps', 'errores'].map(f => ({ big: `img/hx-${f}.jpg`, small: `img/hx-${f}-p.jpg` })),
+  thu: ['plaza', 'cuenta', 'reloj', 'linterna', 'armario', 'cama', 'sala', 'ruleta', 'amanecer'].map(f => ({ big: `img/thu-${f}.jpg`, small: `img/thu-${f}-p.jpg` })),
   bfs: ['calle', 'liga', 'creador', 'casa', 'barrio', 'movil', 'pro', 'menu'].map(f => ({ big: `img/bfs-${f}.jpg`, small: `img/bfs-${f}-p.jpg` })),
   rt: ['inicio', 'bolas', 'ventiladores', 'barredora', 'contador', 'checkpoint', 'noche', 'locura', 'movil'].map(f => ({ big: `img/rt-${f}.jpg`, small: `img/rt-${f}-p.jpg` })),
 };
-const live = { hd: [], pt: [], hx: [], rt: [], bfs: [] };
+const live = { hd: [], pt: [], hx: [], rt: [], bfs: [], thu: [] };
 for (const k in SHOTS) {
   const box = document.querySelector(`[data-shots="${k}"]`);
   SHOTS[k].forEach(s => {
@@ -799,7 +897,7 @@ document.querySelectorAll('[data-link]').forEach(a => {
   else a.href = url;
 });
 
-// ---------- open / close a game frame (also from the address: #basketball-from-scratch, #ragebait-travel, #hollow-days, #party-time, #hardware-exchange) ----------
+// ---------- open / close a game frame (also from the address: #el-cuentacien, #basketball-from-scratch, #ragebait-travel, #hollow-days, #party-time, #hardware-exchange) ----------
 const veil = document.getElementById('veil');
 let lastFocus = null;
 function openGame(id, push) {
@@ -820,7 +918,7 @@ function closeGame(fromHistory) {
 document.querySelectorAll('[data-open]').forEach(c => c.addEventListener('click', () => openGame(c.dataset.open)));
 veil.querySelectorAll('.close').forEach(b => b.addEventListener('click', () => closeGame()));
 veil.addEventListener('click', e => { if (e.target === veil) closeGame(); });
-function fromHash() { const id = location.hash.slice(1); if (['basketball-from-scratch', 'ragebait-travel', 'hollow-days', 'party-time', 'hardware-exchange'].includes(id)) openGame(id, false); else closeGame(true); }
+function fromHash() { const id = location.hash.slice(1); if (['el-cuentacien', 'basketball-from-scratch', 'ragebait-travel', 'hollow-days', 'party-time', 'hardware-exchange'].includes(id)) openGame(id, false); else closeGame(true); }
 addEventListener('popstate', fromHash); fromHash();
 
 // ---------- big screenshot viewer ----------
