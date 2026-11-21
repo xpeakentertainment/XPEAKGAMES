@@ -377,8 +377,8 @@ footer .r { margin-left: auto; }
 .t-v3f ul.feats li::marker { color: #f5d547; }
 @media (max-width: 900px) { .v3fmark span { font-size: 17px; } .v3fmark b { font-size: 44px; } }
 /* an odd card at the end of the shelf takes the whole row */
-.shelf > .card:not(.feature):last-child:nth-child(even) { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); }
-.shelf > .card:not(.feature):last-child:nth-child(even) .meta { padding: 30px 34px; justify-content: center; }
+.shelf > .card:not(.feature):last-child:nth-child(odd) { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); }
+.shelf > .card:not(.feature):last-child:nth-child(odd) .meta { padding: 30px 34px; justify-content: center; }
 
 /* RAGEBAIT TRAVEL frame: grape panels, candy-stripe edge and the chunky yellow and aqua buttons of the game */
 .t-rt { background: #2b1747; color: #fff6e8; border: 4px solid #1b0d30; }
@@ -436,8 +436,8 @@ footer .r { margin-left: auto; }
   .shelf, .about .wrap, .f-body, .card.feature { grid-template-columns: 1fr; }
   .bfsmark span { font-size: 19px; } .bfsmark b { font-size: 36px; }
   .thumark b { font-size: 38px; } .thumark i { font-size: 17px; }
-  .shelf > .card:not(.feature):last-child:nth-child(even) { grid-template-columns: 1fr; }
-  .shelf > .card:not(.feature):last-child:nth-child(even) .meta { padding: 20px 24px 24px; }
+  .shelf > .card:not(.feature):last-child:nth-child(odd) { grid-template-columns: 1fr; }
+  .shelf > .card:not(.feature):last-child:nth-child(odd) .meta { padding: 20px 24px 24px; }
   .card.feature .meta { padding: 20px 24px 24px; }
   .card.feature h3 { font-size: 23px; }
   .rtmark .r1 { font-size: 30px; } .rtmark .r2 { font-size: 25px; }
@@ -524,7 +524,7 @@ footer .r { margin-left: auto; }
           <div class="meta">
             <h3>Frogwars</h3>
             <p>Batallas de ranas con espada y lengua, en horizontal: Battle Royale, duelos, equipos y captura la bandera. Online contra gente de verdad con tu cuenta de Discord, y un pase de batalla gratis de 100 niveles.</p>
-            <div class="chips"><span class="chip new">Nuevo</span><span class="chip">Android</span><span class="chip">Online</span><span class="chip">Acción</span></div>
+            <div class="chips"><span class="chip">Android</span><span class="chip">Online</span><span class="chip">Acción</span></div>
             <span class="go">Ver juego</span>
           </div>
         </button>
@@ -536,7 +536,7 @@ footer .r { margin-left: auto; }
           <div class="meta">
             <h3>El Cuentacien</h3>
             <p>Una noche al año, algo sale de los arbustos de la plaza, se apoya en una pared y cuenta hasta cien. Escóndete de verdad y aguanta hasta que amanezca. Solo, o online con hasta 10 amigos.</p>
-            <div class="chips"><span class="chip new">Nuevo</span><span class="chip">Windows</span><span class="chip">Online</span><span class="chip">Terror</span></div>
+            <div class="chips"><span class="chip">Windows</span><span class="chip">Online</span><span class="chip">Terror</span></div>
             <span class="go">Ver juego</span>
           </div>
         </button>
