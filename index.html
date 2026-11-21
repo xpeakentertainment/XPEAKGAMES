@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <script>
   // ================== ENLACES DE DESCARGA ==================
-  // Los .exe se descargan de tu GitHub (misma release). Frogwars.apk está en la carpeta descargas/ de la web.
+  // Los .exe se descargan de tu GitHub (misma release). Frogwars.apk y Virtual3DFootball.exe están en la carpeta descargas/ de la web.
   window.XPEAK_LINKS = {
     hollowdays: 'https://github.com/xpeakentertainment/XPEAKGAMES/releases/latest/download/HollowDays.exe',
     partytime: 'https://github.com/xpeakentertainment/XPEAKGAMES/releases/latest/download/TADC-Party-Time-1_4_1-Patch.exe',
@@ -14,12 +14,13 @@
     rtandroid: 'https://github.com/xpeakentertainment/XPEAKGAMES/releases/latest/download/RagebaitTravel.apk',
     bfswindows: 'https://github.com/xpeakentertainment/XPEAKGAMES/releases/latest/download/BasketballFromScratch.exe',
     thuwindows: 'https://github.com/xpeakentertainment/XPEAKGAMES/releases/latest/download/TheHundredteller.exe',
-    fwandroid: 'descargas/Frogwars.apk'
+    fwandroid: 'descargas/Frogwars.apk',
+    v3fwindows: 'descargas/Virtual3DFootball.exe'
   };
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>X-Peak Entertainment</title>
-<meta name="description" content="X-Peak Entertainment es un estudio independiente de videojuegos. Juegos: Frogwars, El Cuentacien, Basketball: From Scratch, RAGEBAIT TRAVEL, Hollow Days, The Amazing Digital Circus: Party Time! y Hardware Exchange.">
+<meta name="description" content="X-Peak Entertainment es un estudio independiente de videojuegos. Juegos: VIRTUAL 3D FOOTBALL, Frogwars, El Cuentacien, Basketball: From Scratch, RAGEBAIT TRAVEL, Hollow Days, The Amazing Digital Circus: Party Time! y Hardware Exchange.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23161c36'/%3E%3Cpath d='M10 54 L32 22 L54 54Z' fill='%23eef1f8'/%3E%3Cpath d='M10 54 L44 6 M54 54 L20 6' stroke='%23ff7a4d' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E">
 <style>
 @font-face { font-family: 'Unbounded'; src: url(fonts/unbounded-latin-500-normal.woff2) format('woff2'); font-weight: 500; font-display: swap; }
@@ -36,6 +37,8 @@
 @font-face { font-family: 'Titan One'; src: url(fonts/titan-one-latin-400-normal.woff2) format('woff2'); font-display: swap; }
 @font-face { font-family: 'IM Fell English'; src: url(fonts/im-fell-english-latin-400-normal.woff2) format('woff2'); font-display: swap; }
 @font-face { font-family: 'IM Fell English'; src: url(fonts/im-fell-english-latin-400-italic.woff2) format('woff2'); font-style: italic; font-display: swap; }
+@font-face { font-family: 'Big Shoulders Display'; src: url(fonts/big-shoulders-display-latin-800-normal.woff2) format('woff2'); font-weight: 800; font-display: swap; }
+@font-face { font-family: 'Big Shoulders Display'; src: url(fonts/big-shoulders-display-latin-900-normal.woff2) format('woff2'); font-weight: 900; font-display: swap; }
 @font-face { font-family: 'Pixelify Sans'; src: url(fonts/pixelify-sans-latin-700-normal.woff2) format('woff2'); font-weight: 700; font-display: swap; }
 
 :root {
@@ -340,6 +343,39 @@ footer .r { margin-left: auto; }
 .t-fw .note b { color: #eaf7e4; }
 .t-fw ul.feats li::marker { color: #5fd35b; }
 @media (max-width: 900px) { .fwmark b { font-size: 40px; } .fwmark i { font-size: 13px; } }
+/* ---------- VIRTUAL 3D FOOTBALL: a floodlit night match on TV ---------- */
+.card-v3f { background: #0a1120; border-bottom: 4px solid #f5d547; }
+.card-v3f .cover::after { background: linear-gradient(0deg, rgba(10,17,32,.92) 0%, rgba(10,17,32,0) 52%); }
+.card-v3f .badge { left: 26px; bottom: 22px; }
+.card-v3f h3 { font: 900 34px/1 'Big Shoulders Display', var(--display); letter-spacing: .3px; color: #eef2ea; }
+.card-v3f p { color: #aab6c6; }
+.card-v3f .chip { background: rgba(238,242,234,.08); color: #dfe6ef; border-radius: 3px; }
+.card-v3f .chip.new { background: #f5d547; color: #1b1600; font-weight: 800; }
+.card-v3f .go { color: #f5d547; }
+.v3fmark { display: inline-block; font-family: 'Big Shoulders Display', Impact, sans-serif; line-height: .84; text-shadow: 0 4px 26px rgba(0,0,0,.7); }
+.v3fmark span { display: block; font-weight: 800; font-size: 22px; letter-spacing: 3px; color: #f5d547; }
+.v3fmark b { display: block; font-weight: 900; font-size: 66px; color: #fff; }
+.v3fmark i { display: flex; height: 6px; margin-top: 10px; width: 132px; background: linear-gradient(90deg, #2f6bff 0 50%, #ff3b44 50% 100%); }
+.t-v3f { background: #0a1120; color: #dfe6ef; border: 1px solid rgba(238,242,234,.14); border-radius: 6px; }
+.t-v3f .close { background: #f5d547; color: #1b1600; border-radius: 4px; font-weight: 800; }
+.t-v3f .f-hero::after { background: linear-gradient(0deg, rgba(10,17,32,.97) 0%, rgba(10,17,32,0) 62%); }
+.t-v3f .f-hero .title .v3fmark span { font-size: clamp(18px, 2.2vw, 30px); }
+.t-v3f .f-hero .title .v3fmark b { font-size: clamp(54px, 8.4vw, 124px); }
+.t-v3f h3 { font: 900 30px/1.1 'Big Shoulders Display', var(--display); color: #f5d547; letter-spacing: .3px; }
+.t-v3f .lead { color: #eef2ea; }
+.t-v3f p, .t-v3f li { color: #aab6c6; }
+.t-v3f .shots button { border-radius: 3px; box-shadow: 0 0 0 1px rgba(238,242,234,.14); }
+.t-v3f .dlbox { background: #121c33; border: 1px solid rgba(245,213,71,.35); border-top: 4px solid #f5d547; border-radius: 4px; }
+.t-v3f .dlbox h3 { color: #eef2ea; }
+.t-v3f .dlbox p { color: #8f9bb0; margin: 0; }
+.t-v3f .dlbtn { background: #f5d547; color: #1b1600; border-radius: 3px; }
+.t-v3f .dlbtn:hover { background: #ffe46a; }
+.t-v3f .facts dt { color: #eef2ea; }
+.t-v3f .facts dd { color: #9aa7b8; }
+.t-v3f .note { background: #121c33; color: #aab6c6; border-left: 3px solid #2f6bff; border-radius: 2px; }
+.t-v3f .note b { color: #eef2ea; }
+.t-v3f ul.feats li::marker { color: #f5d547; }
+@media (max-width: 900px) { .v3fmark span { font-size: 17px; } .v3fmark b { font-size: 44px; } }
 /* an odd card at the end of the shelf takes the whole row */
 .shelf > .card:not(.feature):last-child:nth-child(even) { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); }
 .shelf > .card:not(.feature):last-child:nth-child(even) .meta { padding: 30px 34px; justify-content: center; }
@@ -468,6 +504,18 @@ footer .r { margin-left: auto; }
         <p>Pulsa en un juego para ver de qué va, sus capturas y la descarga.</p>
       </div>
       <div class="shelf">
+        <button class="card card-v3f feature" type="button" data-open="virtual-3d-football">
+          <div class="cover">
+            <img src="img/v3f-cover.jpg" alt="Los dos equipos, azul y rojo, salen en fila al césped de un estadio lleno y de noche">
+            <div class="badge"><div class="v3fmark" aria-hidden="true"><span>VIRTUAL</span><b>3D FOOTBALL</b><i></i></div></div>
+          </div>
+          <div class="meta">
+            <h3>VIRTUAL 3D FOOTBALL</h3>
+            <p>Fútbol 11 contra 11 en tercera persona. Eliges modo con 1, 2, 3 y 4 (y 5 si eres el portero) y cada tecla hace un movimiento distinto. Con árbitro, faltas, repeticiones y dos comentaristas. Contra bots o online por salas con tus amigos.</p>
+            <div class="chips"><span class="chip new">Nuevo</span><span class="chip">Windows</span><span class="chip">Online</span><span class="chip">Fútbol</span></div>
+            <span class="go">Ver juego</span>
+          </div>
+        </button>
         <button class="card card-fw feature" type="button" data-open="frogwars">
           <div class="cover">
             <img src="img/fw-cover.jpg" alt="Ranas de colores peleando con espada y lengua en un mapa de selva de Frogwars">
@@ -603,6 +651,50 @@ footer .r { margin-left: auto; }
 
 <!-- ===== game frames ===== -->
 <div class="veil" id="veil" role="dialog" aria-modal="true" aria-label="Juego">
+
+  <article class="frame t-v3f" data-game="virtual-3d-football" hidden>
+    <button class="close" type="button" aria-label="Cerrar">✕</button>
+    <div class="f-hero">
+      <img src="img/v3f-hero.jpg" alt="">
+      <div class="title"><div class="v3fmark" role="img" aria-label="VIRTUAL 3D FOOTBALL"><span>VIRTUAL</span><b>3D FOOTBALL</b><i></i></div></div>
+    </div>
+    <div class="f-body">
+      <div>
+        <p class="lead">Un juego de fútbol 11 contra 11 en tercera persona. Controlas a un jugador de tu equipo, en la posición que tú elijas, y el resto lo juegan tus amigos o los bots.</p>
+        <p>Los controles van por modos: con 1 eliges tiro, con 2 pase, con 3 regate, con 4 defensa y, si eres el portero, con 5 portero. En cada modo, el clic y las teclas Q, E, R, F y Z hacen una acción distinta: rosca, vaselina, volea, pase al hueco, centro, bicicleta, elástica, sombrero, entrada en plancha, estiradas… Los tiros y los pases se cargan manteniendo la tecla y se apuntan con el ratón.</p>
+        <h3>Capturas</h3>
+        <div class="shots" data-shots="v3f"></div>
+        <h3>Qué tiene</h3>
+        <ul class="feats">
+          <li>Partidos completos con árbitro y linieres: faltas, ley de la ventaja, tarjetas, penaltis, fuera de juego, córners, saques de banda y de puerta, y tiempo añadido.</li>
+          <li>Los equipos salen al césped en fila y, en cada saque inicial, cada jugador va andando a su posición.</li>
+          <li>Repetición de cada gol desde varios ángulos, con cámara lenta.</li>
+          <li>Dos comentaristas con voz: uno narra el partido en directo y la otra analiza las repeticiones. Con subtítulos.</li>
+          <li>Entrenamiento libre sin conexión: práctica con un portero, o partido contra bots en cuatro dificultades, y puedes ajustar a cada bot.</li>
+          <li>Online por salas con código, de 1 a 22 personas, con tu cuenta de Discord. El líder elige la duración, la dificultad, si se rellena con bots y quién juega en cada equipo; cada equipo elige sus posiciones y su formación.</li>
+          <li>Cinco idiomas, partidos de día, al atardecer o de noche, y todas las teclas se pueden cambiar.</li>
+        </ul>
+      </div>
+      <aside class="side">
+        <div class="dlbox">
+          <h3>Descargar</h3>
+          <p>Gratis. Un solo archivo, sin instalador.</p>
+          <a class="dlbtn" data-link="v3fwindows" href="#" download>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square" aria-hidden="true"><path d="M12 3v12M6 10l6 6 6-6M4 20h16"/></svg>
+            <span>Descargar para Windows<small>Virtual3DFootball.exe, 76 MB</small></span>
+          </a>
+        </div>
+        <dl class="facts">
+          <dt>Windows</dt><dd>10 u 11 de 64 bits</dd>
+          <dt>Jugadores</dt><dd>1 sin conexión, o de 1 a 22 online</dd>
+          <dt>Controles</dt><dd>Teclado y ratón</dd>
+          <dt>Idiomas</dt><dd>Español, inglés, francés, alemán y portugués</dd>
+          <dt>Online</dt><dd>Con cuenta de Discord</dd>
+        </dl>
+        <div class="note"><b>¿Windows te avisa al abrirlo?</b> Es normal con los juegos independientes que no tienen firma digital de pago. Pulsa «Más información» y luego «Ejecutar de todas formas». Solo pasa la primera vez.</div>
+      </aside>
+    </div>
+  </article>
 
   <article class="frame t-fw" data-game="frogwars" hidden>
     <button class="close" type="button" aria-label="Cerrar">✕</button>
@@ -961,6 +1053,7 @@ footer .r { margin-left: auto; }
 <script>
 // ---------- screenshots of each game ----------
 const SHOTS = {
+  v3f: ['tele', 'saque', 'tiro', 'gol', 'repeticion', 'tarjeta', 'dia', 'pizarra', 'sala'].map(f => ({ big: `img/v3f-${f}.jpg`, small: `img/v3f-${f}-p.jpg` })),
   hd: ['fort', 'millbrook', 'noche', 'combate', 'valle', 'cooperativo', 'mapa', 'hospital', 'creador'].map(f => ({ big: `img/hd-${f}.jpg`, small: `img/hd-${f}-p.jpg` })),
   pt: Array.from({ length: 8 }, (_, i) => ({ big: `img/partytime-${i + 1}.jpg`, small: `img/partytime-${i + 1}-p.jpg` })),
   hx: ['menu', 'montaje', 'buscador', 'pieza', 'pintar', 'juegos', 'fps', 'errores'].map(f => ({ big: `img/hx-${f}.jpg`, small: `img/hx-${f}-p.jpg` })),
@@ -969,7 +1062,7 @@ const SHOTS = {
   bfs: ['calle', 'liga', 'creador', 'casa', 'barrio', 'movil', 'pro', 'menu'].map(f => ({ big: `img/bfs-${f}.jpg`, small: `img/bfs-${f}-p.jpg` })),
   rt: ['inicio', 'bolas', 'ventiladores', 'barredora', 'contador', 'checkpoint', 'noche', 'locura', 'movil'].map(f => ({ big: `img/rt-${f}.jpg`, small: `img/rt-${f}-p.jpg` })),
 };
-const live = { hd: [], pt: [], hx: [], rt: [], bfs: [], thu: [], fw: [] };
+const live = { hd: [], pt: [], hx: [], rt: [], bfs: [], thu: [], fw: [], v3f: [] };
 for (const k in SHOTS) {
   const box = document.querySelector(`[data-shots="${k}"]`);
   SHOTS[k].forEach(s => {
@@ -993,7 +1086,7 @@ document.querySelectorAll('[data-link]').forEach(a => {
   else a.href = url;
 });
 
-// ---------- open / close a game frame (also from the address: #frogwars, #el-cuentacien, #basketball-from-scratch, #ragebait-travel, #hollow-days, #party-time, #hardware-exchange) ----------
+// ---------- open / close a game frame (also from the address: #virtual-3d-football, #frogwars, #el-cuentacien, #basketball-from-scratch, #ragebait-travel, #hollow-days, #party-time, #hardware-exchange) ----------
 const veil = document.getElementById('veil');
 let lastFocus = null;
 function openGame(id, push) {
@@ -1014,7 +1107,7 @@ function closeGame(fromHistory) {
 document.querySelectorAll('[data-open]').forEach(c => c.addEventListener('click', () => openGame(c.dataset.open)));
 veil.querySelectorAll('.close').forEach(b => b.addEventListener('click', () => closeGame()));
 veil.addEventListener('click', e => { if (e.target === veil) closeGame(); });
-function fromHash() { const id = location.hash.slice(1); if (['frogwars', 'el-cuentacien', 'basketball-from-scratch', 'ragebait-travel', 'hollow-days', 'party-time', 'hardware-exchange'].includes(id)) openGame(id, false); else closeGame(true); }
+function fromHash() { const id = location.hash.slice(1); if (['virtual-3d-football', 'frogwars', 'el-cuentacien', 'basketball-from-scratch', 'ragebait-travel', 'hollow-days', 'party-time', 'hardware-exchange'].includes(id)) openGame(id, false); else closeGame(true); }
 addEventListener('popstate', fromHash); fromHash();
 
 // ---------- big screenshot viewer ----------
