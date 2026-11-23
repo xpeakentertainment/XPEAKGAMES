@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <script>
   // ================== ENLACES DE DESCARGA ==================
-  // Los .exe se descargan de tu GitHub (misma release). Frogwars.apk y Virtual3DFootball.exe están en la carpeta descargas/ de la web.
+  // Los .exe se descargan de tu GitHub (misma release). Frogwars.apk, Virtual3DFootball.exe y Virtual3DFootball.apk están en la carpeta descargas/ de la web.
   window.XPEAK_LINKS = {
     hollowdays: 'https://github.com/xpeakentertainment/XPEAKGAMES/releases/latest/download/HollowDays.exe',
     partytime: 'https://github.com/xpeakentertainment/XPEAKGAMES/releases/latest/download/TADC-Party-Time-1_4_1-Patch.exe',
@@ -15,7 +15,8 @@
     bfswindows: 'https://github.com/xpeakentertainment/XPEAKGAMES/releases/latest/download/BasketballFromScratch.exe',
     thuwindows: 'https://github.com/xpeakentertainment/XPEAKGAMES/releases/latest/download/TheHundredteller.exe',
     fwandroid: 'descargas/Frogwars.apk',
-    v3fwindows: 'descargas/Virtual3DFootball.exe'
+    v3fwindows: 'descargas/Virtual3DFootball.exe',
+    v3fandroid: 'descargas/Virtual3DFootball.apk'
   };
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -370,6 +371,17 @@ footer .r { margin-left: auto; }
 .t-v3f .dlbox p { color: #8f9bb0; margin: 0; }
 .t-v3f .dlbtn { background: #f5d547; color: #1b1600; border-radius: 3px; }
 .t-v3f .dlbtn:hover { background: #ffe46a; }
+.t-v3f .dlbtn.android { background: #3ddc97; color: #0b2a1e; }
+.t-v3f .dlbtn.android:hover { background: #63e8ad; }
+.t-v3f .note.android { border-left-color: #3ddc97; }
+/* "now on Android too": a green tag on the card and on the game page */
+.droidtag { display: inline-flex; align-items: center; gap: 7px; background: #3ddc97; color: #0b2a1e; font: 900 17px/1 'Big Shoulders Display', var(--display); letter-spacing: .4px; padding: 7px 12px 7px 9px; border-radius: 3px; box-shadow: 0 6px 22px rgba(0,0,0,.35); }
+.droidtag svg { width: 17px; height: 17px; flex: none; }
+.card-v3f .droidtag { position: absolute; z-index: 2; right: 16px; top: 16px; }
+.t-v3f .f-hero .droidtag { position: absolute; z-index: 2; left: 34px; top: 28px; font-size: clamp(17px, 1.8vw, 24px); padding: 9px 16px 9px 12px; }
+.t-v3f .f-hero .droidtag svg { width: 1.05em; height: 1.05em; }
+.t-v3f .droidnote { margin: 0 0 18px; padding: 12px 16px; background: rgba(61,220,151,.1); border-left: 4px solid #3ddc97; color: #dfe6ef; border-radius: 2px; }
+.t-v3f .droidnote b { color: #3ddc97; }
 .t-v3f .facts dt { color: #eef2ea; }
 .t-v3f .facts dd { color: #9aa7b8; }
 .t-v3f .note { background: #121c33; color: #aab6c6; border-left: 3px solid #2f6bff; border-radius: 2px; }
@@ -508,11 +520,12 @@ footer .r { margin-left: auto; }
           <div class="cover">
             <img src="img/v3f-cover.jpg" alt="Los dos equipos, azul y rojo, salen en fila al césped de un estadio lleno y de noche">
             <div class="badge"><div class="v3fmark" aria-hidden="true"><span>VIRTUAL</span><b>3D FOOTBALL</b><i></i></div></div>
+            <span class="droidtag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M10.5 18h3"/></svg>Ahora también en Android</span>
           </div>
           <div class="meta">
             <h3>VIRTUAL 3D FOOTBALL</h3>
-            <p>Fútbol 11 contra 11 en tercera persona. Eliges modo con 1, 2, 3 y 4 (y 5 si eres el portero) y cada tecla hace un movimiento distinto. Con árbitro, faltas, repeticiones y dos comentaristas. Contra bots o online por salas con tus amigos.</p>
-            <div class="chips"><span class="chip new">Nuevo</span><span class="chip">Windows</span><span class="chip">Online</span><span class="chip">Fútbol</span></div>
+            <p>Fútbol 11 contra 11 en tercera persona. Eliges modo con 1, 2, 3 y 4 (y 5 si eres el portero) y cada tecla hace un movimiento distinto. Con árbitro, faltas, repeticiones y dos comentaristas. Contra bots o online por salas con tus amigos. Para PC y, ahora también, para Android, con controles táctiles.</p>
+            <div class="chips"><span class="chip new">Nuevo</span><span class="chip">Windows</span><span class="chip">Android</span><span class="chip">Online</span><span class="chip">Fútbol</span></div>
             <span class="go">Ver juego</span>
           </div>
         </button>
@@ -657,9 +670,11 @@ footer .r { margin-left: auto; }
     <div class="f-hero">
       <img src="img/v3f-hero.jpg" alt="">
       <div class="title"><div class="v3fmark" role="img" aria-label="VIRTUAL 3D FOOTBALL"><span>VIRTUAL</span><b>3D FOOTBALL</b><i></i></div></div>
+      <span class="droidtag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M10.5 18h3"/></svg>Ahora también en Android</span>
     </div>
     <div class="f-body">
       <div>
+        <p class="droidnote"><b>Disponible también para Android.</b> El mismo juego, con controles táctiles: joystick para moverte, arrastras el dedo para girar la cámara y apuntar, un botón grande por modo (mantén para cargar el tiro o el pase) y todos los movimientos de cada modo en el botón «⋯». Descárgalo abajo.</p>
         <p class="lead">Un juego de fútbol 11 contra 11 en tercera persona. Controlas a un jugador de tu equipo, en la posición que tú elijas, y el resto lo juegan tus amigos o los bots.</p>
         <p>Los controles van por modos: 1 Patada, 2 Pase, 3 Regate (con las habilidades), 4 Defensa y, si eres el portero, 5 Portero. Cada modo tiene su propia lista de teclas: chilena, rabona, escorpión, trivela, tijera, pases laterales, recortes, ruleta, arcoíris, entradas, estiradas… El balón no se pega al pie: en Regate lo llevas dándole toques con el clic. Los tiros y los pases se cargan manteniendo la tecla y, mientras cargas, puedes darle efecto.</p>
         <h3>Capturas</h3>
@@ -674,25 +689,32 @@ footer .r { margin-left: auto; }
           <li>Online con tu cuenta de Discord: ves las salas abiertas de tu región y te unes con un clic (o con la contraseña, si la sala la tiene). De 1 a 22 personas. El líder elige la duración, la dificultad, si se rellena con bots y quién juega en cada equipo; cada equipo elige sus posiciones y su formación.</li>
           <li>Tu jugador online: nombre, dorsal, piel, peinado, barba, complexión, altura, botas, medias, mangas, cinta, muñequeras y guantes de portero. Y tus estadísticas de todos tus partidos online: goles, asistencias, acierto de pases, entradas, paradas y muchas más.</li>
           <li>Cinco idiomas, partidos de día, al atardecer o de noche, y todas las teclas se pueden cambiar.</li>
+          <li>Versión para Android con controles táctiles: joystick (llévalo al borde para correr), cámara con el dedo, los cinco modos abajo, los movimientos más usados alrededor del botón principal y el resto en «⋯». Puedes cambiar el tamaño de los botones en Ajustes.</li>
         </ul>
       </div>
       <aside class="side">
         <div class="dlbox">
           <h3>Descargar</h3>
-          <p>Gratis. Un solo archivo, sin instalador.</p>
+          <p>Gratis. En PC es un solo archivo, sin instalador.</p>
           <a class="dlbtn" data-link="v3fwindows" href="#" download>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square" aria-hidden="true"><path d="M12 3v12M6 10l6 6 6-6M4 20h16"/></svg>
             <span>Descargar para Windows<small>Virtual3DFootball.exe, 77 MB</small></span>
           </a>
+          <a class="dlbtn android" data-link="v3fandroid" href="#" download>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square" aria-hidden="true"><path d="M12 3v12M6 10l6 6 6-6M4 20h16"/></svg>
+            <span>Descargar para Android<small>Virtual3DFootball.apk, 12 MB</small></span>
+          </a>
         </div>
         <dl class="facts">
           <dt>Windows</dt><dd>10 u 11 de 64 bits</dd>
+          <dt>Android</dt><dd>7.0 o superior, en horizontal</dd>
           <dt>Jugadores</dt><dd>1 sin conexión, o de 1 a 22 online</dd>
-          <dt>Controles</dt><dd>Teclado y ratón</dd>
+          <dt>Controles</dt><dd>Teclado y ratón en PC, pantalla táctil en Android</dd>
           <dt>Idiomas</dt><dd>Español, inglés, francés, alemán y portugués</dd>
           <dt>Online</dt><dd>Con cuenta de Discord</dd>
         </dl>
         <div class="note"><b>¿Windows te avisa al abrirlo?</b> Es normal con los juegos independientes que no tienen firma digital de pago. Pulsa «Más información» y luego «Ejecutar de todas formas». Solo pasa la primera vez.</div>
+        <div class="note android"><b>¿Cómo se instala en Android?</b> Abre el archivo descargado. Android te pedirá permiso para instalar apps que no vienen de Google Play: dáselo y vuelve. Si Play Protect muestra un aviso, elige instalar igualmente.</div>
       </aside>
     </div>
   </article>
