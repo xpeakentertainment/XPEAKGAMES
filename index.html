@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <script>
   // ================== ENLACES DE DESCARGA ==================
-  // Los .exe se descargan de tu GitHub (misma release). Frogwars.apk, Virtual3DFootball.exe y Virtual3DFootball.apk están en la carpeta descargas/ de la web.
+  // Los .exe se descargan de tu GitHub (misma release). Frogwars.apk, Virtual3DFootball.exe, Virtual3DFootball.apk y EpicForcesTowerDefense.exe están en la carpeta descargas/ de la web.
   window.XPEAK_LINKS = {
     hollowdays: 'https://github.com/xpeakentertainment/XPEAKGAMES/releases/latest/download/HollowDays.exe',
     partytime: 'https://github.com/xpeakentertainment/XPEAKGAMES/releases/latest/download/TADC-Party-Time-1_4_1-Patch.exe',
@@ -16,12 +16,13 @@
     thuwindows: 'https://github.com/xpeakentertainment/XPEAKGAMES/releases/latest/download/TheHundredteller.exe',
     fwandroid: 'descargas/Frogwars.apk',
     v3fwindows: 'descargas/Virtual3DFootball.exe',
-    v3fandroid: 'descargas/Virtual3DFootball.apk'
+    v3fandroid: 'descargas/Virtual3DFootball.apk',
+    efwindows: 'descargas/EpicForcesTowerDefense.exe'
   };
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>X-Peak Entertainment</title>
-<meta name="description" content="X-Peak Entertainment es un estudio independiente de videojuegos. Juegos: VIRTUAL 3D FOOTBALL, Frogwars, El Cuentacien, Basketball: From Scratch, RAGEBAIT TRAVEL, Hollow Days, The Amazing Digital Circus: Party Time! y Hardware Exchange.">
+<meta name="description" content="X-Peak Entertainment es un estudio independiente de videojuegos. Juegos: Epic Forces Tower Defense, VIRTUAL 3D FOOTBALL, Frogwars, El Cuentacien, Basketball: From Scratch, RAGEBAIT TRAVEL, Hollow Days, The Amazing Digital Circus: Party Time! y Hardware Exchange.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23161c36'/%3E%3Cpath d='M10 54 L32 22 L54 54Z' fill='%23eef1f8'/%3E%3Cpath d='M10 54 L44 6 M54 54 L20 6' stroke='%23ff7a4d' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E">
 <style>
 @font-face { font-family: 'Unbounded'; src: url(fonts/unbounded-latin-500-normal.woff2) format('woff2'); font-weight: 500; font-display: swap; }
@@ -40,6 +41,7 @@
 @font-face { font-family: 'IM Fell English'; src: url(fonts/im-fell-english-latin-400-italic.woff2) format('woff2'); font-style: italic; font-display: swap; }
 @font-face { font-family: 'Big Shoulders Display'; src: url(fonts/big-shoulders-display-latin-800-normal.woff2) format('woff2'); font-weight: 800; font-display: swap; }
 @font-face { font-family: 'Big Shoulders Display'; src: url(fonts/big-shoulders-display-latin-900-normal.woff2) format('woff2'); font-weight: 900; font-display: swap; }
+@font-face { font-family: 'Oxanium'; src: url(fonts/oxanium-latin-800-normal.woff2) format('woff2'); font-weight: 800; font-display: swap; }
 @font-face { font-family: 'Pixelify Sans'; src: url(fonts/pixelify-sans-latin-700-normal.woff2) format('woff2'); font-weight: 700; font-display: swap; }
 
 :root {
@@ -345,6 +347,33 @@ footer .r { margin-left: auto; }
 .t-fw ul.feats li::marker { color: #5fd35b; }
 @media (max-width: 900px) { .fwmark b { font-size: 40px; } .fwmark i { font-size: 13px; } }
 /* ---------- VIRTUAL 3D FOOTBALL: a floodlit night match on TV ---------- */
+/* ---------- Epic Forces Tower Defense ---------- */
+.card-ef { background: #0d1328; border-bottom: 4px solid #f2b84b; }
+.card-ef .cover::after { background: linear-gradient(0deg, rgba(13,19,40,.92) 0%, rgba(13,19,40,0) 55%); }
+.card-ef .badge { left: 26px; bottom: 22px; }
+.card-ef h3 { font: 800 30px/1.05 'Oxanium', var(--display); color: #f4ecd8; letter-spacing: .5px; }
+.card-ef p { color: #aab4cc; }
+.card-ef .chip { background: rgba(242,184,75,.1); color: #e6dcc4; border-radius: 3px; }
+.card-ef .chip.new { background: #f2b84b; color: #2a1a00; font-weight: 800; }
+.card-ef .go { color: #f2b84b; }
+.efmark { display: inline-block; font-family: 'Oxanium', 'Big Shoulders Display', Impact, sans-serif; font-weight: 800; line-height: .9; text-shadow: 0 4px 26px rgba(0,0,0,.75); }
+.efmark b { display: block; font-size: 64px; letter-spacing: 1px; background: linear-gradient(180deg, #fff3cf, #f2b84b 55%, #c47e1f); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.efmark span { display: block; margin-top: 8px; font-size: 17px; letter-spacing: 9px; color: #dfe4f2; }
+.t-ef { background: #0d1328; color: #dfe4f2; border: 1px solid rgba(242,184,75,.18); border-radius: 6px; }
+.t-ef .close { background: #f2b84b; color: #2a1a00; border-radius: 4px; font-weight: 800; }
+.t-ef .f-hero::after { background: linear-gradient(0deg, rgba(13,19,40,.97) 0%, rgba(13,19,40,0) 62%); }
+.t-ef .f-hero .title .efmark b { font-size: clamp(52px, 8vw, 116px); }
+.t-ef .f-hero .title .efmark span { font-size: clamp(14px, 1.6vw, 22px); letter-spacing: clamp(6px, 1vw, 14px); }
+.t-ef h3 { font: 800 26px/1.15 'Oxanium', var(--display); color: #f2b84b; }
+.t-ef .lead { color: #f4ecd8; }
+.t-ef p, .t-ef li { color: #aab4cc; }
+.t-ef .shots button { border-radius: 3px; box-shadow: 0 0 0 1px rgba(242,184,75,.2); }
+.t-ef .dlbox { background: #141c38; border: 1px solid rgba(242,184,75,.35); border-top: 4px solid #f2b84b; border-radius: 4px; }
+.t-ef .dlbox h3 { color: #f4ecd8; }
+.t-ef .dlbox p { color: #8f9ab4; margin: 0; }
+.t-ef .dlbtn { background: #f2b84b; color: #2a1a00; border-radius: 3px; }
+.t-ef .dlbtn:hover { background: #ffd27a; }
+@media (max-width: 700px) { .efmark b { font-size: 42px; } .efmark span { font-size: 12px; letter-spacing: 5px; } }
 .card-v3f { background: #0a1120; border-bottom: 4px solid #f5d547; }
 .card-v3f .cover::after { background: linear-gradient(0deg, rgba(10,17,32,.92) 0%, rgba(10,17,32,0) 52%); }
 .card-v3f .badge { left: 26px; bottom: 22px; }
@@ -516,6 +545,18 @@ footer .r { margin-left: auto; }
         <p>Pulsa en un juego para ver de qué va, sus capturas y la descarga.</p>
       </div>
       <div class="shelf">
+        <button class="card card-ef feature" type="button" data-open="epic-forces">
+          <div class="cover">
+            <img src="img/ef-cover.jpg" alt="Titanes defendiendo un camino de piedra en la selva mientras llega una oleada de criaturas de hueso desde un portal morado">
+            <div class="badge"><div class="efmark" aria-hidden="true"><b>EPIC FORCES</b><span>TOWER DEFENSE</span></div></div>
+          </div>
+          <div class="meta">
+            <h3>Epic Forces Tower Defense</h3>
+            <p>Defensa de torres por oleadas infinitas. Coloca a Los Titanes junto al camino, mejóralos y aguanta todo lo que puedas contra 100 tipos de enemigos y 30 jefes. Solo o con hasta 3 amigos, con tu cuenta de Discord.</p>
+            <div class="chips"><span class="chip new">Nuevo</span><span class="chip">Windows</span><span class="chip">Online</span><span class="chip">Defensa de torres</span></div>
+            <span class="go">Ver juego</span>
+          </div>
+        </button>
         <button class="card card-v3f feature" type="button" data-open="virtual-3d-football">
           <div class="cover">
             <img src="img/v3f-cover.jpg" alt="Los dos equipos, azul y rojo, salen en fila al césped de un estadio lleno y de noche">
@@ -525,7 +566,7 @@ footer .r { margin-left: auto; }
           <div class="meta">
             <h3>VIRTUAL 3D FOOTBALL</h3>
             <p>Fútbol 11 contra 11 en tercera persona. Eliges modo con 1, 2, 3 y 4 (y 5 si eres el portero) y cada tecla hace un movimiento distinto. Con árbitro, faltas, repeticiones y dos comentaristas. Contra bots o online por salas con tus amigos. Para PC y, ahora también, para Android, con controles táctiles.</p>
-            <div class="chips"><span class="chip new">Nuevo</span><span class="chip">Windows</span><span class="chip">Android</span><span class="chip">Online</span><span class="chip">Fútbol</span></div>
+            <div class="chips"><span class="chip">Windows</span><span class="chip">Android</span><span class="chip">Online</span><span class="chip">Fútbol</span></div>
             <span class="go">Ver juego</span>
           </div>
         </button>
@@ -664,6 +705,52 @@ footer .r { margin-left: auto; }
 
 <!-- ===== game frames ===== -->
 <div class="veil" id="veil" role="dialog" aria-modal="true" aria-label="Juego">
+
+  <article class="frame t-ef" data-game="epic-forces" hidden>
+    <button class="close" type="button" aria-label="Cerrar">✕</button>
+    <div class="f-hero">
+      <img src="img/ef-hero.jpg" alt="">
+      <div class="title"><div class="efmark" role="img" aria-label="Epic Forces Tower Defense"><b>EPIC FORCES</b><span>TOWER DEFENSE</span></div></div>
+    </div>
+    <div class="f-body">
+      <div>
+        <p class="lead">Año 2242. Las Amenazas han llegado a la Tierra y solo queda un grupo capaz de pararlas: Los Titanes. Tú decides dónde ponerlos.</p>
+        <p>Es un juego de defensa de torres por oleadas, sin final. Los enemigos salen de un portal y siguen un camino hasta el Núcleo. Tú colocas a tus titanes junto al camino con Z, X, C, V y B, los mejoras con la energía de la partida y lanzas sus habilidades con 1, 2 y 3. Cada mapa tiene un camino distinto cada vez.</p>
+        <p>Con los rubíes que ganas eliminando enemigos y sobreviviendo oleadas subes a tus titanes del nivel 1 al 99 o abres cajas para conseguir más. Cuanto más lejos llegas y más difícil es la partida, más ganas.</p>
+        <h3>Capturas</h3>
+        <div class="shots" data-shots="ef"></div>
+        <h3>Qué tiene</h3>
+        <ul class="feats">
+          <li>54 titanes con nombre e historia, en 8 rarezas: Básico, Raro, Épico, Legendario, Mítico, Exótico, Celestial y Divino. Cada uno con 3 habilidades, y algunos con habilidades extra que se compran con gemas.</li>
+          <li>Oleadas infinitas en 6 dificultades: Fácil, Normal, Difícil, Insano, Leyenda y Pesadilla.</li>
+          <li>100 tipos de enemigos de 5 facciones (máquinas, insectos alienígenas, no-muertos, demonios de fuego y criaturas del Vacío) y 30 jefes, cada uno con sus propias mecánicas.</li>
+          <li>8 mapas: ruinas, desierto, tundra, selva, volcán, la Luna, un cañón y una ciudad de neón.</li>
+          <li>Rubíes para mejorar y abrir cajas de titanes y huevos de mascotas. Gemas para cofres de estilos y habilidades extra.</li>
+          <li>24 mascotas que te acompañan y te dan bonus, 16 estilos para tus titanes y 40 iconos de perfil que se desbloquean jugando.</li>
+          <li>Amigos sin códigos: ves si están en línea, en partida, desconectados o AFK (y cuánto tiempo llevan), y los invitas a tu sala con un clic. Hasta 4 jugadores.</li>
+          <li>Historial de tus últimas partidas, récords, recompensa diaria, bestiario e introducción animada.</li>
+        </ul>
+      </div>
+      <aside class="side">
+        <div class="dlbox">
+          <h3>Descargar</h3>
+          <p>Gratis. Es un solo archivo, sin instalador.</p>
+          <a class="dlbtn" data-link="efwindows" href="#" download>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square" aria-hidden="true"><path d="M12 3v12M6 10l6 6 6-6M4 20h16"/></svg>
+            <span>Descargar para Windows<small>EpicForcesTowerDefense.exe, 65 MB</small></span>
+          </a>
+        </div>
+        <dl class="facts">
+          <dt>Windows</dt><dd>10 u 11 de 64 bits</dd>
+          <dt>Jugadores</dt><dd>De 1 a 4, online</dd>
+          <dt>Controles</dt><dd>Teclado y ratón</dd>
+          <dt>Idioma</dt><dd>Español</dd>
+          <dt>Online</dt><dd>Necesita internet y una cuenta de Discord</dd>
+        </dl>
+        <div class="note"><b>¿Windows te avisa al abrirlo?</b> Es normal con los juegos independientes que no tienen firma digital de pago. Pulsa «Más información» y luego «Ejecutar de todas formas». Solo pasa la primera vez.</div>
+      </aside>
+    </div>
+  </article>
 
   <article class="frame t-v3f" data-game="virtual-3d-football" hidden>
     <button class="close" type="button" aria-label="Cerrar">✕</button>
@@ -1076,6 +1163,7 @@ footer .r { margin-left: auto; }
 <script>
 // ---------- screenshots of each game ----------
 const SHOTS = {
+  ef: ['batalla', 'jefe', 'seleccion', 'titanes', 'cajas', 'neon', 'tundra', 'bestiario', 'menu'].map(f => ({ big: `img/ef-${f}.jpg`, small: `img/ef-${f}-p.jpg` })),
   v3f: ['tele', 'saque', 'tiro', 'gol', 'repeticion', 'tarjeta', 'dia', 'pizarra', 'sala'].map(f => ({ big: `img/v3f-${f}.jpg`, small: `img/v3f-${f}-p.jpg` })),
   hd: ['fort', 'millbrook', 'noche', 'combate', 'valle', 'cooperativo', 'mapa', 'hospital', 'creador'].map(f => ({ big: `img/hd-${f}.jpg`, small: `img/hd-${f}-p.jpg` })),
   pt: Array.from({ length: 8 }, (_, i) => ({ big: `img/partytime-${i + 1}.jpg`, small: `img/partytime-${i + 1}-p.jpg` })),
@@ -1085,7 +1173,7 @@ const SHOTS = {
   bfs: ['calle', 'liga', 'creador', 'casa', 'barrio', 'movil', 'pro', 'menu'].map(f => ({ big: `img/bfs-${f}.jpg`, small: `img/bfs-${f}-p.jpg` })),
   rt: ['inicio', 'bolas', 'ventiladores', 'barredora', 'contador', 'checkpoint', 'noche', 'locura', 'movil'].map(f => ({ big: `img/rt-${f}.jpg`, small: `img/rt-${f}-p.jpg` })),
 };
-const live = { hd: [], pt: [], hx: [], rt: [], bfs: [], thu: [], fw: [], v3f: [] };
+const live = { ef: [], hd: [], pt: [], hx: [], rt: [], bfs: [], thu: [], fw: [], v3f: [] };
 for (const k in SHOTS) {
   const box = document.querySelector(`[data-shots="${k}"]`);
   SHOTS[k].forEach(s => {
@@ -1109,7 +1197,7 @@ document.querySelectorAll('[data-link]').forEach(a => {
   else a.href = url;
 });
 
-// ---------- open / close a game frame (also from the address: #virtual-3d-football, #frogwars, #el-cuentacien, #basketball-from-scratch, #ragebait-travel, #hollow-days, #party-time, #hardware-exchange) ----------
+// ---------- open / close a game frame (also from the address: #epic-forces, #virtual-3d-football, #frogwars, #el-cuentacien, #basketball-from-scratch, #ragebait-travel, #hollow-days, #party-time, #hardware-exchange) ----------
 const veil = document.getElementById('veil');
 let lastFocus = null;
 function openGame(id, push) {
@@ -1130,7 +1218,7 @@ function closeGame(fromHistory) {
 document.querySelectorAll('[data-open]').forEach(c => c.addEventListener('click', () => openGame(c.dataset.open)));
 veil.querySelectorAll('.close').forEach(b => b.addEventListener('click', () => closeGame()));
 veil.addEventListener('click', e => { if (e.target === veil) closeGame(); });
-function fromHash() { const id = location.hash.slice(1); if (['virtual-3d-football', 'frogwars', 'el-cuentacien', 'basketball-from-scratch', 'ragebait-travel', 'hollow-days', 'party-time', 'hardware-exchange'].includes(id)) openGame(id, false); else closeGame(true); }
+function fromHash() { const id = location.hash.slice(1); if (['epic-forces', 'virtual-3d-football', 'frogwars', 'el-cuentacien', 'basketball-from-scratch', 'ragebait-travel', 'hollow-days', 'party-time', 'hardware-exchange'].includes(id)) openGame(id, false); else closeGame(true); }
 addEventListener('popstate', fromHash); fromHash();
 
 // ---------- big screenshot viewer ----------
