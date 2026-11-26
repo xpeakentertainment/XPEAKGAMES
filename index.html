@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <script>
   // ================== ENLACES DE DESCARGA ==================
-  // Los .exe se descargan de tu GitHub (misma release). Frogwars.apk, Virtual3DFootball.exe, Virtual3DFootball.apk y EpicForcesTowerDefense.exe están en la carpeta descargas/ de la web.
+  // Los .exe se descargan de tu GitHub (misma release). Frogwars.apk, Virtual3DFootball.exe, Virtual3DFootball.apk, EpicForcesTowerDefense.exe, FunkVerseCustomBeats.exe y FunkVerse.apk están en la carpeta descargas/ de la web.
   window.XPEAK_LINKS = {
     hollowdays: 'https://github.com/xpeakentertainment/XPEAKGAMES/releases/latest/download/HollowDays.exe',
     partytime: 'https://github.com/xpeakentertainment/XPEAKGAMES/releases/latest/download/TADC-Party-Time-1_4_1-Patch.exe',
@@ -17,12 +17,14 @@
     fwandroid: 'descargas/Frogwars.apk',
     v3fwindows: 'descargas/Virtual3DFootball.exe',
     v3fandroid: 'descargas/Virtual3DFootball.apk',
-    efwindows: 'descargas/EpicForcesTowerDefense.exe'
+    efwindows: 'descargas/EpicForcesTowerDefense.exe',
+    fvwindows: 'descargas/FunkVerseCustomBeats.exe',
+    fvandroid: 'descargas/FunkVerse.apk'
   };
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>X-Peak Entertainment</title>
-<meta name="description" content="X-Peak Entertainment es un estudio independiente de videojuegos. Juegos: Epic Forces Tower Defense, VIRTUAL 3D FOOTBALL, Frogwars, El Cuentacien, Basketball: From Scratch, RAGEBAIT TRAVEL, Hollow Days, The Amazing Digital Circus: Party Time! y Hardware Exchange.">
+<meta name="description" content="X-Peak Entertainment es un estudio independiente de videojuegos. Juegos: FunkVerse: Custom Beats, Epic Forces Tower Defense, VIRTUAL 3D FOOTBALL, Frogwars, El Cuentacien, Basketball: From Scratch, RAGEBAIT TRAVEL, Hollow Days, The Amazing Digital Circus: Party Time! y Hardware Exchange.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23161c36'/%3E%3Cpath d='M10 54 L32 22 L54 54Z' fill='%23eef1f8'/%3E%3Cpath d='M10 54 L44 6 M54 54 L20 6' stroke='%23ff7a4d' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E">
 <style>
 @font-face { font-family: 'Unbounded'; src: url(fonts/unbounded-latin-500-normal.woff2) format('woff2'); font-weight: 500; font-display: swap; }
@@ -41,6 +43,7 @@
 @font-face { font-family: 'IM Fell English'; src: url(fonts/im-fell-english-latin-400-italic.woff2) format('woff2'); font-style: italic; font-display: swap; }
 @font-face { font-family: 'Big Shoulders Display'; src: url(fonts/big-shoulders-display-latin-800-normal.woff2) format('woff2'); font-weight: 800; font-display: swap; }
 @font-face { font-family: 'Big Shoulders Display'; src: url(fonts/big-shoulders-display-latin-900-normal.woff2) format('woff2'); font-weight: 900; font-display: swap; }
+@font-face { font-family: 'Chango'; src: url(fonts/chango-latin-400-normal.woff2) format('woff2'); font-display: swap; }
 @font-face { font-family: 'Oxanium'; src: url(fonts/oxanium-latin-800-normal.woff2) format('woff2'); font-weight: 800; font-display: swap; }
 @font-face { font-family: 'Pixelify Sans'; src: url(fonts/pixelify-sans-latin-700-normal.woff2) format('woff2'); font-weight: 700; font-display: swap; }
 
@@ -101,7 +104,6 @@ section[id] { scroll-margin-top: 80px; }
 .head { display: flex; align-items: end; justify-content: space-between; gap: 20px; margin-bottom: 34px; }
 h2 { font: 700 clamp(30px, 3.6vw, 44px)/1.1 var(--display); margin: 0; }
 .head p { margin: 0; color: var(--mist); max-width: 26em; }
-.shelf { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; }
 .card { position: relative; text-align: left; padding: 0; border: 0; cursor: pointer; color: inherit; background: var(--ridge); border-radius: 18px; overflow: hidden;
   box-shadow: 0 24px 50px rgba(0,0,0,.35); transition: transform .25s ease, box-shadow .25s ease; display: flex; flex-direction: column; }
 .card:hover { transform: translateY(-6px); box-shadow: 0 34px 60px rgba(0,0,0,.45); }
@@ -472,9 +474,74 @@ footer .r { margin-left: auto; }
 @media (max-width: 900px) { .t-pt .trio { display: none; } .card .cover > img.photo { width: 44%; } }
 
 
+/* ---------- shelf: the newest game full width, the rest in an even grid ---------- */
+.shelf { display: flex; flex-direction: column; gap: 28px; }
+.rack { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; align-items: stretch; }
+.rack .card .badge { left: 18px; bottom: 14px; }
+.rack .card .meta { padding: 18px 20px 22px; gap: 10px; }
+.rack .card h3 { font-size: 21px; }
+.rack .card p { font-size: 15px; }
+.rack .card-v3f h3, .rack .card-ef h3 { font-size: 26px; } .rack .card-fw h3 { font-size: 25px; }
+.rack .efmark b { font-size: 40px; } .rack .efmark span { font-size: 12px; letter-spacing: 6px; margin-top: 6px; }
+.rack .v3fmark span { font-size: 15px; letter-spacing: 2px; } .rack .v3fmark b { font-size: 44px; } .rack .v3fmark i { width: 92px; height: 5px; margin-top: 7px; }
+.rack .card-v3f .droidtag { font-size: 14px; padding: 5px 9px 5px 7px; right: 12px; top: 12px; } .rack .card-v3f .droidtag svg { width: 14px; height: 14px; }
+.rack .fwmark b { font-size: 38px; letter-spacing: 2px; } .rack .fwmark i { font-size: 11px; margin-top: 7px; }
+.rack .thumark b { font-size: 38px; } .rack .thumark i { font-size: 16px; margin-top: 5px; }
+.rack .bfsmark span { font-size: 18px; } .rack .bfsmark b { font-size: 36px; }
+.rack .rtmark .r1 { font-size: 31px; } .rack .rtmark .r2 { font-size: 26px; }
+.rack .card-hd .badge svg { width: 170px; }
+.rack .card-pt .badge b { font-size: 22px; }
+.rack .hxmark svg { width: 40px; height: 40px; } .rack .hxmark b { font-size: 22px; }
+@media (max-width: 1100px) {
+  .rack { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .rack > .card:last-child:nth-child(odd) { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); }
+  .rack > .card:last-child:nth-child(odd) .meta { padding: 26px 30px; justify-content: center; }
+}
+@media (max-width: 700px) {
+  .rack { grid-template-columns: 1fr; }
+  .rack > .card:last-child:nth-child(odd) { grid-template-columns: 1fr; }
+  .rack > .card:last-child:nth-child(odd) .meta { padding: 18px 20px 22px; }
+}
+
+/* FunkVerse: a sticker-bombed mixtape, hot pink, cyan and yellow on night violet, hard ink shadows */
+.fvmark { display: inline-flex; flex-direction: column; align-items: flex-start; transform: rotate(-4deg); transform-origin: left bottom; }
+.fvmark b { font: 400 64px/.95 'Chango', var(--display); color: #ffd23f; -webkit-text-stroke: 3px #140a24; paint-order: stroke fill; text-shadow: 5px 5px 0 #ff2e88; }
+.fvmark span { margin: 6px 0 0 6px; font: 400 15px/1 'Chango', var(--display); letter-spacing: 5px; color: #140a24; background: #29d9ff; padding: 5px 12px 4px; border: 3px solid #140a24; box-shadow: 3px 3px 0 #140a24; transform: rotate(2deg); }
+.card-fv { background: #1d0e3f; border-bottom: 4px solid #ff2e88; }
+.card-fv .cover::after { background: linear-gradient(0deg, rgba(29,14,63,.88) 0%, rgba(29,14,63,0) 50%); }
+.card-fv .badge { left: 26px; bottom: 24px; }
+.card-fv h3 { font: 400 30px/1.1 'Chango', var(--display); color: #fff4d6; }
+.card-fv p { color: #d7cdf0; }
+.card-fv .chip { background: rgba(255,244,214,.08); color: #fff4d6; border-radius: 8px; }
+.card-fv .chip.new { background: #ff2e88; color: #fff; font-weight: 800; box-shadow: 2px 2px 0 #140a24; }
+.card-fv .go { color: #ffd23f; }
+.t-fv { background: #1d0e3f; color: #fff4d6; border: 3px solid #140a24; box-shadow: 8px 8px 0 #140a24; }
+.t-fv .close { background: #ffd23f; color: #140a24; border: 3px solid #140a24; box-shadow: 3px 3px 0 #140a24; border-radius: 12px; font-weight: 800; line-height: 40px; }
+.t-fv .f-hero::after { background: linear-gradient(0deg, rgba(29,14,63,.96) 0%, rgba(29,14,63,0) 60%); }
+.t-fv .f-hero .title .fvmark b { font-size: clamp(54px, 8.4vw, 118px); -webkit-text-stroke: 4px #140a24; text-shadow: 7px 7px 0 #ff2e88; }
+.t-fv .f-hero .title .fvmark span { font-size: clamp(14px, 1.7vw, 22px); letter-spacing: clamp(4px, .7vw, 8px); }
+.t-fv h3 { font: 400 24px/1.2 'Chango', var(--display); color: #ffd23f; }
+.t-fv .lead { color: #fff4d6; }
+.t-fv p, .t-fv li { color: #d7cdf0; }
+.t-fv .shots button { border: 3px solid #140a24; border-radius: 10px; box-shadow: 4px 4px 0 #140a24; }
+.t-fv .dlbox { background: #2b1458; border: 3px solid #140a24; border-radius: 14px; box-shadow: 5px 5px 0 #140a24; }
+.t-fv .dlbox h3 { color: #fff4d6; }
+.t-fv .dlbox p { color: #b9aedb; margin: 0; }
+.t-fv .dlbtn { background: #ff2e88; color: #fff; border: 3px solid #140a24; border-radius: 12px; box-shadow: 4px 4px 0 #140a24; font-family: 'Chango', var(--display); font-weight: 400; font-size: 16px; }
+.t-fv .dlbtn span small { font-family: var(--body); font-weight: 600; }
+.t-fv .dlbtn:hover { background: #ff5aa2; }
+.t-fv .dlbtn.android { background: #8cff3c; color: #140a24; }
+.t-fv .dlbtn.android:hover { background: #a9ff6e; }
+.t-fv .facts dt { color: #fff4d6; } .t-fv .facts dd { color: #b9aedb; }
+.t-fv .note { background: #2b1458; color: #d7cdf0; border-left: 4px solid #29d9ff; border-radius: 4px; }
+.t-fv .note.android { border-left-color: #8cff3c; }
+.t-fv .note b { color: #fff4d6; }
+.t-fv ul.feats li::marker { color: #ff2e88; }
+@media (max-width: 900px) { .fvmark b { font-size: 44px; } .fvmark span { font-size: 12px; letter-spacing: 3px; } .card-fv h3 { font-size: 23px; } }
+
 @media (max-width: 900px) {
   .bar nav { display: none; }
-  .shelf, .about .wrap, .f-body, .card.feature { grid-template-columns: 1fr; }
+  .about .wrap, .f-body, .card.feature { grid-template-columns: 1fr; }
   .bfsmark span { font-size: 19px; } .bfsmark b { font-size: 36px; }
   .thumark b { font-size: 38px; } .thumark i { font-size: 17px; }
   .shelf > .card:not(.feature):last-child:nth-child(odd) { grid-template-columns: 1fr; }
@@ -545,7 +612,20 @@ footer .r { margin-left: auto; }
         <p>Pulsa en un juego para ver de qué va, sus capturas y la descarga.</p>
       </div>
       <div class="shelf">
-        <button class="card card-ef feature" type="button" data-open="epic-forces">
+        <button class="card card-fv feature" type="button" data-open="funkverse">
+          <div class="cover">
+            <img src="img/fv-cover.jpg" alt="Una batalla de rap en una discoteca: una bruja canta con el micrófono frente al protagonista, con un robot flotante en el centro">
+            <div class="badge"><div class="fvmark" aria-hidden="true"><b>FunkVerse</b><span>CUSTOM BEATS</span></div></div>
+          </div>
+          <div class="meta">
+            <h3>FunkVerse: Custom Beats</h3>
+            <p>Batallas de rap al ritmo de las flechas, y un editor para crear las tuyas: tu MP3 o un ritmo hecho en el juego, tus personajes, tus escenarios y fases cada vez más creepy. Publícalas en la biblioteca mundial con su propio código.</p>
+            <div class="chips"><span class="chip new">Nuevo</span><span class="chip">Windows</span><span class="chip">Android</span><span class="chip">Online</span><span class="chip">Ritmo</span></div>
+            <span class="go">Ver juego</span>
+          </div>
+        </button>
+        <div class="rack">
+        <button class="card card-ef" type="button" data-open="epic-forces">
           <div class="cover">
             <img src="img/ef-cover.jpg" alt="Titanes defendiendo un camino de piedra en la selva mientras llega una oleada de criaturas de hueso desde un portal morado">
             <div class="badge"><div class="efmark" aria-hidden="true"><b>EPIC FORCES</b><span>TOWER DEFENSE</span></div></div>
@@ -553,11 +633,11 @@ footer .r { margin-left: auto; }
           <div class="meta">
             <h3>Epic Forces Tower Defense</h3>
             <p>Defensa de torres por oleadas infinitas. Coloca a Los Titanes junto al camino, mejóralos y aguanta todo lo que puedas contra 100 tipos de enemigos y 30 jefes. Solo o con hasta 3 amigos, con tu cuenta de Discord.</p>
-            <div class="chips"><span class="chip new">Nuevo</span><span class="chip">Windows</span><span class="chip">Online</span><span class="chip">Defensa de torres</span></div>
+            <div class="chips"><span class="chip">Windows</span><span class="chip">Online</span><span class="chip">Defensa de torres</span></div>
             <span class="go">Ver juego</span>
           </div>
         </button>
-        <button class="card card-v3f feature" type="button" data-open="virtual-3d-football">
+        <button class="card card-v3f" type="button" data-open="virtual-3d-football">
           <div class="cover">
             <img src="img/v3f-cover.jpg" alt="Los dos equipos, azul y rojo, salen en fila al césped de un estadio lleno y de noche">
             <div class="badge"><div class="v3fmark" aria-hidden="true"><span>VIRTUAL</span><b>3D FOOTBALL</b><i></i></div></div>
@@ -570,7 +650,7 @@ footer .r { margin-left: auto; }
             <span class="go">Ver juego</span>
           </div>
         </button>
-        <button class="card card-fw feature" type="button" data-open="frogwars">
+        <button class="card card-fw" type="button" data-open="frogwars">
           <div class="cover">
             <img src="img/fw-cover.jpg" alt="Ranas de colores peleando con espada y lengua en un mapa de selva de Frogwars">
             <div class="badge"><div class="fwmark" aria-hidden="true"><b>FROGWARS</b><i>Temporada 1 · ¡X-PEAK Lanzamiento!</i></div></div>
@@ -677,6 +757,7 @@ footer .r { margin-left: auto; }
             <span class="go">Ver juego</span>
           </div>
         </button>
+        </div>
       </div>
     </div>
   </section>
@@ -705,6 +786,59 @@ footer .r { margin-left: auto; }
 
 <!-- ===== game frames ===== -->
 <div class="veil" id="veil" role="dialog" aria-modal="true" aria-label="Juego">
+
+  <article class="frame t-fv" data-game="funkverse" hidden>
+    <button class="close" type="button" aria-label="Cerrar">✕</button>
+    <div class="f-hero">
+      <img src="img/fv-hero.jpg" alt="">
+      <div class="title"><div class="fvmark" role="img" aria-label="FunkVerse: Custom Beats"><b>FunkVerse</b><span>CUSTOM BEATS</span></div></div>
+    </div>
+    <div class="f-body">
+      <div>
+        <p class="lead">Una batalla de rap a base de flechas: tu rival canta, tú respondes. Y todas las canciones las puedes hacer tú.</p>
+        <p>Pulsa ← ↓ ↑ → (o D, F, J y K) justo cuando cada flecha llega arriba. Si aciertas le vas ganando la barra de vida al rival; si fallas, te quedas callado. En el móvil se juega tocando la pantalla, y en PC también con mando.</p>
+        <p>En el editor eliges la música (tu MP3 o un ritmo que creas dentro del juego), dónde y cuándo cae cada flecha, quién canta, el escenario y lo que pasa durante la canción. Una canción puede tener varias fases, y en cada una los personajes pueden volverse más creepy.</p>
+        <h3>Capturas</h3>
+        <div class="shots" data-shots="fv"></div>
+        <h3>Qué tiene</h3>
+        <ul class="feats">
+          <li>6 canciones para empezar y 9 personajes propios, cada uno con 5 niveles creepy: de normal a pesadilla.</li>
+          <li>Tu MP3 como canción, con las voces aparte si las tienes, o un creador de ritmos con batería, bajo, acordes y melodía.</li>
+          <li>Editor de flechas con la forma de onda de la música, flechas largas, 5 tipos de flecha, metrónomo, grabar tocando el teclado y flechas automáticas a partir de la canción.</li>
+          <li>Fases: cada una con su música, sus personajes, su escenario, su nivel creepy y su transición.</li>
+          <li>Escenarios: 10 listos, o un fondo de color, imagen, GIF o dibujado por ti, con capas de decoración que se mueven, partículas y 12 filtros.</li>
+          <li>Crea personajes con piezas o con tus propias imágenes, GIFs o dibujos, una por pose.</li>
+          <li>16 tipos de eventos durante la canción: cámara, destellos, textos, cambiar de personaje o de escenario, y mover las flechas.</li>
+          <li>Hasta 500 canciones guardadas en el juego.</li>
+          <li>Biblioteca mundial: publica tus canciones y cada una recibe su código. Búscalas por nombre o código, en recientes, populares o más jugadas, dales me gusta, guárdalas en favoritos y descárgalas para jugar sin internet.</li>
+        </ul>
+      </div>
+      <aside class="side">
+        <div class="dlbox">
+          <h3>Descargar</h3>
+          <p>Gratis. En PC es un solo archivo, sin instalador.</p>
+          <a class="dlbtn" data-link="fvwindows" href="#" download>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square" aria-hidden="true"><path d="M12 3v12M6 10l6 6 6-6M4 20h16"/></svg>
+            <span>Descargar para Windows<small>FunkVerseCustomBeats.exe, 65 MB</small></span>
+          </a>
+          <a class="dlbtn android" data-link="fvandroid" href="#" download>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square" aria-hidden="true"><path d="M12 3v12M6 10l6 6 6-6M4 20h16"/></svg>
+            <span>Descargar para Android<small>FunkVerse.apk, 330 KB</small></span>
+          </a>
+        </div>
+        <dl class="facts">
+          <dt>Windows</dt><dd>10 u 11 de 64 bits</dd>
+          <dt>Android</dt><dd>7.0 o superior, en horizontal</dd>
+          <dt>Jugadores</dt><dd>1</dd>
+          <dt>Controles</dt><dd>Teclado o mando en PC, pantalla táctil en Android</dd>
+          <dt>Idioma</dt><dd>Español</dd>
+          <dt>Online</dt><dd>La biblioteca mundial necesita internet y una cuenta de Discord</dd>
+        </dl>
+        <div class="note"><b>¿Windows te avisa al abrirlo?</b> Es normal con los juegos independientes que no tienen firma digital de pago. Pulsa «Más información» y luego «Ejecutar de todas formas». Solo pasa la primera vez.</div>
+        <div class="note android"><b>¿Cómo se instala en Android?</b> Abre el archivo descargado. Android te pedirá permiso para instalar apps que no vienen de Google Play: dáselo y vuelve. Si Play Protect muestra un aviso, elige instalar igualmente.</div>
+      </aside>
+    </div>
+  </article>
 
   <article class="frame t-ef" data-game="epic-forces" hidden>
     <button class="close" type="button" aria-label="Cerrar">✕</button>
@@ -1163,6 +1297,7 @@ footer .r { margin-left: auto; }
 <script>
 // ---------- screenshots of each game ----------
 const SHOTS = {
+  fv: ['club', 'creepy', 'pesadilla', 'notas', 'ritmo', 'escenario', 'personaje', 'biblioteca', 'menu'].map(f => ({ big: `img/fv-${f}.jpg`, small: `img/fv-${f}-p.jpg` })),
   ef: ['batalla', 'jefe', 'seleccion', 'titanes', 'cajas', 'neon', 'tundra', 'bestiario', 'menu'].map(f => ({ big: `img/ef-${f}.jpg`, small: `img/ef-${f}-p.jpg` })),
   v3f: ['tele', 'saque', 'tiro', 'gol', 'repeticion', 'tarjeta', 'dia', 'pizarra', 'sala'].map(f => ({ big: `img/v3f-${f}.jpg`, small: `img/v3f-${f}-p.jpg` })),
   hd: ['fort', 'millbrook', 'noche', 'combate', 'valle', 'cooperativo', 'mapa', 'hospital', 'creador'].map(f => ({ big: `img/hd-${f}.jpg`, small: `img/hd-${f}-p.jpg` })),
@@ -1173,7 +1308,7 @@ const SHOTS = {
   bfs: ['calle', 'liga', 'creador', 'casa', 'barrio', 'movil', 'pro', 'menu'].map(f => ({ big: `img/bfs-${f}.jpg`, small: `img/bfs-${f}-p.jpg` })),
   rt: ['inicio', 'bolas', 'ventiladores', 'barredora', 'contador', 'checkpoint', 'noche', 'locura', 'movil'].map(f => ({ big: `img/rt-${f}.jpg`, small: `img/rt-${f}-p.jpg` })),
 };
-const live = { ef: [], hd: [], pt: [], hx: [], rt: [], bfs: [], thu: [], fw: [], v3f: [] };
+const live = { fv: [], ef: [], hd: [], pt: [], hx: [], rt: [], bfs: [], thu: [], fw: [], v3f: [] };
 for (const k in SHOTS) {
   const box = document.querySelector(`[data-shots="${k}"]`);
   SHOTS[k].forEach(s => {
@@ -1197,7 +1332,7 @@ document.querySelectorAll('[data-link]').forEach(a => {
   else a.href = url;
 });
 
-// ---------- open / close a game frame (also from the address: #epic-forces, #virtual-3d-football, #frogwars, #el-cuentacien, #basketball-from-scratch, #ragebait-travel, #hollow-days, #party-time, #hardware-exchange) ----------
+// ---------- open / close a game frame (also from the address: #funkverse, #epic-forces, #virtual-3d-football, #frogwars, #el-cuentacien, #basketball-from-scratch, #ragebait-travel, #hollow-days, #party-time, #hardware-exchange) ----------
 const veil = document.getElementById('veil');
 let lastFocus = null;
 function openGame(id, push) {
@@ -1218,7 +1353,7 @@ function closeGame(fromHistory) {
 document.querySelectorAll('[data-open]').forEach(c => c.addEventListener('click', () => openGame(c.dataset.open)));
 veil.querySelectorAll('.close').forEach(b => b.addEventListener('click', () => closeGame()));
 veil.addEventListener('click', e => { if (e.target === veil) closeGame(); });
-function fromHash() { const id = location.hash.slice(1); if (['epic-forces', 'virtual-3d-football', 'frogwars', 'el-cuentacien', 'basketball-from-scratch', 'ragebait-travel', 'hollow-days', 'party-time', 'hardware-exchange'].includes(id)) openGame(id, false); else closeGame(true); }
+function fromHash() { const id = location.hash.slice(1); if (['funkverse', 'epic-forces', 'virtual-3d-football', 'frogwars', 'el-cuentacien', 'basketball-from-scratch', 'ragebait-travel', 'hollow-days', 'party-time', 'hardware-exchange'].includes(id)) openGame(id, false); else closeGame(true); }
 addEventListener('popstate', fromHash); fromHash();
 
 // ---------- big screenshot viewer ----------
