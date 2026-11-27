@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "BBB",
+    "BSB",
+    "BBB"
+  ],
+  "key": {
+    "B": {
+      "item": "minecraft:end_stone_bricks"
+    },
+    "S": {
+      "item": "enderite:enderite_scrap"
+    }
+  },
+  "result": {
+    "item": "enderite:enderite_bricks",
+    "count": 8
+  }
+}

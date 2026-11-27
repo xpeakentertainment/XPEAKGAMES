@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "enderite:enderite_bricks"
+  },
+  "result": "enderite:chiseled_enderite_bricks",
+  "count": 1
+}

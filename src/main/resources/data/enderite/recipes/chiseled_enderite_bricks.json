@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "S",
+    "S"
+  ],
+  "key": {
+    "S": {
+      "item": "enderite:enderite_brick_slab"
+    }
+  },
+  "result": {
+    "item": "enderite:chiseled_enderite_bricks"
+  }
+}

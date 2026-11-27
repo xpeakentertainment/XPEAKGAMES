@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "enderite:enderite_bricks"
+  },
+  "result": "enderite:enderite_brick_slab",
+  "count": 2
+}

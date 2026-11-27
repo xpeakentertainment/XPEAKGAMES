@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "enderite:block/enderite_bricks",
+    "side": "enderite:block/enderite_bricks",
+    "top": "enderite:block/enderite_bricks"
+  }
+}

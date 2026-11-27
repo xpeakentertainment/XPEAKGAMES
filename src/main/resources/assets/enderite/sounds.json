@@ -1,0 +1,145 @@
+{
+  "entity.crawler.ambient": {
+    "subtitle": "subtitles.enderite.crawler.ambient",
+    "sounds": [
+      {
+        "name": "minecraft:entity.enderman.ambient",
+        "type": "event",
+        "pitch": 0.45,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:entity.warden.ambient",
+        "type": "event",
+        "pitch": 0.75,
+        "volume": 0.8
+      }
+    ]
+  },
+  "entity.crawler.scream": {
+    "subtitle": "subtitles.enderite.crawler.scream",
+    "sounds": [
+      {
+        "name": "minecraft:entity.enderman.scream",
+        "type": "event",
+        "pitch": 0.5,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:entity.ghast.scream",
+        "type": "event",
+        "pitch": 0.45,
+        "volume": 1.0
+      }
+    ]
+  },
+  "entity.crawler.attack": {
+    "subtitle": "subtitles.enderite.crawler.attack",
+    "sounds": [
+      {
+        "name": "minecraft:entity.warden.attack_impact",
+        "type": "event",
+        "pitch": 0.8,
+        "volume": 1.0
+      }
+    ]
+  },
+  "entity.crawler.step": {
+    "subtitle": "subtitles.enderite.crawler.step",
+    "sounds": [
+      {
+        "name": "minecraft:entity.warden.step",
+        "type": "event",
+        "pitch": 1.25,
+        "volume": 0.8
+      }
+    ]
+  },
+  "entity.crawler.hurt": {
+    "subtitle": "subtitles.enderite.crawler.hurt",
+    "sounds": [
+      {
+        "name": "minecraft:entity.enderman.hurt",
+        "type": "event",
+        "pitch": 0.5,
+        "volume": 1.0
+      }
+    ]
+  },
+  "entity.crawler.death": {
+    "subtitle": "subtitles.enderite.crawler.death",
+    "sounds": [
+      {
+        "name": "minecraft:entity.enderman.death",
+        "type": "event",
+        "pitch": 0.4,
+        "volume": 1.0
+      }
+    ]
+  },
+  "ambient.limbo.loop": {
+    "sounds": [
+      {
+        "name": "minecraft:ambient.soul_sand_valley.loop",
+        "type": "event",
+        "pitch": 0.55,
+        "volume": 1.0
+      }
+    ]
+  },
+  "ambient.limbo.enter": {
+    "subtitle": "subtitles.enderite.limbo.enter",
+    "sounds": [
+      {
+        "name": "minecraft:ambient.cave",
+        "type": "event",
+        "pitch": 0.5,
+        "volume": 1.0
+      }
+    ]
+  },
+  "ambient.limbo.heartbeat": {
+    "subtitle": "subtitles.enderite.limbo.heartbeat",
+    "sounds": [
+      {
+        "name": "minecraft:entity.warden.heartbeat",
+        "type": "event",
+        "pitch": 1.0,
+        "volume": 1.0
+      }
+    ]
+  },
+  "ambient.limbo.escape": {
+    "subtitle": "subtitles.enderite.limbo.escape",
+    "sounds": [
+      {
+        "name": "minecraft:block.beacon.deactivate",
+        "type": "event",
+        "pitch": 0.7,
+        "volume": 1.0
+      }
+    ]
+  },
+  "item.tool.stick": {
+    "subtitle": "subtitles.enderite.tool.stick",
+    "sounds": [
+      {
+        "name": "minecraft:item.trident.hit",
+        "type": "event",
+        "pitch": 1.1,
+        "volume": 1.0
+      }
+    ]
+  },
+  "item.tool.pull": {
+    "subtitle": "subtitles.enderite.tool.pull",
+    "sounds": [
+      {
+        "name": "minecraft:item.trident.return",
+        "type": "event",
+        "pitch": 1.2,
+        "volume": 1.0
+      }
+    ]
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "B  ",
+    "BB ",
+    "BBB"
+  ],
+  "key": {
+    "B": {
+      "item": "enderite:enderite_bricks"
+    }
+  },
+  "result": {
+    "item": "enderite:enderite_brick_stairs",
+    "count": 4
+  }
+}

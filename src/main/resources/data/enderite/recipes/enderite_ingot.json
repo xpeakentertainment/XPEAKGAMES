@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "enderite:enderite_scrap"
+    },
+    {
+      "item": "enderite:enderite_scrap"
+    },
+    {
+      "item": "enderite:enderite_scrap"
+    },
+    {
+      "item": "enderite:enderite_scrap"
+    },
+    {
+      "item": "minecraft:ender_pearl"
+    },
+    {
+      "item": "minecraft:ender_pearl"
+    },
+    {
+      "item": "minecraft:ender_pearl"
+    },
+    {
+      "item": "minecraft:ender_pearl"
+    },
+    {
+      "item": "minecraft:netherite_ingot"
+    }
+  ],
+  "result": {
+    "item": "enderite:enderite_ingot"
+  }
+}
