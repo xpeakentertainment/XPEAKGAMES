@@ -60,6 +60,7 @@ public final class ClientTest {
     private static final List<String> LOG = new ArrayList<>();
     private static int passed, failed;
     private static int t = -1;
+    private static int idleTicks;
     private static int waitStart;
     private static int step;
     private static BlockPos base;
@@ -117,6 +118,16 @@ public final class ClientTest {
     public static void onTick(TickEvent.ClientTickEvent event) {
         if (event.phase != TickEvent.Phase.END) return;
         Minecraft mc = Minecraft.getInstance();
+        idleTicks++;
+        if (idleTicks % 400 == 0) {
+            EnderiteMod.LOGGER.info("[CLIENTTEST] esperando... pantalla={} jugador={} paso={} t={}",
+                    mc.screen == null ? "ninguna" : mc.screen.getClass().getName(), mc.player != null, step, t);
+        }
+        if (t < 0 && idleTicks > 20 * 60 * 8) {
+            check("el mundo de prueba carga", false, "pantalla=" + (mc.screen == null ? "ninguna" : mc.screen.getClass().getName()));
+            finish(mc);
+            return;
+        }
         if (mc.player == null || mc.level == null || mc.getSingleplayerServer() == null) return;
         if (t < 0) {
             t = 0;

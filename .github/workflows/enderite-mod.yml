@@ -46,32 +46,44 @@ jobs:
       - name: Server self-test
         if: steps.build.outcome == 'success' && hashFiles('ci/run-tests') != ''
         continue-on-error: true
+        timeout-minutes: 25
         run: |
           mkdir -p run
           echo "eula=true" > run/eula.txt
           printf "online-mode=false\nlevel-seed=enderite\nspawn-protection=0\nview-distance=6\nsimulation-distance=6\nlevel-name=world\n" > run/server.properties
           set -o pipefail
-          ENDERITE_SELFTEST=1 timeout 1500 gradle runServer --no-daemon 2>&1 | tee out/logs/server.log || true
+          ENDERITE_SELFTEST=1 timeout -k 30 1200 gradle runServer --no-daemon > out/logs/server.log 2>&1 || true
           cp run/logs/latest.log out/logs/server-latest.log || true
           cp run/enderite-selftest.txt out/ || true
 
       - name: Client test (Xvfb)
         if: steps.build.outcome == 'success' && hashFiles('ci/run-tests') != ''
         continue-on-error: true
+        timeout-minutes: 30
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -y -qq xvfb mesa-utils libgl1-mesa-dri > /dev/null
+          sudo apt-get install -y -qq xvfb mesa-utils libgl1-mesa-dri imagemagick x11-apps > /dev/null
           mkdir -p run/saves
           rm -rf run/saves/testworld
           if [ -d run/world ]; then cp -r run/world run/saves/testworld; rm -f run/saves/testworld/session.lock; fi
           printf "lang:es_es\nrenderDistance:6\nsimulationDistance:6\nmaxFps:30\nonboardAccessibility:false\ntutorialStep:none\nskipMultiplayerWarning:true\npauseOnLostFocus:false\nsoundCategory_master:0.0\nguiScale:2\n" > run/options.txt
           export LIBGL_ALWAYS_SOFTWARE=1
-          set -o pipefail
-          ENDERITE_CLIENTTEST=1 timeout 1800 xvfb-run -a -s "-screen 0 1280x720x24" gradle runClient --no-daemon 2>&1 | tee out/logs/client.log || true
+          Xvfb :99 -screen 0 1280x720x24 > /dev/null 2>&1 &
+          export DISPLAY=:99
+          sleep 2
+          glxinfo -B > out/logs/glxinfo.txt 2>&1 || true
+          ( ENDERITE_CLIENTTEST=1 gradle runClient --no-daemon > out/logs/client.log 2>&1; echo done > /tmp/client_done ) &
+          for i in $(seq 1 132); do
+            sleep 10
+            if [ -f /tmp/client_done ]; then echo "cliente terminado tras $i x10s"; break; fi
+            if [ $((i % 9)) -eq 0 ]; then import -window root "out/screenshots/xvfb_$(printf %03d $i).png" || true; fi
+          done
+          pkill -9 -f "java" || true
           cp run/logs/latest.log out/logs/client-latest.log || true
           cp run/screenshots/*.png out/screenshots/ || true
           cp run/enderite-clienttest.txt out/ || true
           cp run/crash-reports/*.txt out/logs/ || true
+          tail -50 out/logs/client.log || true
 
       - name: Collect jar
         if: always()
