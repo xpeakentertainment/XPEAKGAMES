@@ -123,6 +123,16 @@ public final class ClientTest {
             EnderiteMod.LOGGER.info("[CLIENTTEST] esperando... pantalla={} jugador={} paso={} t={}",
                     mc.screen == null ? "ninguna" : mc.screen.getClass().getName(), mc.player != null, step, t);
         }
+        if (t < 0 && mc.screen instanceof net.minecraft.client.gui.screens.ConfirmScreen confirm && idleTicks % 40 == 0) {
+            // Aviso de "ajustes experimentales" (sale una vez en mundos con dimensiones nuevas): pulsar "Proceder"
+            for (var child : confirm.children()) {
+                if (child instanceof net.minecraft.client.gui.components.Button b) {
+                    note("pulsando '" + b.getMessage().getString() + "' en el aviso de ajustes experimentales");
+                    b.onPress();
+                    break;
+                }
+            }
+        }
         if (t < 0 && idleTicks > 20 * 60 * 8) {
             check("el mundo de prueba carga", false, "pantalla=" + (mc.screen == null ? "ninguna" : mc.screen.getClass().getName()));
             finish(mc);
