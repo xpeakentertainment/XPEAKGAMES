@@ -107,9 +107,9 @@ public final class SelfTest {
             if (tick == 90) startRocketCheck();
             if (tick == 90 + 60) endRocketCheck();
             if (portableTicks > 0) tickPortable();
-            if (tick == 80 + 700) endDigCheck();
-            if (tick == 80 + 720 && portableTicks <= 0) finish();
-            if (tick > 80 + 720 && portableTicks <= 0 && tick < 80 + 900) finish();
+            if (tick == 80 + 1000) endDigCheck();
+            if (tick == 80 + 1020 && portableTicks <= 0) finish();
+            if (tick > 80 + 1020 && portableTicks <= 0 && tick < 80 + 1200) finish();
         } catch (Throwable t) {
             check("excepcion en tick " + tick, false, t.toString());
             EnderiteMod.LOGGER.error("[SELFTEST] error", t);

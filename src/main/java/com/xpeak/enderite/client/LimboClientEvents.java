@@ -90,6 +90,19 @@ public final class LimboClientEvents {
             }
         }
 
+        // Si un teletransporte del servidor llega tarde y anula el salto, se vuelve a aplicar
+        if (pendingJumpTicks > 0) {
+            pendingJumpTicks--;
+            if (player.getVehicle() instanceof StuckToolEntity) player.stopRiding();
+            if (player.getY() <= pendingJumpY + 0.05D && player.getDeltaMovement().y <= 0.0D && !player.onGround() && pendingJump != null) {
+                if (Boolean.getBoolean("enderite.clienttest")) {
+                    EnderiteMod.LOGGER.info("[DEBUG] salto anulado, se vuelve a aplicar pos={} vel={}", player.position(), player.getDeltaMovement());
+                }
+                player.setDeltaMovement(pendingJump);
+                pendingJumpTicks = 0;
+            }
+        }
+
         // Salto extra desde la pared (pulsa saltar mientras cuelgas)
         boolean jumpDown = mc.screen == null && (mc.options.keyJump.isDown() || player.input.jumping);
         if (player.getVehicle() instanceof StuckToolEntity) {
@@ -108,7 +121,17 @@ public final class LimboClientEvents {
         if (p.getVehicle() instanceof StuckToolEntity) p.stopRiding();
         p.setDeltaMovement(x, y, z);
         p.resetFallDistance();
+        pendingJump = new net.minecraft.world.phys.Vec3(x, y, z);
+        pendingJumpY = p.getY();
+        pendingJumpTicks = 4;
+        if (Boolean.getBoolean("enderite.clienttest")) {
+            EnderiteMod.LOGGER.info("[DEBUG] applyClingJump cliente pos={} vel=({}, {}, {})", p.position(), x, y, z);
+        }
     }
+
+    private static net.minecraft.world.phys.Vec3 pendingJump;
+    private static double pendingJumpY;
+    private static int pendingJumpTicks;
 
     private static void disableShader(Minecraft mc) {
         if (!shaderActive) return;

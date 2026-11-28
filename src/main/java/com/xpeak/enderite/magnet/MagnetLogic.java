@@ -47,9 +47,10 @@ public final class MagnetLogic {
             } else {
                 double strength = dist > 12.0D ? 0.10D : 0.08D;
                 // flotan (se compensa la gravedad) y aceleran hacia el iman
-                v = item.getDeltaMovement().scale(0.80D).add(dir.scale(strength)).add(0.0D, 0.04D, 0.0D);
+                v = item.getDeltaMovement().scale(0.80D).add(dir.scale(strength)).add(0.0D, 0.055D, 0.0D);
                 double max = 0.9D;
                 if (v.length() > max) v = v.normalize().scale(max);
+                if (v.y > 0.25D) v = new Vec3(v.x, 0.25D, v.z);
             }
             item.setDeltaMovement(v);
             item.hasImpulse = true;

@@ -169,6 +169,9 @@ public final class WallCling {
         player.setDeltaMovement(vel);
         player.hurtMarked = true;
         com.xpeak.enderite.network.ModNetwork.sendClingJumped(player, vel);
+        if (com.xpeak.enderite.debug.SelfTest.ENABLED || Boolean.getBoolean("enderite.clienttest")) {
+            EnderiteMod.LOGGER.info("[DEBUG] wallJump servidor pos={} vel={}", player.position(), vel);
+        }
         player.resetFallDistance();
         player.causeFoodExhaustion(0.2F);
     }

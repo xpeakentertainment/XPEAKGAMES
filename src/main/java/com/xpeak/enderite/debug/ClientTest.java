@@ -458,7 +458,11 @@ public final class ClientTest {
                 if (!after(60)) return;
                 Entity crawler = null;
                 for (Entity e : mc.level.entitiesForRendering()) if (e instanceof CrawlerEntity) crawler = e;
-                check("el Crawler aparece en el Limbo", crawler != null, "");
+                server(sp -> {
+                    int n = 0;
+                    for (Entity e : sp.serverLevel().getAllEntities()) if (e instanceof CrawlerEntity) n++;
+                    check("el Crawler aparece en el Limbo", n == 1, n + " crawler(s)");
+                });
                 if (crawler != null) {
                     note(String.format("crawler a %.1f bloques", crawler.distanceTo(mc.player)));
                     look(crawler.position().add(0, 2.0, 0));
@@ -738,11 +742,13 @@ public final class ClientTest {
                 next();
             }
             case 48 -> {
+                note(String.format("tecla saltar t=%d y=%.2f vel=%s vehiculo=%s", t - waitStart, mc.player.getY(), mc.player.getDeltaMovement(), mc.player.getVehicle()));
                 if (!after(3)) return;
                 mc.options.keyJump.setDown(false);
                 next();
             }
             case 49 -> {
+                note(String.format("tras soltar t=%d y=%.2f vel=%s vehiculo=%s", t - waitStart, mc.player.getY(), mc.player.getDeltaMovement(), mc.player.getVehicle()));
                 if (!after(5)) return;
                 check("agarre: SALTAS pulsando la tecla de saltar", mc.player.getVehicle() == null && mc.player.getY() > hangY + 0.5D,
                         String.format("vehiculo=%s y %.2f -> %.2f", mc.player.getVehicle(), hangY, mc.player.getY()));
