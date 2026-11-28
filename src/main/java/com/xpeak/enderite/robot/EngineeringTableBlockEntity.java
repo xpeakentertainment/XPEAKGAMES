@@ -23,7 +23,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import javax.annotation.Nullable;
 
 /**
- * Huecos: 0 = torso, 1 = municion (cohetes de fuegos artificiales), 2 = material de reparacion (lingotes de hierro).
+ * Huecos: 0 = torso, 1 = municion (la de cada brazo), 2 = material de reparacion (lingotes de hierro).
  * Los brazos no son huecos propios: se guardan dentro del torso.
  */
 public class EngineeringTableBlockEntity extends BlockEntity implements MenuProvider {
@@ -55,18 +55,21 @@ public class EngineeringTableBlockEntity extends BlockEntity implements MenuProv
         if (!(torso.getItem() instanceof RobotTorsoItem)) return false;
         boolean did = false;
 
-        // Municion: cada cohete de fuegos artificiales = 1 cohete del brazo
+        // Municion: cada brazo tiene la suya (cohetes de fuegos artificiales, bombonas, celulas, baterias, cartuchos, muelles)
         ItemStack ammo = container.getItem(AMMO);
-        if (ammo.is(Items.FIREWORK_ROCKET)) {
+        RobotArmType ammoFor = ammo.isEmpty() ? null : RobotArmType.forAmmo(ammo.getItem());
+        if (ammoFor != null) {
             for (HumanoidArm side : HumanoidArm.values()) {
                 ItemStack arm = RobotHelper.getArm(torso, side);
-                if (RobotHelper.armType(arm) != RobotArmType.ROCKET) continue;
+                if (RobotHelper.armType(arm) != ammoFor) continue;
                 int have = RobotHelper.getAmmo(arm);
-                int add = Math.min(RobotHelper.MAX_AMMO - have, ammo.getCount());
-                if (add > 0) {
-                    RobotHelper.setAmmo(arm, have + add);
+                int room = ammoFor.maxAmmo - have;
+                if (room <= 0) continue;
+                int items = Math.min(ammo.getCount(), (room + ammoFor.unitsPerItem - 1) / ammoFor.unitsPerItem);
+                if (items > 0) {
+                    RobotHelper.setAmmo(arm, have + items * ammoFor.unitsPerItem);
                     RobotHelper.setArm(torso, side, arm);
-                    ammo.shrink(add);
+                    ammo.shrink(items);
                     did = true;
                 }
                 if (ammo.isEmpty()) break;

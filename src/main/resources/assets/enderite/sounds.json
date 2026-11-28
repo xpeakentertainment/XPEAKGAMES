@@ -262,5 +262,173 @@
         "volume": 1.0
       }
     ]
+  },
+  "item.robot.harpoon_fire": {
+    "subtitle": "subtitles.enderite.robot.harpoon_fire",
+    "sounds": [
+      {
+        "name": "minecraft:item.crossbow.shoot",
+        "type": "event",
+        "pitch": 0.8,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:item.trident.throw",
+        "type": "event",
+        "pitch": 1.2,
+        "volume": 0.7
+      }
+    ]
+  },
+  "item.robot.harpoon_hit": {
+    "subtitle": "subtitles.enderite.robot.harpoon_hit",
+    "sounds": [
+      {
+        "name": "minecraft:item.trident.hit",
+        "type": "event",
+        "pitch": 1.0,
+        "volume": 1.0
+      }
+    ]
+  },
+  "item.robot.flamethrower": {
+    "subtitle": "subtitles.enderite.robot.flamethrower",
+    "sounds": [
+      {
+        "name": "minecraft:entity.blaze.shoot",
+        "type": "event",
+        "pitch": 0.7,
+        "volume": 0.5
+      },
+      {
+        "name": "minecraft:item.firecharge.use",
+        "type": "event",
+        "pitch": 0.8,
+        "volume": 0.5
+      }
+    ]
+  },
+  "item.robot.portal_shoot": {
+    "subtitle": "subtitles.enderite.robot.portal_shoot",
+    "sounds": [
+      {
+        "name": "minecraft:entity.shulker.shoot",
+        "type": "event",
+        "pitch": 1.6,
+        "volume": 1.0
+      }
+    ]
+  },
+  "item.robot.portal_open": {
+    "subtitle": "subtitles.enderite.robot.portal_open",
+    "sounds": [
+      {
+        "name": "minecraft:block.end_portal_frame.fill",
+        "type": "event",
+        "pitch": 1.3,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:block.respawn_anchor.charge",
+        "type": "event",
+        "pitch": 1.5,
+        "volume": 0.7
+      }
+    ]
+  },
+  "item.robot.portal_fizzle": {
+    "subtitle": "subtitles.enderite.robot.portal_fizzle",
+    "sounds": [
+      {
+        "name": "minecraft:block.fire.extinguish",
+        "type": "event",
+        "pitch": 1.8,
+        "volume": 0.7
+      }
+    ]
+  },
+  "item.robot.portal_enter": {
+    "subtitle": "subtitles.enderite.robot.portal_enter",
+    "sounds": [
+      {
+        "name": "minecraft:entity.enderman.teleport",
+        "type": "event",
+        "pitch": 1.3,
+        "volume": 1.0
+      }
+    ]
+  },
+  "item.robot.exo_beam": {
+    "subtitle": "subtitles.enderite.robot.exo_beam",
+    "sounds": [
+      {
+        "name": "minecraft:block.beacon.ambient",
+        "type": "event",
+        "pitch": 2.0,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:block.conduit.ambient.short",
+        "type": "event",
+        "pitch": 1.8,
+        "volume": 0.8
+      }
+    ]
+  },
+  "item.robot.illusion_create": {
+    "subtitle": "subtitles.enderite.robot.illusion_create",
+    "sounds": [
+      {
+        "name": "minecraft:block.amethyst_block.chime",
+        "type": "event",
+        "pitch": 1.2,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:entity.illusioner.mirror_move",
+        "type": "event",
+        "pitch": 1.2,
+        "volume": 0.8
+      }
+    ]
+  },
+  "item.robot.catapult_grab": {
+    "subtitle": "subtitles.enderite.robot.catapult_grab",
+    "sounds": [
+      {
+        "name": "minecraft:block.piston.contract",
+        "type": "event",
+        "pitch": 0.8,
+        "volume": 1.0
+      }
+    ]
+  },
+  "item.robot.catapult_throw": {
+    "subtitle": "subtitles.enderite.robot.catapult_throw",
+    "sounds": [
+      {
+        "name": "minecraft:entity.player.attack.sweep",
+        "type": "event",
+        "pitch": 0.7,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:block.piston.extend",
+        "type": "event",
+        "pitch": 0.9,
+        "volume": 0.8
+      }
+    ]
+  },
+  "item.robot.catapult_impact": {
+    "subtitle": "subtitles.enderite.robot.catapult_impact",
+    "sounds": [
+      {
+        "name": "minecraft:entity.zombie.attack_wooden_door",
+        "type": "event",
+        "pitch": 0.8,
+        "volume": 1.0
+      }
+    ]
   }
 }

@@ -1,6 +1,15 @@
 package com.xpeak.enderite.robot;
 
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtUtils;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.registries.ForgeRegistries;
+
+import javax.annotation.Nullable;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
@@ -65,7 +74,79 @@ public final class RobotHelper {
     }
 
     public static void setAmmo(ItemStack arm, int ammo) {
-        arm.getOrCreateTag().putInt("Ammo", Math.max(0, Math.min(MAX_AMMO, ammo)));
+        RobotArmType type = armType(arm);
+        int max = type != null && type.usesAmmo() ? type.maxAmmo : MAX_AMMO;
+        arm.getOrCreateTag().putInt("Ammo", Math.max(0, Math.min(max, ammo)));
+    }
+
+    public static int maxAmmo(ItemStack arm) {
+        RobotArmType type = armType(arm);
+        return type != null && type.usesAmmo() ? type.maxAmmo : 0;
+    }
+
+    // ------------------------------------------------------------------ distorsionador de ilusiones
+
+    /** Bloque elegido en el menu "Generar" del brazo de ilusiones (o null si aun no has elegido). */
+    @Nullable
+    public static Block getIllusion(ItemStack arm) {
+        if (!arm.hasTag() || !arm.getTag().contains("Illusion")) return null;
+        ResourceLocation id = ResourceLocation.tryParse(arm.getTag().getString("Illusion"));
+        if (id == null) return null;
+        Block b = ForgeRegistries.BLOCKS.getValue(id);
+        return b == null || b == Blocks.AIR ? null : b;
+    }
+
+    public static void setIllusion(ItemStack arm, @Nullable Block block) {
+        if (block == null) {
+            if (arm.hasTag()) arm.getTag().remove("Illusion");
+            return;
+        }
+        ResourceLocation id = ForgeRegistries.BLOCKS.getKey(block);
+        if (id != null) arm.getOrCreateTag().putString("Illusion", id.toString());
+    }
+
+    // ------------------------------------------------------------------ catapulta
+
+    /** Bloque que la catapulta tiene agarrado en alto (o null). */
+    @Nullable
+    public static BlockState getHeld(ItemStack arm) {
+        if (!arm.hasTag() || !arm.getTag().contains("Held")) return null;
+        BlockState s = NbtUtils.readBlockState(BuiltInRegistries.BLOCK.asLookup(), arm.getTag().getCompound("Held"));
+        return s.isAir() ? null : s;
+    }
+
+    public static void setHeld(ItemStack arm, @Nullable BlockState state) {
+        if (state == null) {
+            if (arm.hasTag()) arm.getTag().remove("Held");
+            return;
+        }
+        arm.getOrCreateTag().put("Held", NbtUtils.writeBlockState(state));
+    }
+
+    /** Algun brazo del robot tiene un bloque agarrado (para levantar los brazos al dibujar). */
+    @Nullable
+    public static BlockState heldBlock(LivingEntity entity) {
+        ItemStack torso = getTorso(entity);
+        if (torso.isEmpty()) return null;
+        for (HumanoidArm side : HumanoidArm.values()) {
+            ItemStack arm = getArm(torso, side);
+            if (armType(arm) == RobotArmType.CATAPULT) {
+                BlockState s = getHeld(arm);
+                if (s != null) return s;
+            }
+        }
+        return null;
+    }
+
+    // ------------------------------------------------------------------ portales
+
+    /** Color del proximo portal que saldra del brazo (0 = cian, 1 = violeta). */
+    public static int nextPortalColor(ItemStack arm) {
+        return arm.hasTag() ? arm.getTag().getInt("PortalColor") : 0;
+    }
+
+    public static void setNextPortalColor(ItemStack arm, int color) {
+        arm.getOrCreateTag().putInt("PortalColor", color & 1);
     }
 
     /** Lado del brazo que se controla con click izquierdo (el izquierdo) y click derecho (el derecho). */

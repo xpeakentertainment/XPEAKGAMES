@@ -42,7 +42,7 @@ import java.util.Map;
 /** Todo lo de la armadura robot en el cliente. */
 @Mod.EventBusSubscriber(modid = EnderiteMod.MODID, value = Dist.CLIENT)
 public final class RobotClient {
-    private static final Map<Integer, long[]> ANIM = new HashMap<>(); // id -> [ultimo tick activo izq, der]
+    private static final Map<Integer, long[]> ANIM = new HashMap<>(); // id -> [ultimo tick activo izq, der, izq activo (1/0), der activo]
     private static boolean lastLeft, lastRight;
     public static RobotArmModel rightModel, leftModel;
 
@@ -52,9 +52,11 @@ public final class RobotClient {
         Minecraft mc = Minecraft.getInstance();
         if (mc.level == null) return;
         long now = mc.level.getGameTime();
-        long[] a = ANIM.computeIfAbsent(entityId, k -> new long[]{-100, -100});
+        long[] a = ANIM.computeIfAbsent(entityId, k -> new long[]{-100, -100, 0, 0});
         if (left) a[0] = now;
         if (right) a[1] = now;
+        a[2] = left ? 1 : 0;
+        a[3] = right ? 1 : 0;
         ANIM.put(entityId, a);
     }
 
@@ -62,15 +64,30 @@ public final class RobotClient {
     public static boolean isActive(Player p, HumanoidArm side) {
         Minecraft mc = Minecraft.getInstance();
         if (mc.level == null) return false;
+        ItemStack arm = RobotHelper.getArm(RobotHelper.getTorso(p), side);
+        RobotArmType type = RobotHelper.armType(arm);
+        if (type == RobotArmType.HARPOON) {
+            // el arpon esta "activo" (sin punta) mientras va volando o tirando de ti
+            for (net.minecraft.world.entity.Entity e : mc.level.entitiesForRendering()) {
+                if (e instanceof com.xpeak.enderite.robot.HarpoonEntity h && h.getOwner() == p && h.isLeft() == (side == HumanoidArm.LEFT)) return true;
+            }
+            return false;
+        }
         if (p == mc.player) {
-            ItemStack arm = RobotHelper.getArm(RobotHelper.getTorso(p), side);
-            if (RobotHelper.armType(arm) == RobotArmType.CHAINSAW && (side == HumanoidArm.LEFT ? lastLeft : lastRight)
+            if (type == RobotArmType.CHAINSAW && (side == HumanoidArm.LEFT ? lastLeft : lastRight)
                     && !RobotHelper.isBroken(arm) && !RobotHelper.isBroken(RobotHelper.getTorso(p))) return true;
         }
         long[] a = ANIM.get(p.getId());
         if (a == null) return false;
+        if ((side == HumanoidArm.LEFT ? a[2] : a[3]) == 1 && type != null && type.continuous()) return true;
         long t = side == HumanoidArm.LEFT ? a[0] : a[1];
         return mc.level.getGameTime() - t <= 12;
+    }
+
+    /** Este brazo esta lanzando su rayo o su llamarada ahora mismo (para dibujar el rayo del exobrazo). */
+    public static boolean isFiring(Player p, HumanoidArm side) {
+        long[] a = ANIM.get(p.getId());
+        return a != null && (side == HumanoidArm.LEFT ? a[2] : a[3]) == 1;
     }
 
     // ------------------------------------------------------------------ entrada (clicks = brazos)
@@ -164,6 +181,10 @@ public final class RobotClient {
         } else if (type == RobotArmType.ROCKET) {
             line2 = Component.translatable("enderite.robot.hud.ammo", RobotHelper.getAmmo(arm));
             color2 = RobotHelper.getAmmo(arm) >= 3 ? 0xFFCC55 : 0xFF5555;
+        } else if (type != null && type.usesAmmo()) {
+            int ammo = RobotHelper.getAmmo(arm);
+            line2 = Component.translatable("enderite.robot.hud.ammo." + type.id, ammo);
+            color2 = ammo > 0 ? 0xFFCC55 : 0xFF5555;
         } else {
             int pct = 100 - (int) (100.0F * arm.getDamageValue() / Math.max(1, arm.getMaxDamage() - 1));
             line2 = Component.literal(pct + "%");
@@ -171,6 +192,29 @@ public final class RobotClient {
         }
         g.drawString(font, line1, x + 22, y + 3, 0xFFFFFF, false);
         g.drawString(font, line2, x + 22, y + 12, color2, false);
+        // icono extra: bloque elegido (ilusiones), bloque agarrado (catapulta), color del proximo portal
+        if (type == RobotArmType.ILLUSION) {
+            net.minecraft.world.level.block.Block b = RobotHelper.getIllusion(arm);
+            if (b != null) {
+                g.pose().pushPose();
+                g.pose().translate(x + 75, y + 5, 0);
+                g.pose().scale(0.75F, 0.75F, 1.0F);
+                g.renderItem(new ItemStack(b), 0, 0);
+                g.pose().popPose();
+            }
+        } else if (type == RobotArmType.CATAPULT) {
+            net.minecraft.world.level.block.state.BlockState held = RobotHelper.getHeld(arm);
+            if (held != null) {
+                g.pose().pushPose();
+                g.pose().translate(x + 75, y + 5, 0);
+                g.pose().scale(0.75F, 0.75F, 1.0F);
+                g.renderItem(new ItemStack(held.getBlock()), 0, 0);
+                g.pose().popPose();
+            }
+        } else if (type == RobotArmType.PORTAL) {
+            int c = 0xFF000000 | com.xpeak.enderite.robot.RobotPortalEntity.rgb(RobotHelper.nextPortalColor(arm));
+            g.fill(x + 77, y + 7, x + 84, y + 15, c);
+        }
     }
 
     // ------------------------------------------------------------------ huecos de brazo en el inventario
@@ -304,10 +348,25 @@ public final class RobotClient {
             float t = p.tickCount + event.getPartialTick();
             pose.translate(Mth.sin(t * 2.3F) * 0.012F, -0.08F, 0.0F);
         }
+        if (RobotHelper.heldBlock(p) != null) {
+            // brazos en alto sujetando el bloque (saque de banda)
+            pose.translate(0.0F, -0.35F, 0.0F);
+        }
         pose.translate(f * -5.0F / 16.0F, 2.0F / 16.0F, 0.0F);
-        VertexConsumer vc = event.getMultiBufferSource().getBuffer(RenderType.entityCutoutNoCull(RobotArmModel.TEXTURE));
-        (right ? rightModel : leftModel).render(pose, vc, event.getPackedLight(), type, active, p.tickCount + event.getPartialTick());
+        (right ? rightModel : leftModel).render(pose, event.getMultiBufferSource(), event.getPackedLight(), type, active,
+                p.tickCount + event.getPartialTick(), arm);
         pose.popPose();
+        // Catapulta: el bloque agarrado se ve en alto, encima de ti
+        net.minecraft.world.level.block.state.BlockState held = RobotHelper.heldBlock(p);
+        if (held != null && event.getHand() == InteractionHand.MAIN_HAND) {
+            pose.pushPose();
+            float bob = Mth.sin((p.tickCount + event.getPartialTick()) * 0.15F) * 0.02F;
+            pose.translate(-0.3D, 0.32D + bob, -0.95D);
+            pose.scale(0.6F, 0.6F, 0.6F);
+            mc.getBlockRenderer().renderSingleBlock(held, pose, event.getMultiBufferSource(), event.getPackedLight(),
+                    net.minecraft.client.renderer.texture.OverlayTexture.NO_OVERLAY, net.minecraftforge.client.model.data.ModelData.EMPTY, null);
+            pose.popPose();
+        }
     }
 
     // ------------------------------------------------------------------ tercera persona
@@ -363,8 +422,8 @@ public final class RobotClient {
                            float partialTick, float ageInTicks, float netHeadYaw, float headPitch) {
             ItemStack torso = RobotHelper.getTorso(p);
             if (torso.isEmpty() || rightModel == null) return;
-            VertexConsumer vc = buffers.getBuffer(RenderType.entityCutoutNoCull(RobotArmModel.TEXTURE));
             PlayerModel<AbstractClientPlayer> model = this.getParentModel();
+            net.minecraft.world.level.block.state.BlockState held = RobotHelper.heldBlock(p);
             for (HumanoidArm side : HumanoidArm.values()) {
                 ItemStack arm = RobotHelper.getArm(torso, side);
                 RobotArmType type = RobotHelper.armType(arm);
@@ -374,13 +433,27 @@ public final class RobotClient {
                 pose.pushPose();
                 pose.translate(part.x / 16.0F, part.y / 16.0F, part.z / 16.0F);
                 float xRot = part.xRot, yRot = part.yRot, zRot = part.zRot;
-                if (active) {
+                if (held != null) {
+                    // los dos brazos arriba, sujetando el bloque por encima de la cabeza
+                    xRot = (float) Math.PI;
+                    yRot = 0.0F;
+                    zRot = side == HumanoidArm.RIGHT ? 0.18F : -0.18F;
+                } else if (active) {
                     xRot = model.head.xRot - (float) Math.PI / 2.0F;
                     yRot = model.head.yRot;
                     zRot = 0.0F;
                 }
                 pose.mulPose(new org.joml.Quaternionf().rotationZYX(zRot, yRot, xRot));
-                (side == HumanoidArm.RIGHT ? rightModel : leftModel).render(pose, vc, light, type, active, ageInTicks);
+                (side == HumanoidArm.RIGHT ? rightModel : leftModel).render(pose, buffers, light, type, active, ageInTicks, arm);
+                pose.popPose();
+            }
+            if (held != null) {
+                pose.pushPose();
+                pose.translate(0.0D, -1.05D, 0.0D);
+                pose.scale(-0.7F, -0.7F, 0.7F);
+                pose.translate(-0.5D, -0.5D, -0.5D);
+                net.minecraft.client.Minecraft.getInstance().getBlockRenderer().renderSingleBlock(held, pose, buffers, light,
+                        net.minecraft.client.renderer.texture.OverlayTexture.NO_OVERLAY, net.minecraftforge.client.model.data.ModelData.EMPTY, null);
                 pose.popPose();
             }
         }

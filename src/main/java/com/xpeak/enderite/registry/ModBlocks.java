@@ -53,5 +53,11 @@ public final class ModBlocks {
             BlockBehaviour.Properties.of().mapColor(MapColor.METAL).requiresCorrectToolForDrops().strength(3.5F, 6.0F)
                     .sound(SoundType.METAL).noOcclusion()));
 
+    /** Bloque ilusorio del Distorsionador de ilusiones: se ve como otro bloque pero se atraviesa (no-clip). */
+    public static final RegistryObject<Block> ILLUSION_BLOCK = BLOCKS.register("illusion_block", () -> new com.xpeak.enderite.robot.IllusionBlock(
+            BlockBehaviour.Properties.of().mapColor(MapColor.NONE).noCollission().instabreak().noOcclusion().noLootTable()
+                    .sound(SoundType.AMETHYST).isSuffocating((s, l, p) -> false).isViewBlocking((s, l, p) -> false)
+                    .isRedstoneConductor((s, l, p) -> false).pushReaction(net.minecraft.world.level.material.PushReaction.DESTROY)));
+
     private ModBlocks() {}
 }

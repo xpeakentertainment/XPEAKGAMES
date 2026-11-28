@@ -69,6 +69,18 @@ public final class ModItems {
             () -> new com.xpeak.enderite.robot.RobotArmItem(com.xpeak.enderite.robot.RobotArmType.CHAINSAW, new Item.Properties()));
     public static final RegistryObject<Item> ROBOT_ARM_ROCKET = ITEMS.register("robot_arm_rocket",
             () -> new com.xpeak.enderite.robot.RobotArmItem(com.xpeak.enderite.robot.RobotArmType.ROCKET, new Item.Properties()));
+    public static final RegistryObject<Item> ROBOT_ARM_HARPOON = arm("robot_arm_harpoon", com.xpeak.enderite.robot.RobotArmType.HARPOON);
+    public static final RegistryObject<Item> ROBOT_ARM_FLAMETHROWER = arm("robot_arm_flamethrower", com.xpeak.enderite.robot.RobotArmType.FLAMETHROWER);
+    public static final RegistryObject<Item> ROBOT_ARM_PORTAL = arm("robot_arm_portal", com.xpeak.enderite.robot.RobotArmType.PORTAL);
+    public static final RegistryObject<Item> ROBOT_ARM_EXO = arm("robot_arm_exo", com.xpeak.enderite.robot.RobotArmType.EXO);
+    public static final RegistryObject<Item> ROBOT_ARM_ILLUSION = arm("robot_arm_illusion", com.xpeak.enderite.robot.RobotArmType.ILLUSION);
+    public static final RegistryObject<Item> ROBOT_ARM_CATAPULT = arm("robot_arm_catapult", com.xpeak.enderite.robot.RobotArmType.CATAPULT);
+    // Municion propia de cada brazo
+    public static final RegistryObject<Item> FUEL_CANISTER = ammo("fuel_canister", "flamethrower");
+    public static final RegistryObject<Item> PORTAL_CELL = ammo("portal_cell", "portal");
+    public static final RegistryObject<Item> EXO_BATTERY = ammo("exo_battery", "exo");
+    public static final RegistryObject<Item> ILLUSION_CARTRIDGE = ammo("illusion_cartridge", "illusion");
+    public static final RegistryObject<Item> CATAPULT_SPRING = ammo("catapult_spring", "catapult");
     public static final RegistryObject<Item> ENGINEERING_TABLE = block(ModBlocks.ENGINEERING_TABLE, false);
 
     // Utilidades
@@ -80,6 +92,14 @@ public final class ModItems {
     // Huevo del Crawler
     public static final RegistryObject<Item> CRAWLER_SPAWN_EGG = ITEMS.register("crawler_spawn_egg",
             () -> new ForgeSpawnEggItem(ModEntities.CRAWLER, 0x0B0B0D, 0x8A0B0B, new Item.Properties()));
+
+    private static RegistryObject<Item> arm(String name, com.xpeak.enderite.robot.RobotArmType type) {
+        return ITEMS.register(name, () -> new com.xpeak.enderite.robot.RobotArmItem(type, new Item.Properties()));
+    }
+
+    private static RegistryObject<Item> ammo(String name, String arm) {
+        return ITEMS.register(name, () -> new com.xpeak.enderite.robot.AmmoItem(arm, new Item.Properties()));
+    }
 
     private static RegistryObject<Item> block(RegistryObject<? extends Block> block, boolean fireResistant) {
         Supplier<Item> s = () -> new BlockItem(block.get(), fireResistant ? fire() : new Item.Properties());

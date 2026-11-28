@@ -42,9 +42,15 @@ public class RobotArmItem extends Item {
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
         tooltip.add(Component.translatable("item.enderite.robot_arm." + type.id + ".desc").withStyle(ChatFormatting.GRAY));
-        if (type == RobotArmType.ROCKET) {
-            tooltip.add(Component.translatable("item.enderite.robot.ammo", RobotHelper.getAmmo(stack), RobotHelper.MAX_AMMO)
+        if (type.usesAmmo()) {
+            tooltip.add(Component.translatable("item.enderite.robot.ammo", RobotHelper.getAmmo(stack), type.maxAmmo)
                     .withStyle(ChatFormatting.GOLD));
+            tooltip.add(Component.translatable("item.enderite.robot.ammo_type", type.ammoItem().getDescription())
+                    .withStyle(ChatFormatting.DARK_GRAY));
+        }
+        if (type == RobotArmType.ILLUSION) {
+            net.minecraft.world.level.block.Block b = RobotHelper.getIllusion(stack);
+            if (b != null) tooltip.add(Component.translatable("item.enderite.robot.illusion_selected", b.getName()).withStyle(ChatFormatting.LIGHT_PURPLE));
         }
         int pct = 100 - (int) (100.0F * stack.getDamageValue() / Math.max(1, stack.getMaxDamage() - 1));
         tooltip.add(Component.translatable("item.enderite.robot.integrity", pct).withStyle(RobotHelper.isBroken(stack) ? ChatFormatting.RED : ChatFormatting.DARK_GRAY));

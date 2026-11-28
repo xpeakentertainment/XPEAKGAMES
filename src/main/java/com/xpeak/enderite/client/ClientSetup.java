@@ -43,8 +43,10 @@ public final class ClientSetup {
 
     @SubscribeEvent
     public static void addLayers(EntityRenderersEvent.AddLayers event) {
-        RobotClient.rightModel = new RobotArmModel(event.getEntityModels().bakeLayer(RobotArmModel.RIGHT));
-        RobotClient.leftModel = new RobotArmModel(event.getEntityModels().bakeLayer(RobotArmModel.LEFT));
+        RobotClient.rightModel = new RobotArmModel(event.getEntityModels().bakeLayer(RobotArmModel.RIGHT),
+                event.getEntityModels().bakeLayer(RobotArmModel.EXTRA_RIGHT));
+        RobotClient.leftModel = new RobotArmModel(event.getEntityModels().bakeLayer(RobotArmModel.LEFT),
+                event.getEntityModels().bakeLayer(RobotArmModel.EXTRA_LEFT));
         for (String skin : event.getSkins()) {
             if (event.getSkin(skin) instanceof net.minecraft.client.renderer.entity.player.PlayerRenderer pr) {
                 pr.addLayer(new RobotClient.ArmsLayer(pr));
@@ -57,6 +59,10 @@ public final class ClientSetup {
         event.registerEntityRenderer(ModEntities.CRAWLER.get(), CrawlerRenderer::new);
         event.registerEntityRenderer(ModEntities.STUCK_TOOL.get(), StuckToolRenderer::new);
         event.registerEntityRenderer(ModEntities.ROBOT_ROCKET.get(), RobotRocketRenderer::new);
+        event.registerEntityRenderer(ModEntities.HARPOON.get(), HarpoonRenderer::new);
+        event.registerEntityRenderer(ModEntities.ROBOT_PORTAL.get(), PortalRenderer::new);
+        event.registerEntityRenderer(ModEntities.THROWN_BLOCK.get(), ThrownBlockRenderer::new);
+        event.registerBlockEntityRenderer(com.xpeak.enderite.registry.ModBlockEntities.ILLUSION.get(), IllusionBlockRenderer::new);
     }
 
     @SubscribeEvent
@@ -64,6 +70,9 @@ public final class ClientSetup {
         event.registerLayerDefinition(CrawlerModel.LAYER, CrawlerModel::createLayer);
         event.registerLayerDefinition(RobotArmModel.RIGHT, () -> RobotArmModel.create(true));
         event.registerLayerDefinition(RobotArmModel.LEFT, () -> RobotArmModel.create(false));
+        event.registerLayerDefinition(RobotArmModel.EXTRA_RIGHT, () -> RobotArmModel.createExtra(true));
+        event.registerLayerDefinition(RobotArmModel.EXTRA_LEFT, () -> RobotArmModel.createExtra(false));
+        event.registerLayerDefinition(HarpoonRenderer.LAYER, HarpoonRenderer::createLayer);
     }
 
     @SubscribeEvent

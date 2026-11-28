@@ -28,6 +28,21 @@ public final class ModEntities {
                     .sized(0.3F, 0.3F).clientTrackingRange(8).updateInterval(1)
                     .build(EnderiteMod.MODID + ":robot_rocket"));
 
+    public static final RegistryObject<EntityType<com.xpeak.enderite.robot.HarpoonEntity>> HARPOON = ENTITIES.register("harpoon",
+            () -> EntityType.Builder.<com.xpeak.enderite.robot.HarpoonEntity>of(com.xpeak.enderite.robot.HarpoonEntity::new, MobCategory.MISC)
+                    .sized(0.3F, 0.3F).clientTrackingRange(10).updateInterval(1)
+                    .build(EnderiteMod.MODID + ":harpoon"));
+
+    public static final RegistryObject<EntityType<com.xpeak.enderite.robot.RobotPortalEntity>> ROBOT_PORTAL = ENTITIES.register("robot_portal",
+            () -> EntityType.Builder.<com.xpeak.enderite.robot.RobotPortalEntity>of(com.xpeak.enderite.robot.RobotPortalEntity::new, MobCategory.MISC)
+                    .sized(1.0F, 1.0F).fireImmune().clientTrackingRange(10).updateInterval(20)
+                    .build(EnderiteMod.MODID + ":robot_portal"));
+
+    public static final RegistryObject<EntityType<com.xpeak.enderite.robot.ThrownBlockEntity>> THROWN_BLOCK = ENTITIES.register("thrown_block",
+            () -> EntityType.Builder.<com.xpeak.enderite.robot.ThrownBlockEntity>of(com.xpeak.enderite.robot.ThrownBlockEntity::new, MobCategory.MISC)
+                    .sized(0.7F, 0.7F).clientTrackingRange(10).updateInterval(1)
+                    .build(EnderiteMod.MODID + ":thrown_block"));
+
     public static void registerAttributes(EntityAttributeCreationEvent event) {
         event.put(CRAWLER.get(), CrawlerEntity.createAttributes().build());
     }

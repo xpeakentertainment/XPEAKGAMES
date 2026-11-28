@@ -43,6 +43,53 @@ public final class ModNetwork {
                 .encoder(ArmAnimPacket::encode).decoder(ArmAnimPacket::decode).consumerMainThread(ArmAnimPacket::handle).add();
         CHANNEL.messageBuilder(ClingJumpedPacket.class, 5, NetworkDirection.PLAY_TO_CLIENT)
                 .encoder(ClingJumpedPacket::encode).decoder(ClingJumpedPacket::decode).consumerMainThread(ClingJumpedPacket::handle).add();
+        CHANNEL.messageBuilder(IllusionMenuPacket.class, 6, NetworkDirection.PLAY_TO_CLIENT)
+                .encoder(IllusionMenuPacket::encode).decoder(IllusionMenuPacket::decode).consumerMainThread(IllusionMenuPacket::handle).add();
+        CHANNEL.messageBuilder(IllusionSelectPacket.class, 7, NetworkDirection.PLAY_TO_SERVER)
+                .encoder(IllusionSelectPacket::encode).decoder(IllusionSelectPacket::decode).consumerMainThread(IllusionSelectPacket::handle).add();
+    }
+
+    public static void sendOpenIllusionMenu(ServerPlayer player, boolean left) {
+        if (player.connection == null) return;
+        CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), new IllusionMenuPacket(left));
+    }
+
+    public static void sendIllusionSelect(boolean left, ResourceLocation item) {
+        CHANNEL.sendToServer(new IllusionSelectPacket(left, item));
+    }
+
+    /** Servidor -> cliente: abre el menu del distorsionador de ilusiones. */
+    public record IllusionMenuPacket(boolean left) {
+        static void encode(IllusionMenuPacket p, FriendlyByteBuf buf) {
+            buf.writeBoolean(p.left);
+        }
+
+        static IllusionMenuPacket decode(FriendlyByteBuf buf) {
+            return new IllusionMenuPacket(buf.readBoolean());
+        }
+
+        static void handle(IllusionMenuPacket p, Supplier<NetworkEvent.Context> ctx) {
+            DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> com.xpeak.enderite.client.IllusionScreen.open(p.left));
+            ctx.get().setPacketHandled(true);
+        }
+    }
+
+    /** Cliente -> servidor: boton "Generar" de un bloque del menu de ilusiones. */
+    public record IllusionSelectPacket(boolean left, ResourceLocation item) {
+        static void encode(IllusionSelectPacket p, FriendlyByteBuf buf) {
+            buf.writeBoolean(p.left);
+            buf.writeResourceLocation(p.item);
+        }
+
+        static IllusionSelectPacket decode(FriendlyByteBuf buf) {
+            return new IllusionSelectPacket(buf.readBoolean(), buf.readResourceLocation());
+        }
+
+        static void handle(IllusionSelectPacket p, Supplier<NetworkEvent.Context> ctx) {
+            ServerPlayer sender = ctx.get().getSender();
+            if (sender != null) com.xpeak.enderite.robot.RobotServer.selectIllusion(sender, p.left, p.item);
+            ctx.get().setPacketHandled(true);
+        }
     }
 
     public static void sendArmInput(boolean left, boolean right) {

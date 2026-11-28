@@ -19,5 +19,9 @@ public final class ModBlockEntities {
     public static final RegistryObject<BlockEntityType<EngineeringTableBlockEntity>> ENGINEERING_TABLE = BLOCK_ENTITIES.register("engineering_table",
             () -> BlockEntityType.Builder.of(EngineeringTableBlockEntity::new, ModBlocks.ENGINEERING_TABLE.get()).build(null));
 
+    @SuppressWarnings("DataFlowIssue")
+    public static final RegistryObject<BlockEntityType<com.xpeak.enderite.robot.IllusionBlockEntity>> ILLUSION = BLOCK_ENTITIES.register("illusion_block",
+            () -> BlockEntityType.Builder.of(com.xpeak.enderite.robot.IllusionBlockEntity::new, ModBlocks.ILLUSION_BLOCK.get()).build(null));
+
     private ModBlockEntities() {}
 }

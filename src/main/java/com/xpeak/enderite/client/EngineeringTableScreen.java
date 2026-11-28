@@ -21,7 +21,27 @@ import java.util.List;
 /** Pantalla de la Mesa de ingenieria: montaje (izquierda) y fabricacion de piezas (derecha). */
 public class EngineeringTableScreen extends AbstractContainerScreen<EngineeringTableMenu> {
     private static final ResourceLocation BG = new ResourceLocation(EnderiteMod.MODID, "textures/gui/engineering_table.png");
-    private static final int BTN_X = 96, BTN_Y = 16, BTN_W = 74, BTN_H = 19;
+    private static final int BTN_X = 96, BTN_Y = 16, BTN_W = 74, BTN_H = 17, PER_PAGE = 5;
+    private static final int NAV_Y = 102;
+    private int page;
+
+    private int pages() {
+        return (EngineeringRecipes.PARTS.size() + PER_PAGE - 1) / PER_PAGE;
+    }
+
+    /** Indice de la pieza en la fila {@code row} de la pagina actual, o -1. */
+    private int partAt(int row) {
+        int i = page * PER_PAGE + row;
+        return i < EngineeringRecipes.PARTS.size() ? i : -1;
+    }
+
+    public void setPage(int p) {
+        page = Math.floorMod(p, pages());
+    }
+
+    public int getPage() {
+        return page;
+    }
 
     public EngineeringTableScreen(EngineeringTableMenu menu, Inventory inv, Component title) {
         super(menu, inv, title);
@@ -33,21 +53,37 @@ public class EngineeringTableScreen extends AbstractContainerScreen<EngineeringT
     @Override
     protected void renderBg(GuiGraphics g, float partialTick, int mouseX, int mouseY) {
         g.blit(BG, leftPos, topPos, 0, 0, imageWidth, imageHeight, 256, 256);
-        // botones de fabricacion
-        for (int i = 0; i < EngineeringRecipes.PARTS.size(); i++) {
+        // botones de fabricacion (por paginas)
+        for (int row = 0; row < PER_PAGE; row++) {
+            int i = partAt(row);
+            if (i < 0) break;
             var part = EngineeringRecipes.PARTS.get(i);
-            int x = leftPos + BTN_X, y = topPos + BTN_Y + i * BTN_H;
+            int x = leftPos + BTN_X, y = topPos + BTN_Y + row * BTN_H;
             boolean hover = mouseX >= x && mouseX < x + BTN_W && mouseY >= y && mouseY < y + BTN_H - 1;
             boolean can = this.minecraft != null && this.minecraft.player != null && EngineeringRecipes.canAfford(this.minecraft.player, part);
             int bg = can ? (hover ? 0xFF3C6E8F : 0xFF2B4A60) : (hover ? 0xFF5A3434 : 0xFF3A2A2A);
             g.fill(x, y, x + BTN_W, y + BTN_H - 1, 0xFF0D1418);
             g.fill(x + 1, y + 1, x + BTN_W - 1, y + BTN_H - 2, bg);
-            ItemStack icon = new ItemStack(part.result().get());
-            g.renderItem(icon, x + 1, y + 1);
+            ItemStack icon = new ItemStack(part.result().get(), part.count());
+            g.renderItem(icon, x + 1, y);
+            if (part.count() > 1) g.renderItemDecorations(this.font, icon, x + 1, y);
             String name = Component.translatable("enderite.engineering.part." + i).getString();
             if (this.font.width(name) > BTN_W - 20) name = this.font.plainSubstrByWidth(name, BTN_W - 24) + "..";
-            g.drawString(this.font, name, x + 19, y + 5, can ? 0xFFFFFF : 0xAA8888, false);
+            g.drawString(this.font, name, x + 19, y + 4, can ? 0xFFFFFF : 0xAA8888, false);
         }
+        // paginas
+        int nx = leftPos + BTN_X, ny = topPos + NAV_Y;
+        navButton(g, nx, ny, "<", mouseX, mouseY);
+        navButton(g, nx + BTN_W - 14, ny, ">", mouseX, mouseY);
+        String label = (page + 1) + "/" + pages();
+        g.drawCenteredString(this.font, label, nx + BTN_W / 2, ny + 2, 0xFFFFFF);
+    }
+
+    private void navButton(GuiGraphics g, int x, int y, String text, int mouseX, int mouseY) {
+        boolean hover = mouseX >= x && mouseX < x + 14 && mouseY >= y && mouseY < y + 12;
+        g.fill(x, y, x + 14, y + 12, 0xFF0D1418);
+        g.fill(x + 1, y + 1, x + 13, y + 11, hover ? 0xFF3C6E8F : 0xFF2B4A60);
+        g.drawCenteredString(this.font, text, x + 7, y + 2, 0xFFFFFF);
     }
 
     @Override
@@ -73,17 +109,23 @@ public class EngineeringTableScreen extends AbstractContainerScreen<EngineeringT
         this.renderBackground(g);
         super.render(g, mouseX, mouseY, partialTick);
         // tooltip de coste
-        for (int i = 0; i < EngineeringRecipes.PARTS.size(); i++) {
-            int x = leftPos + BTN_X, y = topPos + BTN_Y + i * BTN_H;
+        for (int row = 0; row < PER_PAGE; row++) {
+            int i = partAt(row);
+            if (i < 0) break;
+            int x = leftPos + BTN_X, y = topPos + BTN_Y + row * BTN_H;
             if (mouseX >= x && mouseX < x + BTN_W && mouseY >= y && mouseY < y + BTN_H - 1) {
                 var part = EngineeringRecipes.PARTS.get(i);
                 List<Component> lines = new ArrayList<>();
                 ItemStack result = new ItemStack(part.result().get());
-                lines.add(result.getHoverName().copy().withStyle(ChatFormatting.AQUA));
+                lines.add((part.count() > 1 ? Component.literal(part.count() + "x ") : Component.empty()).copy()
+                        .append(result.getHoverName()).withStyle(ChatFormatting.AQUA));
                 if (result.getItem() instanceof RobotTorsoItem t) {
                     lines.add(Component.translatable("item.enderite.robot_torso.effect." + t.core.id).withStyle(t.core.format));
                 } else if (result.getItem() instanceof RobotArmItem a) {
                     lines.add(Component.translatable("item.enderite.robot_arm." + a.type.id + ".desc").withStyle(ChatFormatting.GRAY));
+                } else {
+                    com.xpeak.enderite.robot.RobotArmType t = com.xpeak.enderite.robot.RobotArmType.forAmmo(result.getItem());
+                    if (t != null) lines.add(Component.translatable("item.enderite.ammo.units." + t.id, t.unitsPerItem).withStyle(ChatFormatting.GRAY));
                 }
                 lines.add(Component.translatable("enderite.engineering.cost").withStyle(ChatFormatting.YELLOW));
                 for (var c : part.costs()) {
@@ -101,8 +143,21 @@ public class EngineeringTableScreen extends AbstractContainerScreen<EngineeringT
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        for (int i = 0; i < EngineeringRecipes.PARTS.size(); i++) {
-            int x = leftPos + BTN_X, y = topPos + BTN_Y + i * BTN_H;
+        int nx = leftPos + BTN_X, ny = topPos + NAV_Y;
+        if (button == 0 && mouseY >= ny && mouseY < ny + 12) {
+            if (mouseX >= nx && mouseX < nx + 14) {
+                setPage(page - 1);
+                return true;
+            }
+            if (mouseX >= nx + BTN_W - 14 && mouseX < nx + BTN_W) {
+                setPage(page + 1);
+                return true;
+            }
+        }
+        for (int row = 0; row < PER_PAGE; row++) {
+            int i = partAt(row);
+            if (i < 0) break;
+            int x = leftPos + BTN_X, y = topPos + BTN_Y + row * BTN_H;
             if (mouseX >= x && mouseX < x + BTN_W && mouseY >= y && mouseY < y + BTN_H - 1 && button == 0) {
                 if (this.minecraft != null && this.minecraft.gameMode != null) {
                     this.minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, i);

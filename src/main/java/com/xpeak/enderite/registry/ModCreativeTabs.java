@@ -46,6 +46,19 @@ public final class ModCreativeTabs {
                 ItemStack full = new ItemStack(ModItems.ROBOT_ARM_ROCKET.get());
                 com.xpeak.enderite.robot.RobotHelper.setAmmo(full, com.xpeak.enderite.robot.RobotHelper.MAX_AMMO);
                 out.accept(full);
+                out.accept(ModItems.ROBOT_ARM_HARPOON.get());
+                for (var arm : java.util.List.of(ModItems.ROBOT_ARM_FLAMETHROWER, ModItems.ROBOT_ARM_PORTAL, ModItems.ROBOT_ARM_EXO,
+                        ModItems.ROBOT_ARM_ILLUSION, ModItems.ROBOT_ARM_CATAPULT)) {
+                    out.accept(new ItemStack(arm.get()));
+                    ItemStack charged = new ItemStack(arm.get());
+                    com.xpeak.enderite.robot.RobotHelper.setAmmo(charged, Integer.MAX_VALUE);
+                    out.accept(charged);
+                }
+                out.accept(ModItems.FUEL_CANISTER.get());
+                out.accept(ModItems.PORTAL_CELL.get());
+                out.accept(ModItems.EXO_BATTERY.get());
+                out.accept(ModItems.ILLUSION_CARTRIDGE.get());
+                out.accept(ModItems.CATAPULT_SPRING.get());
                 out.accept(ModItems.QUICKSAND.get());
                 out.accept(ModItems.MAGNET.get());
                 out.accept(ModItems.PORTABLE_MAGNET.get());

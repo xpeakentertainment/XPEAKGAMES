@@ -51,7 +51,7 @@ public class EngineeringTableMenu extends AbstractContainerMenu {
         this.addSlot(new Slot(table, EngineeringTableBlockEntity.AMMO, 18, 78) {
             @Override
             public boolean mayPlace(ItemStack stack) {
-                return stack.is(Items.FIREWORK_ROCKET);
+                return RobotArmType.forAmmo(stack.getItem()) != null;
             }
         });
         this.addSlot(new Slot(table, EngineeringTableBlockEntity.REPAIR, 70, 78) {
@@ -161,7 +161,7 @@ public class EngineeringTableMenu extends AbstractContainerMenu {
                         : !this.slots.get(SLOT_RIGHT).hasItem() && this.slots.get(SLOT_RIGHT).mayPlace(stack) ? this.slots.get(SLOT_RIGHT) : null;
                 if (target == null) return ItemStack.EMPTY;
                 target.set(stack.split(1));
-            } else if (stack.is(Items.FIREWORK_ROCKET)) {
+            } else if (RobotArmType.forAmmo(stack.getItem()) != null) {
                 if (!this.moveItemStackTo(stack, SLOT_AMMO, SLOT_AMMO + 1, false)) return ItemStack.EMPTY;
             } else if (stack.is(Items.IRON_INGOT)) {
                 if (!this.moveItemStackTo(stack, SLOT_REPAIR, SLOT_REPAIR + 1, false)) return ItemStack.EMPTY;
