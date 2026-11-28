@@ -1,0 +1,207 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.8/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :compileJava UP-TO-DATE
+> Task :processResources UP-TO-DATE
+> Task :classes UP-TO-DATE
+> Task :downloadMcpConfig
+> Task :extractSrg UP-TO-DATE
+> Task :createSrgToMcp
+> Task :downloadMCMeta
+> Task :downloadAssets
+> Task :extractNatives
+> Task :makeSrcDirs
+> Task :prepareRuns
+> Task :prepareRunServer
+> Task :prepareRunServerCompile UP-TO-DATE
+
+> Task :runServer
+2026-11-28 10:50:03,654 main WARN Advanced terminal features are not available in this environment
+[10:50:03] [main/INFO] [cp.mo.mo.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgeserveruserdev, --gameDir, ., --fml.forgeVersion, 47.3.0, --fml.mcVersion, 1.20.1, --fml.forgeGroup, net.minecraftforge, --fml.mcpVersion, 20230612.114412, --nogui]
+[10:50:03] [main/INFO] [cp.mo.mo.Launcher/MODLAUNCHER]: ModLauncher 10.0.9+10.0.9+main.dcd20f30 starting: java version 17.0.21.1 by Eclipse Adoptium; OS Linux arch amd64 version 7.0.0-1020-azure
+[10:50:03] [main/WARN] [ne.mi.fm.lo.FMLConfig/CORE]: Configuration file /home/runner/work/XPEAKGAMES/XPEAKGAMES/run/config/fml.toml is not correct. Correcting
+[10:50:03] [main/INFO] [ne.mi.fm.lo.FMLConfig/CORE]: Incorrect key [earlyWindowSkipGLVersions] was corrected from null to []
+[10:50:03] [main/INFO] [ne.mi.fm.lo.FMLConfig/CORE]: Incorrect key [earlyWindowSquir] was corrected from null to false
+[10:50:03] [main/INFO] [ne.mi.fm.lo.FMLConfig/CORE]: Incorrect key [earlyWindowShowCPU] was corrected from null to false
+[10:50:03] [main/INFO] [ne.mi.fm.lo.ImmediateWindowHandler/]: ImmediateWindowProvider not loading because launch target is forgeserveruserdev
+[10:50:03] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.5 Source=union:/home/runner/.gradle/caches/modules-2/files-2.1/org.spongepowered/mixin/0.8.5/9d1c0c3a304ae6697ecd477218fa61b850bf57fc/mixin-0.8.5.jar%23116!/ Service=ModLauncher Env=SERVER
+[10:50:04] [main/WARN] [ne.mi.fm.lo.mo.ModFileParser/LOADING]: Mod file /home/runner/.gradle/caches/modules-2/files-2.1/net.minecraftforge/javafmllanguage/1.20.1-47.3.0/d7ebc62120f202109e300e084ca1a31a7b946a62/javafmllanguage-1.20.1-47.3.0.jar is missing mods.toml file
+[10:50:04] [main/WARN] [ne.mi.fm.lo.mo.ModFileParser/LOADING]: Mod file /home/runner/.gradle/caches/modules-2/files-2.1/net.minecraftforge/lowcodelanguage/1.20.1-47.3.0/1bf3e845ea0ce750096da8c71c8364b188ab74d4/lowcodelanguage-1.20.1-47.3.0.jar is missing mods.toml file
+[10:50:04] [main/WARN] [ne.mi.fm.lo.mo.ModFileParser/LOADING]: Mod file /home/runner/.gradle/caches/modules-2/files-2.1/net.minecraftforge/mclanguage/1.20.1-47.3.0/6093682e943ddccbabf70539319d7f2fe64db2e7/mclanguage-1.20.1-47.3.0.jar is missing mods.toml file
+[10:50:04] [main/WARN] [ne.mi.fm.lo.mo.ModFileParser/LOADING]: Mod file /home/runner/.gradle/caches/modules-2/files-2.1/net.minecraftforge/fmlcore/1.20.1-47.3.0/3b6be96aba3e323f3c918e8ef6a96312d82d76ad/fmlcore-1.20.1-47.3.0.jar is missing mods.toml file
+[10:50:04] [main/INFO] [ne.mi.fm.lo.mo.JarInJarDependencyLocator/]: No dependencies to load found. Skipping!
+[10:50:05] [main/INFO] [cp.mo.mo.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgeserveruserdev' with arguments [--gameDir, ., --nogui]
+[10:50:10] [modloading-worker-0/INFO] [ne.mi.co.ForgeMod/FORGEMOD]: Forge mod loading, version 47.3.0, for MC 1.20.1 with MCP 20230612.114412
+[10:50:10] [modloading-worker-0/INFO] [ne.mi.co.MinecraftForge/FORGE]: MinecraftForge v47.3.0 Initialized
+[10:50:10] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Configuration file /home/runner/work/XPEAKGAMES/XPEAKGAMES/run/config/enderite-common.toml is not correct. Correcting
+[10:50:10] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key limbo was corrected from null to its default, SimpleCommentedConfig:{}. 
+[10:50:10] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key limbo.probabilidad was corrected from null to its default, 1.0. 
+[10:50:10] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key limbo.radioCopiaChunks was corrected from null to its default, 8. 
+[10:50:10] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key limbo.retrasoCrawlerSegundos was corrected from null to its default, 18. 
+[10:50:10] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key pesadilla was corrected from null to its default, SimpleCommentedConfig:{}. 
+[10:50:10] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key pesadilla.nivelMaximo was corrected from null to its default, 5. 
+[10:50:10] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key agarre was corrected from null to its default, SimpleCommentedConfig:{}. 
+[10:50:10] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key agarre.durabilidadPorcentaje was corrected from null to its default, 8. 
+[10:50:10] [modloading-worker-0/INFO] [co.xp.en.EnderiteMod/]: Enderite: El Limbo cargado
+[10:50:11] [Forge Version Check/INFO] [ne.mi.fm.VersionChecker/]: [forge] Starting version check at https://files.minecraftforge.net/net/minecraftforge/forge/promotions_slim.json
+[10:50:11] [Forge Version Check/INFO] [ne.mi.fm.VersionChecker/]: [forge] Found status: OUTDATED Current: 47.3.0 Target: 47.4.28
+[10:50:11] [main/INFO] [mojang/YggdrasilAuthenticationService]: Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', servicesHost='https://api.minecraftservices.com', name='PROD'
+[10:50:11] [main/WARN] [minecraft/VanillaPackResourcesBuilder]: Assets URL 'union:/home/runner/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.3.0_mapped_official_1.20.1/forge-1.20.1-47.3.0_mapped_official_1.20.1.jar%23181!/assets/.mcassetsroot' uses unexpected schema
+[10:50:11] [main/WARN] [minecraft/VanillaPackResourcesBuilder]: Assets URL 'union:/home/runner/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.3.0_mapped_official_1.20.1/forge-1.20.1-47.3.0_mapped_official_1.20.1.jar%23181!/data/.mcassetsroot' uses unexpected schema
+[10:50:13] [main/INFO] [minecraft/RecipeManager]: Loaded 7 recipes
+[10:50:13] [main/INFO] [minecraft/AdvancementList]: Loaded 1271 advancements
+[10:50:14] [Server thread/INFO] [minecraft/DedicatedServer]: Starting minecraft server version 1.20.1
+[10:50:14] [Server thread/INFO] [minecraft/DedicatedServer]: Loading properties
+[10:50:14] [Server thread/INFO] [minecraft/DedicatedServer]: Default game type: SURVIVAL
+[10:50:14] [Server thread/INFO] [minecraft/MinecraftServer]: Generating keypair
+[10:50:14] [Server thread/INFO] [minecraft/DedicatedServer]: Starting Minecraft server on *:25565
+[10:50:14] [Server thread/INFO] [minecraft/ServerConnectionListener]: Using epoll channel type
+[10:50:14] [Server thread/WARN] [minecraft/DedicatedServer]: **** SERVER IS RUNNING IN OFFLINE/INSECURE MODE!
+[10:50:14] [Server thread/WARN] [minecraft/DedicatedServer]: The server will make no attempt to authenticate usernames. Beware.
+[10:50:14] [Server thread/WARN] [minecraft/DedicatedServer]: While this makes the game possible to play without internet access, it also opens up the ability for hackers to connect with any username they choose.
+[10:50:14] [Server thread/WARN] [minecraft/DedicatedServer]: To change this, set "online-mode" to "true" in the server.properties file.
+[10:50:14] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Configuration file ./world/serverconfig/forge-server.toml is not correct. Correcting
+[10:50:14] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server was corrected from null to its default, SimpleCommentedConfig:{}. 
+[10:50:14] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.removeErroringBlockEntities was corrected from null to its default, false. 
+[10:50:14] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.removeErroringEntities was corrected from null to its default, false. 
+[10:50:14] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.fullBoundingBoxLadders was corrected from null to its default, false. 
+[10:50:14] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.zombieBaseSummonChance was corrected from null to its default, 0.1. 
+[10:50:14] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.zombieBabyChance was corrected from null to its default, 0.05. 
+[10:50:14] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.permissionHandler was corrected from null to its default, forge:default_handler. 
+[10:50:14] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.advertiseDedicatedServerToLan was corrected from null to its default, true. 
+[10:50:14] [Server thread/INFO] [minecraft/DedicatedServer]: Preparing level "world"
+[10:50:21] [Server thread/INFO] [minecraft/MinecraftServer]: Preparing start region for dimension minecraft:overworld
+[10:50:22] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[10:50:22] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[10:50:22] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[10:50:22] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[10:50:23] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[10:50:23] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 1%
+[10:50:24] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 2%
+[10:50:24] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 3%
+[10:50:25] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 4%
+[10:50:25] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 6%
+[10:50:26] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 7%
+[10:50:26] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 9%
+[10:50:27] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 11%
+[10:50:27] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 13%
+[10:50:28] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 15%
+[10:50:28] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 17%
+[10:50:29] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 20%
+[10:50:29] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 22%
+[10:50:30] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 24%
+[10:50:30] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 27%
+[10:50:31] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 30%
+[10:50:31] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 32%
+[10:50:32] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 35%
+[10:50:32] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 39%
+[10:50:33] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 41%
+[10:50:33] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 43%
+[10:50:34] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 46%
+[10:50:34] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 50%
+[10:50:35] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 53%
+[10:50:35] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 55%
+[10:50:36] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 58%
+[10:50:36] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 61%
+[10:50:37] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 65%
+[10:50:37] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 68%
+[10:50:38] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 70%
+[10:50:38] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 73%
+[10:50:39] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 75%
+[10:50:39] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 80%
+[10:50:40] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 83%
+[10:50:40] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 85%
+[10:50:41] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 88%
+[10:50:41] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 92%
+[10:50:42] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 96%
+[10:50:42] [Server thread/INFO] [minecraft/LoggerChunkProgressListener]: Time elapsed: 21467 ms
+[10:50:42] [Server thread/INFO] [minecraft/DedicatedServer]: Done (28.481s)! For help, type "help"
+[10:50:42] [Server thread/INFO] [ne.mi.ga.ForgeGameTestHooks/]: Enabled Gametest Namespaces: []
+[10:50:42] [Server thread/INFO] [ne.mi.se.pe.PermissionAPI/]: Successfully initialized permission handler forge:default_handler
+[10:50:44] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [SELFTEST] PASS dimension limbo existe
+[10:50:44] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [SELFTEST] PASS limbo: no natural (no se duerme)
+[10:50:44] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [SELFTEST] PASS limbo: altura igual al mundo -> -64/384
+[10:50:44] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [SELFTEST] PASS pico netherite pica la enderita
+[10:50:44] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [SELFTEST] PASS pico diamante NO pica la enderita
+[10:50:44] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [SELFTEST] PASS pico enderite pica la enderita
+[10:50:44] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [SELFTEST] PASS pico enderite pica obsidiana
+[10:50:44] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [SELFTEST] PASS mena en mineable/pickaxe
+[10:50:44] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [SELFTEST] PASS espada enderite durabilidad 4062 -> 4062
+[10:50:44] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [SELFTEST] PASS espada enderite dano 16 (x2 netherite) -> 16.0
+[10:50:44] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [SELFTEST] PASS peto enderite armadura 16 (x2) -> 16
+[10:50:44] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [SELFTEST] PASS recetas cargadas -> []
+[10:50:44] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [SELFTEST] PASS tablas de botin -> []
+[10:50:44] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [SELFTEST] PASS tipo de dano crawler
+[10:50:44] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [SELFTEST] PASS feature de mena registrada
+[10:50:45] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [SELFTEST] PASS mena de enderita se genera en el End -> 342 menas entre 794410 de piedra del End (isla central)
+[10:50:46] [Server thread/WARN] [minecraft/MinecraftServer]: Can't keep up! Is the server overloaded? Running 2250ms or 45 ticks behind
+[10:50:50] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [SELFTEST] PASS copia del mundo identica -> 0/884736 distintos, 690 bloques copiados en 1721 ms
+[10:50:50] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [SELFTEST] PASS cofre copiado con su contenido
+[10:50:50] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [SELFTEST] PASS cartel copiado con su texto
+[10:50:51] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [SELFTEST] PASS terreno natural del Limbo igual al mundo real -> 2/67584 distintos
+[10:50:52] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [SELFTEST] PASS pesadilla 3: zombi con +60% vida -> 32.0
+[10:50:52] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [SELFTEST] PASS pesadilla 3: zombi con vida llena -> 32.0
+[10:50:52] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [SELFTEST] PASS pesadilla 0: zombi normal -> 20.0
+[10:50:52] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [SELFTEST] PASS agarre: encuentra la pared -> Spot[wall=BlockPos{x=360, y=71, z=360}, face=east, toolCenter=(361.12, 71.95, 360.5)]
+[10:50:52] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [SELFTEST] PASS agarre: se clava la espada y cuelgas -> vehiculo=StuckToolEntity['Stuck Tool'/297, l='ServerLevel[world]', x=361.12, y=71.70, z=360.50]
+[10:50:52] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [SELFTEST] PASS agarre: gasta durabilidad -> dano=20/250
+[10:50:52] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [SELFTEST] PASS agarre: la mano queda vacia
+[10:50:52] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [DEBUG] wallJump servidor pos=(361.34000000000003, 70.0, 360.5) vel=(0.18, 0.62, 0.0)
+[10:50:52] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [SELFTEST] PASS agarre: salto extra desde la pared -> vel=(0.18, 0.62, 0.0)
+[10:50:52] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [SELFTEST] PASS agarre: click derecho recupera la herramienta -> mano=1 iron_sword pos=(361.34000000000003, 70.0, 360.5)
+[10:50:52] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [SELFTEST] PASS agarre: un palo no sirve
+[10:50:52] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [SELFTEST] PASS agarre: el tridente (lanza) sirve
+[10:50:53] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [SELFTEST] PASS crawler aparece
+[10:51:01] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [SELFTEST] PASS arenas: zona con lluvia -> BlockPos{x=600, y=104, z=744}
+[10:51:01] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [SELFTEST] PASS arenas: la lluvia convierte la arena un ~10% -> 41/500
+[10:51:01] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [SELFTEST] PASS arenas: sin lluvia encima no cambia
+[10:51:01] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [SELFTEST] PASS arenas: pala con toque de seda la recoge -> [1 quicksand]
+[10:51:01] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [SELFTEST] PASS arenas: pico con toque de seda la recoge -> [1 quicksand]
+[10:51:01] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [SELFTEST] PASS arenas: sin toque de seda da arena normal -> [1 sand]
+[10:51:01] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [SELFTEST] PASS robot azul: +50% velocidad
+[10:51:01] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [SELFTEST] PASS robot rojo: +50% dano
+[10:51:01] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [SELFTEST] PASS robot verde: x2 vida
+[10:51:01] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [SELFTEST] PASS robot: nunca se rompe del todo (se averia) -> dano=699
+[10:51:01] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [SELFTEST] PASS robot averiado: sin bonus
+[10:51:01] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [SELFTEST] PASS mesa: fabrica el torso azul -> iron left=6
+[10:51:01] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [SELFTEST] PASS mesa: sin materiales no fabrica
+[10:51:01] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [SELFTEST] PASS mesa: fabrica el brazo motosierra
+[10:51:01] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [SELFTEST] PASS mesa: los brazos se montan en el torso
+[10:51:01] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [SELFTEST] PASS mesa: carga cohetes como municion -> municion=10
+[10:51:01] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [SELFTEST] PASS mesa: repara con hierro -> dano=125
+[10:51:01] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [SELFTEST] PASS robot: el agua lo estropea -> en agua=true dano=14
+[10:51:01] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [SELFTEST] PASS robot: con brazos la hotbar no se usa
+[10:51:01] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [SELFTEST] PASS motosierra: hace dano constante -> vida 20.0 -> 8.2
+[10:51:02] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [SELFTEST] PASS iman: se enciende con redstone
+[10:51:02] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [SELFTEST] PASS lanzacohetes: dispara 3 cohetes -> 3 cohetes
+[10:51:02] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [SELFTEST] PASS lanzacohetes: gasta 3 de municion -> municion=6
+[10:51:03] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [SELFTEST] PASS cohetes: mucho mas dano que un cohete normal -> vida 20.0 -> 6.2
+[10:51:03] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [SELFTEST] iman en 700, 112, 700, encendido=true, bloques activos=true, objeto vivo=true ticks=74, entidades activas=true
+[10:51:03] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [SELFTEST] PASS iman: atrae objetos a 20 bloques -> distancia=0.6
+[10:51:03] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [SELFTEST] PASS iman: no atrae a traves de paredes -> distancia=16.0
+[10:51:04] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [SELFTEST] PASS iman portatil: atrae objetos hacia ti -> distancia=0.3
+[10:51:04] [Server thread/WARN] [minecraft/MinecraftServer]: Can't keep up! Is the server overloaded? Running 2732ms or 54 ticks behind
+[10:51:41] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [SELFTEST] PASS crawler llega hasta la presa encerrada -> distancia=0.3
+[10:51:41] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [SELFTEST] PASS crawler rompe la puerta o los muros -> puerta rota=false, cobble 114 -> 109
+[10:51:42] [Server thread/INFO] [co.xp.en.EnderiteMod/]: [SELFTEST] TERMINADO: 61 OK, 0 FALLOS
+[10:51:42] [Server thread/INFO] [minecraft/MinecraftServer]: Stopping server
+[10:51:42] [Server thread/INFO] [minecraft/MinecraftServer]: Saving players
+[10:51:42] [Server thread/INFO] [minecraft/MinecraftServer]: Saving worlds
+[10:51:43] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/minecraft:overworld
+[10:51:45] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_nether
+[10:51:45] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/enderite:limbo
+[10:51:45] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_end
+[10:51:45] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[10:51:45] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[10:51:45] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (limbo): All chunks are saved
+[10:51:45] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[10:51:45] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage: All dimensions are saved
+gradle/actions: Writing build results to /home/runner/work/_temp/.gradle-actions/build-results/__run_3-1795862995392.json
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 9.0.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/8.8/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 1m 53s
+10 actionable tasks: 7 executed, 3 up-to-date

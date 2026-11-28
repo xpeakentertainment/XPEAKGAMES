@@ -1,0 +1,63 @@
+RESUMEN: 61 OK, 0 FALLOS
+PASS dimension limbo existe
+PASS limbo: no natural (no se duerme)
+PASS limbo: altura igual al mundo -> -64/384
+PASS pico netherite pica la enderita
+PASS pico diamante NO pica la enderita
+PASS pico enderite pica la enderita
+PASS pico enderite pica obsidiana
+PASS mena en mineable/pickaxe
+PASS espada enderite durabilidad 4062 -> 4062
+PASS espada enderite dano 16 (x2 netherite) -> 16.0
+PASS peto enderite armadura 16 (x2) -> 16
+PASS recetas cargadas -> []
+PASS tablas de botin -> []
+PASS tipo de dano crawler
+PASS feature de mena registrada
+PASS mena de enderita se genera en el End -> 342 menas entre 794410 de piedra del End (isla central)
+PASS copia del mundo identica -> 0/884736 distintos, 690 bloques copiados en 1721 ms
+PASS cofre copiado con su contenido
+PASS cartel copiado con su texto
+PASS terreno natural del Limbo igual al mundo real -> 2/67584 distintos
+PASS pesadilla 3: zombi con +60% vida -> 32.0
+PASS pesadilla 3: zombi con vida llena -> 32.0
+PASS pesadilla 0: zombi normal -> 20.0
+PASS agarre: encuentra la pared -> Spot[wall=BlockPos{x=360, y=71, z=360}, face=east, toolCenter=(361.12, 71.95, 360.5)]
+PASS agarre: se clava la espada y cuelgas -> vehiculo=StuckToolEntity['Stuck Tool'/297, l='ServerLevel[world]', x=361.12, y=71.70, z=360.50]
+PASS agarre: gasta durabilidad -> dano=20/250
+PASS agarre: la mano queda vacia
+PASS agarre: salto extra desde la pared -> vel=(0.18, 0.62, 0.0)
+PASS agarre: click derecho recupera la herramienta -> mano=1 iron_sword pos=(361.34000000000003, 70.0, 360.5)
+PASS agarre: un palo no sirve
+PASS agarre: el tridente (lanza) sirve
+PASS crawler aparece
+PASS arenas: zona con lluvia -> BlockPos{x=600, y=104, z=744}
+PASS arenas: la lluvia convierte la arena un ~10% -> 41/500
+PASS arenas: sin lluvia encima no cambia
+PASS arenas: pala con toque de seda la recoge -> [1 quicksand]
+PASS arenas: pico con toque de seda la recoge -> [1 quicksand]
+PASS arenas: sin toque de seda da arena normal -> [1 sand]
+PASS robot azul: +50% velocidad
+PASS robot rojo: +50% dano
+PASS robot verde: x2 vida
+PASS robot: nunca se rompe del todo (se averia) -> dano=699
+PASS robot averiado: sin bonus
+PASS mesa: fabrica el torso azul -> iron left=6
+PASS mesa: sin materiales no fabrica
+PASS mesa: fabrica el brazo motosierra
+PASS mesa: los brazos se montan en el torso
+PASS mesa: carga cohetes como municion -> municion=10
+PASS mesa: repara con hierro -> dano=125
+PASS robot: el agua lo estropea -> en agua=true dano=14
+PASS robot: con brazos la hotbar no se usa
+PASS motosierra: hace dano constante -> vida 20.0 -> 8.2
+PASS iman: se enciende con redstone
+PASS lanzacohetes: dispara 3 cohetes -> 3 cohetes
+PASS lanzacohetes: gasta 3 de municion -> municion=6
+PASS cohetes: mucho mas dano que un cohete normal -> vida 20.0 -> 6.2
+INFO iman en 700, 112, 700, encendido=true, bloques activos=true, objeto vivo=true ticks=74, entidades activas=true
+PASS iman: atrae objetos a 20 bloques -> distancia=0.6
+PASS iman: no atrae a traves de paredes -> distancia=16.0
+PASS iman portatil: atrae objetos hacia ti -> distancia=0.3
+PASS crawler llega hasta la presa encerrada -> distancia=0.3
+PASS crawler rompe la puerta o los muros -> puerta rota=false, cobble 114 -> 109

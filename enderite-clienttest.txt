@@ -1,0 +1,76 @@
+RESUMEN: 37 OK, 0 FALLOS
+INFO pulsando 'Proceder' en el aviso de ajustes experimentales
+INFO mundo cargado
+PASS armadura completa = 30 (tope del juego) -> 30
+INFO captura 01_bloques_y_espada
+INFO captura 02_armadura
+INFO captura 03_inventario
+INFO captura 04_crawler_dia
+INFO captura 05_crawler_noche
+INFO captura 06_crawler_noche_cerca
+PASS agarre (cliente): encuentra la pared -> Spot[wall=BlockPos{x=-348, y=78, z=82}, face=east, toolCenter=(-346.88, 78.55, 82.5)]
+PASS agarre (cliente): cuelga del pico -> StuckToolEntity['Herramienta clavada'/516, l='ServerLevel[world]', x=-346.88, y=78.30, z=82.50]
+PASS agarre (cliente): el cliente ve que cuelgas -> StuckToolEntity['Herramienta clavada'/516, l='ClientLevel', x=-346.88, y=78.30, z=82.50]
+INFO captura 07_agarre_pared
+INFO captura 08_agarre_pared_2
+PASS agarre (cliente): salto extra -> y=77.75 base=75
+INFO captura 09_salto_extra
+PASS agarre (cliente): el pico sigue clavado
+PASS agarre (cliente): recuperas el pico -> 1 enderite_pickaxe dano=324
+PASS el jugador esta durmiendo
+PASS dormir te lleva al Limbo -> tras 90 ticks
+INFO captura 10_limbo_cargando
+PASS el Limbo termina de copiar el mundo -> tras 122 ticks
+PASS en el Limbo
+PASS la cama existe en la copia -> Block{minecraft:red_bed}[facing=north,occupied=false,part=head]
+PASS la casa existe en la copia -> Block{minecraft:dark_oak_planks}
+PASS apareces de pie sobre la cama -> 0.56
+PASS no hay otras entidades en el Limbo -> 0 entidades
+INFO captura 11_limbo_casa
+PASS no puedes colocar bloques en el Limbo -> Block{minecraft:air}
+PASS no puedes correr
+INFO crawler a 4.2 bloques
+PASS el Crawler aparece en el Limbo -> 1 crawler(s)
+INFO captura 12_limbo_crawler
+INFO captura 13_limbo_crawler_tercera
+INFO a los 10 s: crawler a 3.6 bloques (pos -335.3 75.2 83.0, escalando=false, rompiendo=false), vida jugador=20.0
+PASS el Crawler persigue al jugador y entra en la casa -> 3.6 bloques a los 10 s
+PASS al amanecer vuelves a tu cama real -> (-335.5, 75.5625, 79.5)
+PASS sube la Pesadilla -> 0 -> 1
+PASS el Crawler desaparece al salir -> 0
+INFO captura 14_de_vuelta
+PASS el cliente ya no esta en el Limbo
+PASS segunda entrada al Limbo
+INFO captura 15_muerte_limbo
+PASS al morir en el Limbo pierdes tus cosas -> vacio=true nivel=0
+PASS y apareces en el mundo real -> minecraft:overworld
+INFO captura 16_tras_morir
+PASS robot: la hotbar se sustituye por los brazos
+PASS robot azul: mas velocidad -> 0.150
+INFO captura 17_robot_primera_persona
+INFO captura 18_robot_tercera_persona
+INFO captura 19_motosierra
+PASS motosierra (clic izquierdo de verdad): hace dano -> vida=0.0
+PASS con brazos no usas la espada de la hotbar
+INFO captura 20_cohetes
+PASS lanzacohetes (clic derecho de verdad): dispara 3 -> municion=27
+INFO captura 21_inventario_robot
+PASS la Mesa de ingenieria se abre -> EngineeringTableScreen
+INFO captura 22_mesa_ingenieria
+PASS arenas movedizas: te hundes -> hundido=1.72
+INFO captura 23_arenas_movedizas
+INFO captura 24_arenas_movedizas_fuera
+PASS arenas movedizas: manteniendo saltar sales -> y 73.00 -> 74.99
+INFO captura 25_iman_atrayendo
+INFO captura 26_iman
+PASS iman: los objetos llegan al iman -> 5/5
+PASS agarre: colgado otra vez -> StuckToolEntity['Herramienta clavada'/918, l='ClientLevel', x=-346.88, y=78.30, z=82.50]
+INFO tecla saltar t=1 y=76.60 vel=(0.0, -0.0784000015258789, 0.0) vehiculo=StuckToolEntity['Herramienta clavada'/918, l='ClientLevel', x=-346.88, y=78.30, z=82.50]
+INFO tecla saltar t=2 y=77.22 vel=(0.16380000472068787, 0.5292000102996827, -0.2730000078678131) vehiculo=null
+INFO tecla saltar t=3 y=77.75 vel=(0.14905800859165205, 0.44021601866149923, -0.24843001431942005) vehiculo=null
+INFO tras soltar t=1 y=78.19 vel=(0.1356427917276052, 0.35301170515884456, -0.22607131954600865) vehiculo=null
+INFO tras soltar t=2 y=78.54 vel=(0.12343494402949452, 0.26755147626295267, -0.20572490671582416) vehiculo=null
+INFO tras soltar t=3 y=78.81 vel=(0.11232580230405025, 0.18380045031495412, -0.1872096705067504) vehiculo=null
+INFO tras soltar t=4 y=78.99 vel=(0.10221648304254713, 0.1017244432884915, -0.17036080507091186) vehiculo=null
+INFO tras soltar t=5 y=79.10 vel=(0.09301700224945184, 0.021289954837082545, -0.15502833708241973) vehiculo=null
+PASS agarre: SALTAS pulsando la tecla de saltar -> vehiculo=null y 76.60 -> 79.10

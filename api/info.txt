@@ -1,0 +1,18 @@
+mapped jar: /home/runner/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.3.0_mapped_official_1.20.1/forge-1.20.1-47.3.0_mapped_official_1.20.1.jar
+/home/runner/.gradle/caches/forge_gradle/maven_downloader/de/oceanlabs/mcp/mcp_config/1.20.1/mcp_config-1.20.1.zip
+/home/runner/.gradle/caches/forge_gradle/maven_downloader/de/oceanlabs/mcp/mcp_config/1.20.1-20230612.114412/mcp_config-1.20.1-20230612.114412.zip
+/home/runner/.gradle/caches/forge_gradle/mcp_repo/net/minecraft/mapping/1.20.1/mapping-1.20.1-mapping.zip
+/home/runner/.gradle/caches/forge_gradle/mcp_repo/de/oceanlabs/mcp/mcp_config/1.20.1/mcp_config-1.20.1-obf_to_srg.tsrg
+/home/runner/.gradle/caches/forge_gradle/mcp_repo/de/oceanlabs/mcp/mcp_config/1.20.1/mcp_config-1.20.1-obf_to_srg.tsrg.input
+/home/runner/.gradle/caches/forge_gradle/mcp_repo/de/oceanlabs/mcp/mcp_config/1.20.1/mcp_config-1.20.1-obf_to_srg.tsrg.sha1
+/home/runner/.gradle/caches/forge_gradle/minecraft_repo/versions/1.20.1/mcp_mappings.tsrg.md5
+/home/runner/.gradle/caches/forge_gradle/minecraft_repo/versions/1.20.1/server_mappings.txt
+/home/runner/.gradle/caches/forge_gradle/minecraft_repo/versions/1.20.1/mcp_mappings.tsrg
+/home/runner/.gradle/caches/forge_gradle/minecraft_repo/versions/1.20.1/mcp_mappings.tsrg.sha256
+/home/runner/.gradle/caches/forge_gradle/minecraft_repo/versions/1.20.1/mcp.zip
+/home/runner/.gradle/caches/forge_gradle/minecraft_repo/versions/1.20.1/mcp_mappings.tsrg.input
+/home/runner/.gradle/caches/forge_gradle/minecraft_repo/versions/1.20.1/mcp_mappings.tsrg.sha512
+/home/runner/.gradle/caches/forge_gradle/minecraft_repo/versions/1.20.1/client_mappings.txt
+/home/runner/.gradle/caches/forge_gradle/minecraft_repo/versions/1.20.1/mcp_mappings.tsrg.sha1
+/home/runner/.gradle/caches/forge_gradle/minecraft_user_repo/de/oceanlabs/mcp/mcp_config/1.20.1-20230612.114412/srg_to_official_1.20.1.tsrg.input
+/home/runner/.gradle/caches/forge_gradle/minecraft_user_repo/de/oceanlabs/mcp/mcp_config/1.20.1-20230612.114412/srg_to_official_1.20.1.tsrg
