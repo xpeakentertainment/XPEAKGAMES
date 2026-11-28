@@ -44,7 +44,7 @@ public class EngineeringTableScreen extends AbstractContainerScreen<EngineeringT
             g.fill(x + 1, y + 1, x + BTN_W - 1, y + BTN_H - 2, bg);
             ItemStack icon = new ItemStack(part.result().get());
             g.renderItem(icon, x + 1, y + 1);
-            String name = icon.getHoverName().getString();
+            String name = Component.translatable("enderite.engineering.part." + i).getString();
             if (this.font.width(name) > BTN_W - 20) name = this.font.plainSubstrByWidth(name, BTN_W - 24) + "..";
             g.drawString(this.font, name, x + 19, y + 5, can ? 0xFFFFFF : 0xAA8888, false);
         }
@@ -52,11 +52,10 @@ public class EngineeringTableScreen extends AbstractContainerScreen<EngineeringT
 
     @Override
     protected void renderLabels(GuiGraphics g, int mouseX, int mouseY) {
-        g.drawString(this.font, this.title, 8, 5, 0xE0E0E0, false);
-        g.drawString(this.font, Component.translatable("enderite.engineering.build"), BTN_X + 2, 5, 0x9FD3FF, false);
-        g.drawString(this.font, Component.translatable("enderite.engineering.left"), 13, 27, 0x9FD3FF, false);
-        g.drawString(this.font, Component.translatable("enderite.engineering.torso"), 40, 27, 0x9FD3FF, false);
-        g.drawString(this.font, Component.translatable("enderite.engineering.right"), 67, 27, 0x9FD3FF, false);
+        g.drawString(this.font, this.title, 8, 5, 0x1B1E22, false);
+        g.drawString(this.font, Component.translatable("enderite.engineering.left"), 17, 27, 0x9FD3FF, false);
+        g.drawString(this.font, Component.translatable("enderite.engineering.torso"), 38, 27, 0x9FD3FF, false);
+        g.drawString(this.font, Component.translatable("enderite.engineering.right"), 71, 27, 0x9FD3FF, false);
         g.drawString(this.font, Component.translatable("enderite.engineering.ammo"), 8, 67, 0xFFCC55, false);
         g.drawString(this.font, Component.translatable("enderite.engineering.repair"), 60, 67, 0xC0C0C0, false);
         // estado del robot montado

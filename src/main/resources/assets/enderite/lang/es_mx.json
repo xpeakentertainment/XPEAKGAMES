@@ -113,5 +113,10 @@
   "subtitles.enderite.robot.equip": "Pieza robot colocada",
   "subtitles.enderite.engineering.build": "Mesa de ingeniería trabajando",
   "subtitles.enderite.magnet.on": "Imán encendido",
-  "subtitles.enderite.magnet.off": "Imán apagado"
+  "subtitles.enderite.magnet.off": "Imán apagado",
+  "enderite.engineering.part.0": "Núcleo azul",
+  "enderite.engineering.part.1": "Núcleo rojo",
+  "enderite.engineering.part.2": "Núcleo verde",
+  "enderite.engineering.part.3": "Motosierra",
+  "enderite.engineering.part.4": "Lanzacohetes"
 }

@@ -113,5 +113,10 @@
   "subtitles.enderite.robot.equip": "Robot part attached",
   "subtitles.enderite.engineering.build": "Engineering Table works",
   "subtitles.enderite.magnet.on": "Magnet on",
-  "subtitles.enderite.magnet.off": "Magnet off"
+  "subtitles.enderite.magnet.off": "Magnet off",
+  "enderite.engineering.part.0": "Blue core",
+  "enderite.engineering.part.1": "Red core",
+  "enderite.engineering.part.2": "Green core",
+  "enderite.engineering.part.3": "Chainsaw",
+  "enderite.engineering.part.4": "Rockets"
 }

@@ -21,8 +21,6 @@ public class MagnetBlockEntity extends BlockEntity {
         Vec3 center = Vec3.atCenterOf(pos);
         MagnetLogic.ambientParticles(sl, center, 0.8D, t);
         if (t % 80 == 0) level.playSound(null, pos, ModSounds.MAGNET_HUM.get(), SoundSource.BLOCKS, 0.5F, 1.0F);
-        if (t % 2 == 0) {
-            MagnetLogic.pull(sl, center, null, hit -> hit.getBlockPos().equals(pos), t);
-        }
+        MagnetLogic.pull(sl, center, null, hit -> hit.getBlockPos().equals(pos), t);
     }
 }

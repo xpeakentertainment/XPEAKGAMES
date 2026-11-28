@@ -101,6 +101,15 @@ public final class LimboClientEvents {
         jumpWasDown = jumpDown;
     }
 
+    /** El servidor confirma el salto desde la pared: soltarse y saltar ya en el cliente. */
+    public static void applyClingJump(double x, double y, double z) {
+        LocalPlayer p = Minecraft.getInstance().player;
+        if (p == null) return;
+        if (p.getVehicle() instanceof StuckToolEntity) p.stopRiding();
+        p.setDeltaMovement(x, y, z);
+        p.resetFallDistance();
+    }
+
     private static void disableShader(Minecraft mc) {
         if (!shaderActive) return;
         PostChain current = mc.gameRenderer.currentEffect();

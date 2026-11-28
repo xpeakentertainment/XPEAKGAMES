@@ -43,7 +43,7 @@ public final class ModBlocks {
     /** Arenas movedizas: un poquito mas oscuras que la arena normal (se tinen en el cliente). */
     public static final RegistryObject<Block> QUICKSAND = BLOCKS.register("quicksand", () -> new com.xpeak.enderite.block.QuicksandBlock(
             BlockBehaviour.Properties.of().mapColor(MapColor.SAND).strength(0.6F).sound(SoundType.SAND)
-                    .forceSolidOn().isSuffocating((s, l, p) -> false).isViewBlocking((s, l, p) -> true)));
+                    .forceSolidOn().noOcclusion().isSuffocating((s, l, p) -> false).isViewBlocking((s, l, p) -> false)));
 
     public static final RegistryObject<Block> MAGNET = BLOCKS.register("magnet", () -> new com.xpeak.enderite.magnet.MagnetBlock(
             BlockBehaviour.Properties.of().mapColor(MapColor.METAL).requiresCorrectToolForDrops().strength(4.0F, 6.0F)

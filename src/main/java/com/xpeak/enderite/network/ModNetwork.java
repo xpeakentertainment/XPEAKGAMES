@@ -41,6 +41,8 @@ public final class ModNetwork {
                 .encoder(ArmSlotPacket::encode).decoder(ArmSlotPacket::decode).consumerMainThread(ArmSlotPacket::handle).add();
         CHANNEL.messageBuilder(ArmAnimPacket.class, 4, NetworkDirection.PLAY_TO_CLIENT)
                 .encoder(ArmAnimPacket::encode).decoder(ArmAnimPacket::decode).consumerMainThread(ArmAnimPacket::handle).add();
+        CHANNEL.messageBuilder(ClingJumpedPacket.class, 5, NetworkDirection.PLAY_TO_CLIENT)
+                .encoder(ClingJumpedPacket::encode).decoder(ClingJumpedPacket::decode).consumerMainThread(ClingJumpedPacket::handle).add();
     }
 
     public static void sendArmInput(boolean left, boolean right) {
@@ -54,6 +56,29 @@ public final class ModNetwork {
     public static void sendArmAnim(ServerPlayer player, boolean left, boolean right) {
         if (player.connection == null) return;
         CHANNEL.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> player), new ArmAnimPacket(player.getId(), left, right));
+    }
+
+    public static void sendClingJumped(ServerPlayer player, net.minecraft.world.phys.Vec3 vel) {
+        if (player.connection == null) return;
+        CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), new ClingJumpedPacket(vel.x, vel.y, vel.z));
+    }
+
+    /** Servidor -> cliente: te has soltado de la pared con este impulso (asi el salto nunca se pierde). */
+    public record ClingJumpedPacket(double x, double y, double z) {
+        static void encode(ClingJumpedPacket p, FriendlyByteBuf buf) {
+            buf.writeDouble(p.x);
+            buf.writeDouble(p.y);
+            buf.writeDouble(p.z);
+        }
+
+        static ClingJumpedPacket decode(FriendlyByteBuf buf) {
+            return new ClingJumpedPacket(buf.readDouble(), buf.readDouble(), buf.readDouble());
+        }
+
+        static void handle(ClingJumpedPacket p, Supplier<NetworkEvent.Context> ctx) {
+            DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> com.xpeak.enderite.client.LimboClientEvents.applyClingJump(p.x, p.y, p.z));
+            ctx.get().setPacketHandled(true);
+        }
     }
 
     /** Cliente -> servidor: que botones (izq/der) estas pulsando con los brazos robot. */

@@ -53,7 +53,7 @@ public class PortableMagnetItem extends Item {
         ServerLevel sl = (ServerLevel) level;
         long t = level.getGameTime();
         // Si llevas varios imanes, solo trabaja el primero
-        if (t % 2 != 0 || firstActive(player) != stack) return;
+        if (firstActive(player) != stack) return;
         Vec3 center = player.position().add(0.0D, 0.9D, 0.0D);
         MagnetLogic.pull(sl, center, player, null, t);
         MagnetLogic.ambientParticles(sl, player.position().add(0.0D, 0.1D, 0.0D), 0.7D, t);

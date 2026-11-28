@@ -91,6 +91,11 @@ public final class SelfTest {
         try {
             if (tick == 20) staticChecks();
             if (tick == 30) worldgenCheck();
+            if (tick == 32) {
+                server.overworld().setChunkForced(500 >> 4, 500 >> 4, true);
+                server.overworld().setChunkForced(500 >> 4, (500 >> 4) - 1, true);
+                server.overworld().setChunkForced(500 >> 4, (500 >> 4) + 1, true);
+            }
             if (tick == 40) copyCheck();
             if (tick == 60) nightmareCheck();
             if (tick == 70) clingCheck();
@@ -510,12 +515,12 @@ public final class SelfTest {
         for (int dz = 1; dz < 14; dz++) for (int dy = 0; dy < 4; dy++) for (int dx = -2; dx <= 2; dx++)
             ow.setBlock(base.offset(dx, dy, dz), Blocks.AIR.defaultBlockState(), 3);
         rocketTarget = EntityType.ZOMBIE.create(ow);
-        rocketTarget.moveTo(robotPlayer.getX() + 0.3D, robotPlayer.getY(), robotPlayer.getZ() + 9.0D, 180.0F, 0);
+        rocketTarget.moveTo(robotPlayer.getX() - 0.38D, robotPlayer.getY(), robotPlayer.getZ() + 9.0D, 180.0F, 0);
         rocketTarget.setNoAi(true);
         rocketTarget.setPersistenceRequired();
         ow.addFreshEntity(rocketTarget);
         rocketTargetHealth = rocketTarget.getHealth();
-        robotPlayer.setXRot(8.0F);
+        robotPlayer.setXRot(2.0F);
         com.xpeak.enderite.robot.RobotServer.setInput(robotPlayer, false, true);
         robotPlayer.tickCount = 200;
         com.xpeak.enderite.robot.RobotServer.tick(robotPlayer);

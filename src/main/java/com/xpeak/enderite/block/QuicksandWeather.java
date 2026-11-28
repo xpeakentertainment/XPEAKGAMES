@@ -48,8 +48,10 @@ public final class QuicksandWeather {
 
     /** La lluvia cae sobre {@code pos}: si es arena, 10% de que se vuelva movediza. */
     public static boolean tryConvert(ServerLevel level, BlockPos pos, RandomSource random) {
-        if (!level.getBlockState(pos).is(Blocks.SAND)) return false;
-        if (!level.isRainingAt(pos.above())) return false;
+        if (!level.isRaining() || !level.getBlockState(pos).is(Blocks.SAND)) return false;
+        // La lluvia solo cae sobre el bloque mas alto de la columna
+        if (level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, pos).getY() != pos.getY() + 1) return false;
+        if (level.getBiome(pos).value().getPrecipitationAt(pos) != net.minecraft.world.level.biome.Biome.Precipitation.RAIN) return false;
         if (random.nextFloat() >= CHANCE) return false;
         level.setBlock(pos, ModBlocks.QUICKSAND.get().defaultBlockState(), 3);
         return true;

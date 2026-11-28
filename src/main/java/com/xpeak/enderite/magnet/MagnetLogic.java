@@ -41,10 +41,16 @@ public final class MagnetLogic {
             BlockHitResult hit = level.clip(new ClipContext(from, center, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, self != null ? self : item));
             if (hit.getType() == HitResult.Type.BLOCK && (clearAt == null || !clearAt.test(hit))) continue; // hay una pared
             Vec3 dir = center.subtract(from).normalize();
-            double strength = dist > 12.0D ? 0.11D : 0.07D;
-            Vec3 v = item.getDeltaMovement().scale(0.85D).add(dir.scale(strength)).add(0.0D, 0.035D, 0.0D);
-            double max = 1.1D;
-            if (v.length() > max) v = v.normalize().scale(max);
+            Vec3 v;
+            if (dist < 1.6D) {
+                v = dir.scale(dist * 0.25D);
+            } else {
+                double strength = dist > 12.0D ? 0.10D : 0.08D;
+                // flotan (se compensa la gravedad) y aceleran hacia el iman
+                v = item.getDeltaMovement().scale(0.80D).add(dir.scale(strength)).add(0.0D, 0.04D, 0.0D);
+                double max = 0.9D;
+                if (v.length() > max) v = v.normalize().scale(max);
+            }
             item.setDeltaMovement(v);
             item.hasImpulse = true;
             pulled++;

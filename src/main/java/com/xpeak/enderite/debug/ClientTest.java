@@ -206,12 +206,12 @@ public final class ClientTest {
                     sp.setItemSlot(EquipmentSlot.FEET, new ItemStack(ModItems.ENDERITE_BOOTS.get()));
                     sp.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(ModItems.ENDERITE_SWORD.get()));
                     sp.connection.teleport(base.getX() + 0.5, base.getY(), base.getZ() + 0.5, 0.0F, 20.0F);
-                    check("armadura completa = 30 (tope del juego)", sp.getArmorValue() >= 30, "" + sp.getArmorValue());
                 });
                 next();
             }
             case 1 -> {
                 if (!after(80)) return;
+                server(sp -> check("armadura completa = 30 (tope del juego)", sp.getArmorValue() >= 30, "" + sp.getArmorValue()));
                 look(Vec3.atCenterOf(base.offset(0, 0, 5)));
                 next();
             }
@@ -568,6 +568,8 @@ public final class ClientTest {
                 check("robot azul: mas velocidad", mc.player.getAttributeValue(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED) > 0.14D,
                         String.format("%.3f", mc.player.getAttributeValue(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED)));
                 shot("17_robot_primera_persona");
+                mc.player.setYRot(90.0F);
+                mc.player.setXRot(10.0F);
                 mc.options.setCameraType(CameraType.THIRD_PERSON_FRONT);
                 next();
             }
@@ -575,6 +577,8 @@ public final class ClientTest {
                 if (!after(30)) return;
                 shot("18_robot_tercera_persona");
                 mc.options.setCameraType(CameraType.FIRST_PERSON);
+                mc.player.setYRot(0.0F);
+                mc.player.setXRot(5.0F);
                 mc.options.keyAttack.setDown(true);
                 next();
             }

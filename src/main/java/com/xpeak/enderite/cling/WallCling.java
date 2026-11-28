@@ -168,6 +168,7 @@ public final class WallCling {
         Vec3 vel = horizontal.add(face.getStepX() * 0.18D, 0.62D, face.getStepZ() * 0.18D);
         player.setDeltaMovement(vel);
         player.hurtMarked = true;
+        com.xpeak.enderite.network.ModNetwork.sendClingJumped(player, vel);
         player.resetFallDistance();
         player.causeFoodExhaustion(0.2F);
     }

@@ -15,6 +15,14 @@ public final class LimboOverlay {
     private static final ResourceLocation VIGNETTE = new ResourceLocation(EnderiteMod.MODID, "textures/misc/limbo_vignette.png");
 
     public static void render(ForgeGui gui, GuiGraphics g, float partialTick, int width, int height) {
+        // Cabeza dentro de arenas movedizas: todo se ve arena
+        Minecraft m = Minecraft.getInstance();
+        if (m.player != null && m.level != null && m.options.getCameraType().isFirstPerson()) {
+            net.minecraft.core.BlockPos eyes = net.minecraft.core.BlockPos.containing(m.player.getEyePosition(partialTick));
+            if (m.level.getBlockState(eyes).is(com.xpeak.enderite.registry.ModBlocks.QUICKSAND.get())) {
+                g.fill(0, 0, width, height, 0xF0A89A78);
+            }
+        }
         int phase = ClientLimboState.phase();
         if (phase == Limbo.PHASE_NONE) return;
         Minecraft mc = Minecraft.getInstance();
