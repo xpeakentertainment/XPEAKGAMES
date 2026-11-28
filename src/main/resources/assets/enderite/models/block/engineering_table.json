@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/orientable_with_bottom",
+  "textures": {
+    "top": "enderite:block/engineering_table_top",
+    "bottom": "enderite:block/engineering_table_bottom",
+    "side": "enderite:block/engineering_table_side",
+    "front": "enderite:block/engineering_table_front"
+  }
+}

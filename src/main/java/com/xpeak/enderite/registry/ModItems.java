@@ -58,6 +58,25 @@ public final class ModItems {
     public static final RegistryObject<Item> ENDERITE_BRICK_STAIRS = block(ModBlocks.ENDERITE_BRICK_STAIRS, false);
     public static final RegistryObject<Item> ENDERITE_BRICK_SLAB = block(ModBlocks.ENDERITE_BRICK_SLAB, false);
 
+    // Armadura robot
+    public static final RegistryObject<Item> ROBOT_TORSO_BLUE = ITEMS.register("robot_torso_blue",
+            () -> new com.xpeak.enderite.robot.RobotTorsoItem(com.xpeak.enderite.robot.RobotCore.BLUE, new Item.Properties()));
+    public static final RegistryObject<Item> ROBOT_TORSO_RED = ITEMS.register("robot_torso_red",
+            () -> new com.xpeak.enderite.robot.RobotTorsoItem(com.xpeak.enderite.robot.RobotCore.RED, new Item.Properties()));
+    public static final RegistryObject<Item> ROBOT_TORSO_GREEN = ITEMS.register("robot_torso_green",
+            () -> new com.xpeak.enderite.robot.RobotTorsoItem(com.xpeak.enderite.robot.RobotCore.GREEN, new Item.Properties()));
+    public static final RegistryObject<Item> ROBOT_ARM_CHAINSAW = ITEMS.register("robot_arm_chainsaw",
+            () -> new com.xpeak.enderite.robot.RobotArmItem(com.xpeak.enderite.robot.RobotArmType.CHAINSAW, new Item.Properties()));
+    public static final RegistryObject<Item> ROBOT_ARM_ROCKET = ITEMS.register("robot_arm_rocket",
+            () -> new com.xpeak.enderite.robot.RobotArmItem(com.xpeak.enderite.robot.RobotArmType.ROCKET, new Item.Properties()));
+    public static final RegistryObject<Item> ENGINEERING_TABLE = block(ModBlocks.ENGINEERING_TABLE, false);
+
+    // Utilidades
+    public static final RegistryObject<Item> QUICKSAND = block(ModBlocks.QUICKSAND, false);
+    public static final RegistryObject<Item> MAGNET = block(ModBlocks.MAGNET, false);
+    public static final RegistryObject<Item> PORTABLE_MAGNET = ITEMS.register("portable_magnet",
+            () -> new com.xpeak.enderite.magnet.PortableMagnetItem(new Item.Properties().stacksTo(1)));
+
     // Huevo del Crawler
     public static final RegistryObject<Item> CRAWLER_SPAWN_EGG = ITEMS.register("crawler_spawn_egg",
             () -> new ForgeSpawnEggItem(ModEntities.CRAWLER, 0x0B0B0D, 0x8A0B0B, new Item.Properties()));

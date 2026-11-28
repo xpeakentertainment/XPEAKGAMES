@@ -23,6 +23,8 @@ public class EnderiteMod {
         ModBlocks.BLOCKS.register(bus);
         ModItems.ITEMS.register(bus);
         ModEntities.ENTITIES.register(bus);
+        ModBlockEntities.BLOCK_ENTITIES.register(bus);
+        ModMenus.MENUS.register(bus);
         ModSounds.SOUNDS.register(bus);
         ModCreativeTabs.TABS.register(bus);
         ModLootModifiers.SERIALIZERS.register(bus);

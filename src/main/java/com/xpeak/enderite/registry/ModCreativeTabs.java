@@ -36,6 +36,19 @@ public final class ModCreativeTabs {
                 out.accept(ModItems.ENDERITE_LEGGINGS.get());
                 out.accept(ModItems.ENDERITE_BOOTS.get());
                 out.accept(ModItems.CRAWLER_SPAWN_EGG.get());
+                out.accept(ModItems.ENGINEERING_TABLE.get());
+                out.accept(ModItems.ROBOT_TORSO_BLUE.get());
+                out.accept(ModItems.ROBOT_TORSO_RED.get());
+                out.accept(ModItems.ROBOT_TORSO_GREEN.get());
+                out.accept(ModItems.ROBOT_ARM_CHAINSAW.get());
+                ItemStack loaded = new ItemStack(ModItems.ROBOT_ARM_ROCKET.get());
+                out.accept(loaded);
+                ItemStack full = new ItemStack(ModItems.ROBOT_ARM_ROCKET.get());
+                com.xpeak.enderite.robot.RobotHelper.setAmmo(full, com.xpeak.enderite.robot.RobotHelper.MAX_AMMO);
+                out.accept(full);
+                out.accept(ModItems.QUICKSAND.get());
+                out.accept(ModItems.MAGNET.get());
+                out.accept(ModItems.PORTABLE_MAGNET.get());
             })
             .build());
 

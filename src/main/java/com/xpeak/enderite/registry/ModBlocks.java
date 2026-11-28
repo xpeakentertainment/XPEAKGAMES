@@ -40,5 +40,18 @@ public final class ModBlocks {
     public static final RegistryObject<Block> ENDERITE_BRICK_SLAB = BLOCKS.register("enderite_brick_slab", () -> new SlabBlock(
             BlockBehaviour.Properties.copy(ENDERITE_BRICKS.get())));
 
+    /** Arenas movedizas: un poquito mas oscuras que la arena normal (se tinen en el cliente). */
+    public static final RegistryObject<Block> QUICKSAND = BLOCKS.register("quicksand", () -> new com.xpeak.enderite.block.QuicksandBlock(
+            BlockBehaviour.Properties.of().mapColor(MapColor.SAND).strength(0.6F).sound(SoundType.SAND)
+                    .forceSolidOn().isSuffocating((s, l, p) -> false).isViewBlocking((s, l, p) -> true)));
+
+    public static final RegistryObject<Block> MAGNET = BLOCKS.register("magnet", () -> new com.xpeak.enderite.magnet.MagnetBlock(
+            BlockBehaviour.Properties.of().mapColor(MapColor.METAL).requiresCorrectToolForDrops().strength(4.0F, 6.0F)
+                    .sound(SoundType.METAL).lightLevel(s -> s.getValue(com.xpeak.enderite.magnet.MagnetBlock.POWERED) ? 7 : 0)));
+
+    public static final RegistryObject<Block> ENGINEERING_TABLE = BLOCKS.register("engineering_table", () -> new com.xpeak.enderite.robot.EngineeringTableBlock(
+            BlockBehaviour.Properties.of().mapColor(MapColor.METAL).requiresCorrectToolForDrops().strength(3.5F, 6.0F)
+                    .sound(SoundType.METAL).noOcclusion()));
+
     private ModBlocks() {}
 }

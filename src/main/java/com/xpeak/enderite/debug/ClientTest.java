@@ -65,6 +65,7 @@ public final class ClientTest {
     private static int step;
     private static BlockPos base;
     private static BlockPos bed;
+    private static double quickY, hangY;
 
     private static void check(String name, boolean ok, String detail) {
         if (ok) passed++;
@@ -540,6 +541,211 @@ public final class ClientTest {
             case 32 -> {
                 if (!after(40)) return;
                 shot("16_tras_morir");
+                // ---------------- Armadura robot
+                server(sp -> {
+                    ServerLevel ow = sp.serverLevel();
+                    ow.setDayTime(6000);
+                    ow.getGameRules().getRule(GameRules.RULE_DAYLIGHT).set(false, sp.server);
+                    ItemStack torso = new ItemStack(ModItems.ROBOT_TORSO_BLUE.get());
+                    com.xpeak.enderite.robot.RobotHelper.setArm(torso, net.minecraft.world.entity.HumanoidArm.LEFT, new ItemStack(ModItems.ROBOT_ARM_CHAINSAW.get()));
+                    ItemStack rocket = new ItemStack(ModItems.ROBOT_ARM_ROCKET.get());
+                    com.xpeak.enderite.robot.RobotHelper.setAmmo(rocket, 30);
+                    com.xpeak.enderite.robot.RobotHelper.setArm(torso, net.minecraft.world.entity.HumanoidArm.RIGHT, rocket);
+                    sp.setItemSlot(EquipmentSlot.CHEST, torso);
+                    sp.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.DIAMOND_SWORD));
+                    sp.connection.teleport(base.getX() + 0.5, base.getY(), base.getZ() - 4.5, 0.0F, 5.0F);
+                    for (Entity e : ow.getAllEntities()) if (e instanceof net.minecraft.world.entity.monster.Zombie) e.discard();
+                    var z = net.minecraft.world.entity.EntityType.ZOMBIE.create(ow);
+                    z.moveTo(base.getX() + 0.5, base.getY(), base.getZ() - 2.6, 180.0F, 0.0F);
+                    z.setNoAi(true);
+                    ow.addFreshEntity(z);
+                });
+                next();
+            }
+            case 33 -> {
+                if (!after(40)) return;
+                check("robot: la hotbar se sustituye por los brazos", com.xpeak.enderite.robot.RobotHelper.hasArms(mc.player), "");
+                check("robot azul: mas velocidad", mc.player.getAttributeValue(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED) > 0.14D,
+                        String.format("%.3f", mc.player.getAttributeValue(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED)));
+                shot("17_robot_primera_persona");
+                mc.options.setCameraType(CameraType.THIRD_PERSON_FRONT);
+                next();
+            }
+            case 34 -> {
+                if (!after(30)) return;
+                shot("18_robot_tercera_persona");
+                mc.options.setCameraType(CameraType.FIRST_PERSON);
+                mc.options.keyAttack.setDown(true);
+                next();
+            }
+            case 35 -> {
+                if (!after(25)) return;
+                shot("19_motosierra");
+                next();
+            }
+            case 36 -> {
+                if (!after(15)) return;
+                mc.options.keyAttack.setDown(false);
+                server(sp -> {
+                    float hp = 20.0F;
+                    boolean found = false;
+                    for (Entity e : sp.serverLevel().getAllEntities())
+                        if (e instanceof net.minecraft.world.entity.monster.Zombie zz) { hp = zz.isAlive() ? zz.getHealth() : 0; found = true; }
+                    check("motosierra (clic izquierdo de verdad): hace dano", !found || hp < 14.0F, String.format("vida=%.1f", hp));
+                    // un objeto en la mano no se debe haber usado (la espada no ataca)
+                    check("con brazos no usas la espada de la hotbar", sp.getMainHandItem().getDamageValue() == 0, "");
+                });
+                mc.player.setXRot(-2.0F);
+                mc.options.keyUse.setDown(true);
+                next();
+            }
+            case 37 -> {
+                if (!after(3)) return;
+                mc.options.keyUse.setDown(false);
+                next();
+            }
+            case 38 -> {
+                if (!after(4)) return;
+                shot("20_cohetes");
+                server(sp -> {
+                    ItemStack arm = com.xpeak.enderite.robot.RobotHelper.getArm(com.xpeak.enderite.robot.RobotHelper.getTorso(sp), net.minecraft.world.entity.HumanoidArm.RIGHT);
+                    check("lanzacohetes (clic derecho de verdad): dispara 3", com.xpeak.enderite.robot.RobotHelper.getAmmo(arm) == 27,
+                            "municion=" + com.xpeak.enderite.robot.RobotHelper.getAmmo(arm));
+                });
+                mc.setScreen(new InventoryScreen(mc.player));
+                next();
+            }
+            case 39 -> {
+                if (!after(25)) return;
+                shot("21_inventario_robot");
+                mc.setScreen(null);
+                mc.options.setCameraType(CameraType.FIRST_PERSON);
+                server(sp -> {
+                    sp.setItemSlot(EquipmentSlot.CHEST, ItemStack.EMPTY);
+                    ServerLevel ow = sp.serverLevel();
+                    ow.setBlock(base.offset(2, 0, -6), ModBlocks.ENGINEERING_TABLE.get().defaultBlockState(), 3);
+                    if (ow.getBlockEntity(base.offset(2, 0, -6)) instanceof com.xpeak.enderite.robot.EngineeringTableBlockEntity be) {
+                        ItemStack t = new ItemStack(ModItems.ROBOT_TORSO_RED.get());
+                        com.xpeak.enderite.robot.RobotHelper.setArm(t, net.minecraft.world.entity.HumanoidArm.LEFT, new ItemStack(ModItems.ROBOT_ARM_ROCKET.get()));
+                        t.setDamageValue(200);
+                        be.getContainer().setItem(0, t);
+                        be.getContainer().setItem(1, new ItemStack(Items.FIREWORK_ROCKET, 5));
+                    }
+                    sp.getInventory().add(new ItemStack(Items.IRON_INGOT, 20));
+                    sp.getInventory().add(new ItemStack(Items.REDSTONE, 10));
+                    sp.connection.teleport(base.getX() + 2.5, base.getY(), base.getZ() - 3.5, 180.0F, 30.0F);
+                });
+                next();
+            }
+            case 40 -> {
+                if (!after(20)) return;
+                BlockPos table = base.offset(2, 0, -6);
+                mc.gameMode.useItemOn(mc.player, InteractionHand.MAIN_HAND,
+                        new BlockHitResult(Vec3.atCenterOf(table).add(0, 0.5, 0), Direction.UP, table, false));
+                next();
+            }
+            case 41 -> {
+                if (!after(30)) return;
+                check("la Mesa de ingenieria se abre", mc.screen instanceof com.xpeak.enderite.client.EngineeringTableScreen,
+                        mc.screen == null ? "ninguna" : mc.screen.getClass().getSimpleName());
+                shot("22_mesa_ingenieria");
+                mc.setScreen(null);
+                // ---------------- Arenas movedizas
+                server(sp -> {
+                    ServerLevel ow = sp.serverLevel();
+                    BlockPos q = base.offset(-3, 0, 6);
+                    for (int dx = -1; dx <= 1; dx++) for (int dz = -1; dz <= 1; dz++) {
+                        ow.setBlock(q.offset(dx, -1, dz), ModBlocks.QUICKSAND.get().defaultBlockState(), 3);
+                        ow.setBlock(q.offset(dx, -2, dz), ModBlocks.QUICKSAND.get().defaultBlockState(), 3);
+                        ow.setBlock(q.offset(dx, -3, dz), Blocks.STONE.defaultBlockState(), 3);
+                    }
+                    for (int dx = -2; dx <= 2; dx++) ow.setBlock(q.offset(dx, -1, 2), Blocks.SAND.defaultBlockState(), 3);
+                    sp.connection.teleport(q.getX() + 0.5, q.getY() + 0.2, q.getZ() + 0.5, 180.0F, 20.0F);
+                });
+                next();
+            }
+            case 42 -> {
+                if (!after(50)) return;
+                double sink = base.getY() - mc.player.getY();
+                check("arenas movedizas: te hundes", sink > 0.4D, String.format("hundido=%.2f", sink));
+                shot("23_arenas_movedizas");
+                mc.options.setCameraType(CameraType.THIRD_PERSON_BACK);
+                next();
+            }
+            case 43 -> {
+                if (!after(15)) return;
+                shot("24_arenas_movedizas_fuera");
+                mc.options.setCameraType(CameraType.FIRST_PERSON);
+                quickY = mc.player.getY();
+                mc.options.keyJump.setDown(true);
+                next();
+            }
+            case 44 -> {
+                if (!after(40)) return;
+                mc.options.keyJump.setDown(false);
+                check("arenas movedizas: manteniendo saltar sales", mc.player.getY() > quickY + 0.4D,
+                        String.format("y %.2f -> %.2f", quickY, mc.player.getY()));
+                // ---------------- Iman
+                server(sp -> {
+                    ServerLevel ow = sp.serverLevel();
+                    BlockPos m = base.offset(6, 0, 0);
+                    ow.setBlock(m, ModBlocks.MAGNET.get().defaultBlockState(), 3);
+                    ow.setBlock(m.below(), Blocks.REDSTONE_BLOCK.defaultBlockState(), 3);
+                    Item[] drops = {Items.DIAMOND, Items.GOLD_INGOT, Items.EMERALD, Items.IRON_INGOT, Items.APPLE};
+                    for (int i = 0; i < drops.length; i++) {
+                        var it = new net.minecraft.world.entity.item.ItemEntity(ow, m.getX() + 0.5 - 5 + i * 1.8, m.getY() + 0.2, m.getZ() + 7.5,
+                                new ItemStack(drops[i]));
+                        it.setPickUpDelay(400);
+                        ow.addFreshEntity(it);
+                    }
+                    sp.connection.teleport(m.getX() + 0.5, m.getY(), m.getZ() + 12.5, 180.0F, 20.0F);
+                });
+                next();
+            }
+            case 45 -> {
+                if (!after(18)) return;
+                shot("25_iman_atrayendo");
+                next();
+            }
+            case 46 -> {
+                if (!after(50)) return;
+                shot("26_iman");
+                server(sp -> {
+                    BlockPos m = base.offset(6, 0, 0);
+                    int near = 0;
+                    for (Entity e : sp.serverLevel().getAllEntities())
+                        if (e instanceof net.minecraft.world.entity.item.ItemEntity ie && ie.position().distanceTo(Vec3.atCenterOf(m)) < 2.5D) near++;
+                    check("iman: los objetos llegan al iman", near >= 4, near + "/5");
+                    sp.serverLevel().setBlock(m.below(), Blocks.STONE.defaultBlockState(), 3);
+                    // ---------------- Salto desde la pared con la TECLA de saltar
+                    sp.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.IRON_SWORD));
+                    sp.teleportTo(base.getX() - 4.69, base.getY() + 1.6, base.getZ() + 0.5);
+                    sp.setOnGround(false);
+                    WallCling.Spot spot = WallCling.findSpot(sp, Direction.EAST, base.offset(-6, 3, 0));
+                    if (spot != null) WallCling.doCling(sp, InteractionHand.MAIN_HAND, spot);
+                });
+                next();
+            }
+            case 47 -> {
+                if (!after(20)) return;
+                check("agarre: colgado otra vez", mc.player.getVehicle() instanceof StuckToolEntity, "" + mc.player.getVehicle());
+                hangY = mc.player.getY();
+                mc.options.keyJump.setDown(true);
+                next();
+            }
+            case 48 -> {
+                if (!after(3)) return;
+                mc.options.keyJump.setDown(false);
+                next();
+            }
+            case 49 -> {
+                if (!after(5)) return;
+                check("agarre: SALTAS pulsando la tecla de saltar", mc.player.getVehicle() == null && mc.player.getY() > hangY + 0.5D,
+                        String.format("vehiculo=%s y %.2f -> %.2f", mc.player.getVehicle(), hangY, mc.player.getY()));
+                next();
+            }
+            case 50 -> {
+                if (!after(30)) return;
                 finish(mc);
             }
             default -> {

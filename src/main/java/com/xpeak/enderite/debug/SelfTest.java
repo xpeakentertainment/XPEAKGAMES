@@ -95,8 +95,16 @@ public final class SelfTest {
             if (tick == 60) nightmareCheck();
             if (tick == 70) clingCheck();
             if (tick == 80) startDigCheck();
+            if (tick == 84) quicksandCheck();
+            if (tick == 86) robotCheck();
+            if (tick == 88) startMagnetCheck();
+            if (tick == 88 + 140) endMagnetCheck();
+            if (tick == 90) startRocketCheck();
+            if (tick == 90 + 60) endRocketCheck();
+            if (portableTicks > 0) tickPortable();
             if (tick == 80 + 700) endDigCheck();
-            if (tick == 80 + 720) finish();
+            if (tick == 80 + 720 && portableTicks <= 0) finish();
+            if (tick > 80 + 720 && portableTicks <= 0 && tick < 80 + 900) finish();
         } catch (Throwable t) {
             check("excepcion en tick " + tick, false, t.toString());
             EnderiteMod.LOGGER.error("[SELFTEST] error", t);
@@ -341,6 +349,254 @@ public final class SelfTest {
         check("crawler rompe la puerta o los muros", doorGone || wallNow < wallBlocksBefore - 1,
                 "puerta rota=" + doorGone + ", cobble " + wallBlocksBefore + " -> " + wallNow);
         digCrawler.discard();
+    }
+
+
+    // ------------------------------------------------------------------ arenas movedizas
+    private static void quicksandCheck() {
+        ServerLevel ow = server.overworld();
+        ow.setWeatherParameters(0, 6000, true, false);
+        ow.setRainLevel(1.0F);
+        BlockPos spot = null;
+        for (int i = 0; i < 64 && spot == null; i++) {
+            int x = 600 + (i % 8) * 48, z = 600 + (i / 8) * 48;
+            ow.getChunk(x >> 4, z >> 4);
+            BlockPos top = ow.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, new BlockPos(x, 0, z));
+            if (ow.getBiome(top).value().getPrecipitationAt(top) == net.minecraft.world.level.biome.Biome.Precipitation.RAIN) spot = top;
+        }
+        check("arenas: zona con lluvia", spot != null, String.valueOf(spot));
+        if (spot == null) return;
+        ow.setChunkForced(spot.getX() >> 4, spot.getZ() >> 4, true);
+        net.minecraft.util.RandomSource rnd = net.minecraft.util.RandomSource.create(42L);
+        int ok = 0, trials = 500;
+        for (int i = 0; i < trials; i++) {
+            ow.setBlock(spot, Blocks.SAND.defaultBlockState(), 3);
+            if (com.xpeak.enderite.block.QuicksandWeather.tryConvert(ow, spot, rnd)) ok++;
+        }
+        check("arenas: la lluvia convierte la arena un ~10%", ok > trials * 0.06 && ok < trials * 0.14, ok + "/" + trials);
+        ow.setBlock(spot, Blocks.SAND.defaultBlockState(), 3);
+        ow.setBlock(spot.above(2), Blocks.STONE.defaultBlockState(), 3);
+        boolean covered = !com.xpeak.enderite.block.QuicksandWeather.tryConvert(ow, spot, net.minecraft.util.RandomSource.create(1L))
+                && ow.getBlockState(spot).is(Blocks.SAND);
+        check("arenas: sin lluvia encima no cambia", covered, "");
+        ow.setBlock(spot.above(2), Blocks.AIR.defaultBlockState(), 3);
+        BlockState qs = com.xpeak.enderite.registry.ModBlocks.QUICKSAND.get().defaultBlockState();
+        ItemStack silkShovel = new ItemStack(Items.IRON_SHOVEL);
+        silkShovel.enchant(net.minecraft.world.item.enchantment.Enchantments.SILK_TOUCH, 1);
+        ItemStack silkPick = new ItemStack(Items.IRON_PICKAXE);
+        silkPick.enchant(net.minecraft.world.item.enchantment.Enchantments.SILK_TOUCH, 1);
+        var d1 = net.minecraft.world.level.block.Block.getDrops(qs, ow, spot, null, null, silkShovel);
+        var d2 = net.minecraft.world.level.block.Block.getDrops(qs, ow, spot, null, null, silkPick);
+        var d3 = net.minecraft.world.level.block.Block.getDrops(qs, ow, spot, null, null, new ItemStack(Items.IRON_SHOVEL));
+        check("arenas: pala con toque de seda la recoge", !d1.isEmpty() && d1.get(0).is(com.xpeak.enderite.registry.ModItems.QUICKSAND.get()), d1.toString());
+        check("arenas: pico con toque de seda la recoge", !d2.isEmpty() && d2.get(0).is(com.xpeak.enderite.registry.ModItems.QUICKSAND.get()), d2.toString());
+        check("arenas: sin toque de seda da arena normal", !d3.isEmpty() && d3.get(0).is(Items.SAND), d3.toString());
+        ow.setWeatherParameters(6000, 0, false, false);
+        ow.setRainLevel(0.0F);
+    }
+
+    // ------------------------------------------------------------------ robot
+    private static FakePlayer robotPlayer;
+
+    private static void robotCheck() {
+        ServerLevel ow = server.overworld();
+        ItemStack blue = new ItemStack(com.xpeak.enderite.registry.ModItems.ROBOT_TORSO_BLUE.get());
+        ItemStack red = new ItemStack(com.xpeak.enderite.registry.ModItems.ROBOT_TORSO_RED.get());
+        ItemStack green = new ItemStack(com.xpeak.enderite.registry.ModItems.ROBOT_TORSO_GREEN.get());
+        var chest = net.minecraft.world.entity.EquipmentSlot.CHEST;
+        check("robot azul: +50% velocidad", blue.getAttributeModifiers(chest).get(Attributes.MOVEMENT_SPEED).stream().anyMatch(m -> m.getAmount() == 0.5D), "");
+        check("robot rojo: +50% dano", red.getAttributeModifiers(chest).get(Attributes.ATTACK_DAMAGE).stream().anyMatch(m -> m.getAmount() == 0.5D), "");
+        check("robot verde: x2 vida", green.getAttributeModifiers(chest).get(Attributes.MAX_HEALTH).stream().anyMatch(m -> m.getAmount() == 1.0D), "");
+
+        robotPlayer = FakePlayerFactory.get(ow, new GameProfile(UUID.fromString("00000000-0000-0000-0000-0000000000b0"), "[EnderiteRobot]"));
+        ItemStack t = blue.copy();
+        t.hurtAndBreak(100000, robotPlayer, p -> {});
+        check("robot: nunca se rompe del todo (se averia)", !t.isEmpty() && com.xpeak.enderite.robot.RobotHelper.isBroken(t), "dano=" + t.getDamageValue());
+        check("robot averiado: sin bonus", t.getAttributeModifiers(chest).get(Attributes.MOVEMENT_SPEED).isEmpty(), "");
+
+        // Fabricar en la mesa
+        robotPlayer.getInventory().clearContent();
+        robotPlayer.getInventory().add(new ItemStack(Items.IRON_INGOT, 16));
+        robotPlayer.getInventory().add(new ItemStack(Items.REDSTONE, 9));
+        robotPlayer.getInventory().add(new ItemStack(Items.DIAMOND, 1));
+        robotPlayer.getInventory().add(new ItemStack(Items.LAPIS_LAZULI, 8));
+        robotPlayer.getInventory().add(new ItemStack(Items.IRON_AXE, 1));
+        var container = new net.minecraft.world.SimpleContainer(3);
+        var menu = new com.xpeak.enderite.robot.EngineeringTableMenu(1, robotPlayer.getInventory(), container,
+                net.minecraft.world.inventory.ContainerLevelAccess.NULL);
+        boolean built = menu.clickMenuButton(robotPlayer, 0);
+        boolean has = com.xpeak.enderite.robot.EngineeringRecipes.count(robotPlayer.getInventory(), com.xpeak.enderite.registry.ModItems.ROBOT_TORSO_BLUE.get()) == 1;
+        check("mesa: fabrica el torso azul", built && has, "iron left=" + com.xpeak.enderite.robot.EngineeringRecipes.count(robotPlayer.getInventory(), Items.IRON_INGOT));
+        boolean noMore = !menu.clickMenuButton(robotPlayer, 1);
+        check("mesa: sin materiales no fabrica", noMore, "");
+        boolean saw = menu.clickMenuButton(robotPlayer, 3);
+        check("mesa: fabrica el brazo motosierra", saw, "");
+        // montar brazos en la mesa
+        container.setItem(0, new ItemStack(com.xpeak.enderite.registry.ModItems.ROBOT_TORSO_BLUE.get()));
+        menu.getSlot(1).set(new ItemStack(com.xpeak.enderite.registry.ModItems.ROBOT_ARM_CHAINSAW.get()));
+        menu.getSlot(2).set(new ItemStack(com.xpeak.enderite.registry.ModItems.ROBOT_ARM_ROCKET.get()));
+        ItemStack assembled = container.getItem(0);
+        check("mesa: los brazos se montan en el torso",
+                com.xpeak.enderite.robot.RobotHelper.getArm(assembled, net.minecraft.world.entity.HumanoidArm.LEFT).is(com.xpeak.enderite.registry.ModItems.ROBOT_ARM_CHAINSAW.get())
+                        && com.xpeak.enderite.robot.RobotHelper.getArm(assembled, net.minecraft.world.entity.HumanoidArm.RIGHT).is(com.xpeak.enderite.registry.ModItems.ROBOT_ARM_ROCKET.get()), "");
+
+        // municion y reparacion en el bloque real
+        BlockPos tablePos = new BlockPos(500, ow.getHeight(Heightmap.Types.MOTION_BLOCKING, 500, 500), 500);
+        ow.setChunkForced(500 >> 4, 500 >> 4, true);
+        ow.setBlock(tablePos, com.xpeak.enderite.registry.ModBlocks.ENGINEERING_TABLE.get().defaultBlockState(), 3);
+        var be = (com.xpeak.enderite.robot.EngineeringTableBlockEntity) ow.getBlockEntity(tablePos);
+        ItemStack robot = assembled.copy();
+        robot.setDamageValue(300);
+        be.getContainer().setItem(0, robot);
+        be.getContainer().setItem(1, new ItemStack(Items.FIREWORK_ROCKET, 10));
+        be.getContainer().setItem(2, new ItemStack(Items.IRON_INGOT, 1));
+        be.process();
+        ItemStack after = be.getContainer().getItem(0);
+        int ammo = com.xpeak.enderite.robot.RobotHelper.getAmmo(com.xpeak.enderite.robot.RobotHelper.getArm(after, net.minecraft.world.entity.HumanoidArm.RIGHT));
+        check("mesa: carga cohetes como municion", ammo == 10 && be.getContainer().getItem(1).isEmpty(), "municion=" + ammo);
+        check("mesa: repara con hierro", after.getDamageValue() == 300 - after.getMaxDamage() / 4 && be.getContainer().getItem(2).isEmpty(), "dano=" + after.getDamageValue());
+
+        // agua
+        ItemStack worn = after.copy();
+        worn.setDamageValue(0);
+        robotPlayer.setItemSlot(chest, worn);
+        BlockPos wpos = tablePos.offset(3, 0, 0);
+        ow.setBlock(wpos, Blocks.WATER.defaultBlockState(), 3);
+        ow.setBlock(wpos.above(), Blocks.WATER.defaultBlockState(), 3);
+        robotPlayer.moveTo(wpos.getX() + 0.5D, wpos.getY(), wpos.getZ() + 0.5D, 0, 0);
+        robotPlayer.baseTick();
+        robotPlayer.tickCount = 20;
+        com.xpeak.enderite.robot.RobotServer.tick(robotPlayer);
+        check("robot: el agua lo estropea", robotPlayer.getItemBySlot(chest).getDamageValue() > 0,
+                "en agua=" + robotPlayer.isInWaterOrBubble() + " dano=" + robotPlayer.getItemBySlot(chest).getDamageValue());
+        ow.setBlock(wpos, Blocks.AIR.defaultBlockState(), 3);
+        ow.setBlock(wpos.above(), Blocks.AIR.defaultBlockState(), 3);
+        robotPlayer.baseTick();
+
+        // reglas: con brazos no se usa la hotbar, con torso no se usa la mano secundaria
+        check("robot: con brazos la hotbar no se usa", com.xpeak.enderite.robot.RobotHelper.hasArms(robotPlayer), "");
+
+        // motosierra
+        robotPlayer.getItemBySlot(chest).setDamageValue(0);
+        robotPlayer.moveTo(tablePos.getX() + 0.5D, tablePos.getY() + 1.0D, tablePos.getZ() - 3.5D, 0.0F, 0.0F); // mirando al sur
+        Zombie dummy = EntityType.ZOMBIE.create(ow);
+        dummy.moveTo(robotPlayer.getX(), robotPlayer.getY(), robotPlayer.getZ() + 1.8D, 180.0F, 0);
+        dummy.setNoAi(true);
+        ow.addFreshEntity(dummy);
+        float before = dummy.getHealth();
+        com.xpeak.enderite.robot.RobotServer.setInput(robotPlayer, true, false);
+        for (int i = 0; i < 12; i++) {
+            robotPlayer.tickCount = 100 + i;
+            com.xpeak.enderite.robot.RobotServer.tick(robotPlayer);
+        }
+        com.xpeak.enderite.robot.RobotServer.setInput(robotPlayer, false, false);
+        com.xpeak.enderite.robot.RobotServer.tick(robotPlayer);
+        check("motosierra: hace dano constante", dummy.getHealth() < before - 6.0F || !dummy.isAlive(),
+                String.format("vida %.1f -> %.1f", before, dummy.getHealth()));
+        dummy.discard();
+    }
+
+    // ------------------------------------------------------------------ cohetes
+    private static Zombie rocketTarget;
+    private static float rocketTargetHealth;
+
+    private static void startRocketCheck() {
+        ServerLevel ow = server.overworld();
+        ItemStack torso = robotPlayer.getItemBySlot(net.minecraft.world.entity.EquipmentSlot.CHEST);
+        ItemStack arm = com.xpeak.enderite.robot.RobotHelper.getArm(torso, net.minecraft.world.entity.HumanoidArm.RIGHT);
+        com.xpeak.enderite.robot.RobotHelper.setAmmo(arm, 9);
+        com.xpeak.enderite.robot.RobotHelper.setArm(torso, net.minecraft.world.entity.HumanoidArm.RIGHT, arm);
+        BlockPos base = robotPlayer.blockPosition();
+        for (int dz = 1; dz < 14; dz++) for (int dy = 0; dy < 4; dy++) for (int dx = -2; dx <= 2; dx++)
+            ow.setBlock(base.offset(dx, dy, dz), Blocks.AIR.defaultBlockState(), 3);
+        rocketTarget = EntityType.ZOMBIE.create(ow);
+        rocketTarget.moveTo(robotPlayer.getX() + 0.3D, robotPlayer.getY(), robotPlayer.getZ() + 9.0D, 180.0F, 0);
+        rocketTarget.setNoAi(true);
+        rocketTarget.setPersistenceRequired();
+        ow.addFreshEntity(rocketTarget);
+        rocketTargetHealth = rocketTarget.getHealth();
+        robotPlayer.setXRot(8.0F);
+        com.xpeak.enderite.robot.RobotServer.setInput(robotPlayer, false, true);
+        robotPlayer.tickCount = 200;
+        com.xpeak.enderite.robot.RobotServer.tick(robotPlayer);
+        com.xpeak.enderite.robot.RobotServer.setInput(robotPlayer, false, false);
+        robotPlayer.tickCount = 201;
+        com.xpeak.enderite.robot.RobotServer.tick(robotPlayer);
+        int rockets = 0;
+        for (var e : ow.getAllEntities()) if (e instanceof com.xpeak.enderite.robot.RobotRocketEntity) rockets++;
+        ItemStack armAfter = com.xpeak.enderite.robot.RobotHelper.getArm(torso, net.minecraft.world.entity.HumanoidArm.RIGHT);
+        check("lanzacohetes: dispara 3 cohetes", rockets == 3, rockets + " cohetes");
+        check("lanzacohetes: gasta 3 de municion", com.xpeak.enderite.robot.RobotHelper.getAmmo(armAfter) == 6,
+                "municion=" + com.xpeak.enderite.robot.RobotHelper.getAmmo(armAfter));
+    }
+
+    private static void endRocketCheck() {
+        float hp = rocketTarget.isAlive() ? rocketTarget.getHealth() : 0.0F;
+        check("cohetes: mucho mas dano que un cohete normal", rocketTargetHealth - hp >= 12.0F,
+                String.format("vida %.1f -> %.1f", rocketTargetHealth, hp));
+        rocketTarget.discard();
+    }
+
+    // ------------------------------------------------------------------ imanes
+    private static net.minecraft.world.entity.item.ItemEntity itemFree, itemWalled, itemPortable;
+    private static BlockPos magnetPos;
+    private static FakePlayer magnetHolder;
+    private static ItemStack magnetStack;
+
+    private static void startMagnetCheck() {
+        ServerLevel ow = server.overworld();
+        int bx = 700, bz = 700;
+        for (int cx = (bx - 32) >> 4; cx <= (bx + 32) >> 4; cx++) for (int cz = (bz - 32) >> 4; cz <= (bz + 32) >> 4; cz++) ow.setChunkForced(cx, cz, true);
+        int y = ow.getHeight(Heightmap.Types.MOTION_BLOCKING, bx, bz) + 1;
+        for (int dx = -26; dx <= 26; dx++) for (int dz = -3; dz <= 3; dz++) {
+            ow.setBlock(new BlockPos(bx + dx, y - 1, bz + dz), Blocks.STONE.defaultBlockState(), 3);
+            for (int dy = 0; dy < 5; dy++) ow.setBlock(new BlockPos(bx + dx, y + dy, bz + dz), Blocks.AIR.defaultBlockState(), 3);
+        }
+        magnetPos = new BlockPos(bx, y, bz);
+        ow.setBlock(magnetPos, com.xpeak.enderite.registry.ModBlocks.MAGNET.get().defaultBlockState(), 3);
+        ow.setBlock(magnetPos.below(), Blocks.REDSTONE_BLOCK.defaultBlockState(), 3);
+        // pared que tapa el lado oeste
+        for (int dz = -3; dz <= 3; dz++) for (int dy = 0; dy < 5; dy++) ow.setBlock(new BlockPos(bx - 8, y + dy, bz + dz), Blocks.STONE.defaultBlockState(), 3);
+        itemFree = new net.minecraft.world.entity.item.ItemEntity(ow, bx + 20.5D, y + 0.1D, bz + 0.5D, new ItemStack(Items.DIAMOND));
+        itemWalled = new net.minecraft.world.entity.item.ItemEntity(ow, bx - 15.5D, y + 0.1D, bz + 0.5D, new ItemStack(Items.EMERALD));
+        itemFree.setDeltaMovement(0, 0, 0);
+        itemWalled.setDeltaMovement(0, 0, 0);
+        ow.addFreshEntity(itemFree);
+        ow.addFreshEntity(itemWalled);
+        check("iman: se enciende con redstone", ow.getBlockState(magnetPos).getValue(com.xpeak.enderite.magnet.MagnetBlock.POWERED), "");
+    }
+
+    private static void endMagnetCheck() {
+        Vec3 c = Vec3.atCenterOf(magnetPos);
+        double dFree = itemFree.position().distanceTo(c), dWall = itemWalled.position().distanceTo(c);
+        check("iman: atrae objetos a 20 bloques", dFree < 3.0D, String.format("distancia=%.1f", dFree));
+        check("iman: no atrae a traves de paredes", dWall > 14.0D, String.format("distancia=%.1f", dWall));
+        // iman portatil
+        ServerLevel ow = server.overworld();
+        magnetHolder = FakePlayerFactory.get(ow, new GameProfile(UUID.fromString("00000000-0000-0000-0000-0000000000a1"), "[EnderiteIman]"));
+        magnetHolder.getInventory().clearContent();
+        magnetStack = new ItemStack(com.xpeak.enderite.registry.ModItems.PORTABLE_MAGNET.get());
+        com.xpeak.enderite.magnet.PortableMagnetItem.setActive(magnetStack, true);
+        magnetHolder.getInventory().add(magnetStack);
+        magnetHolder.moveTo(magnetPos.getX() + 14.5D, magnetPos.getY(), magnetPos.getZ() + 0.5D, 0, 0);
+        ow.setBlock(magnetPos.below(), Blocks.STONE.defaultBlockState(), 3); // apagar el bloque
+        itemPortable = new net.minecraft.world.entity.item.ItemEntity(ow, magnetHolder.getX() + 12.0D, magnetHolder.getY() + 0.1D, magnetHolder.getZ(), new ItemStack(Items.GOLD_INGOT));
+        ow.addFreshEntity(itemPortable);
+        portableTicks = 80;
+    }
+
+    private static int portableTicks;
+
+    private static void tickPortable() {
+        ServerLevel ow = server.overworld();
+        magnetHolder.getInventory().getItem(0).inventoryTick(ow, magnetHolder, 0, true);
+        if (--portableTicks == 0) {
+            double dp = itemPortable.position().distanceTo(magnetHolder.position());
+            check("iman portatil: atrae objetos hacia ti", dp < 6.0D || !itemPortable.isAlive(), String.format("distancia=%.1f", dp));
+            itemFree.discard();
+            itemWalled.discard();
+            itemPortable.discard();
+        }
     }
 
     private static void finish() {

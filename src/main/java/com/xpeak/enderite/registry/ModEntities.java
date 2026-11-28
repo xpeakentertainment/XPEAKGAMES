@@ -23,6 +23,11 @@ public final class ModEntities {
                     .sized(0.5F, 0.5F).fireImmune().clientTrackingRange(10).updateInterval(20)
                     .build(EnderiteMod.MODID + ":stuck_tool"));
 
+    public static final RegistryObject<EntityType<com.xpeak.enderite.robot.RobotRocketEntity>> ROBOT_ROCKET = ENTITIES.register("robot_rocket",
+            () -> EntityType.Builder.<com.xpeak.enderite.robot.RobotRocketEntity>of(com.xpeak.enderite.robot.RobotRocketEntity::new, MobCategory.MISC)
+                    .sized(0.3F, 0.3F).clientTrackingRange(8).updateInterval(1)
+                    .build(EnderiteMod.MODID + ":robot_rocket"));
+
     public static void registerAttributes(EntityAttributeCreationEvent event) {
         event.put(CRAWLER.get(), CrawlerEntity.createAttributes().build());
     }

@@ -6,6 +6,9 @@
     "enderite:enderite_bricks",
     "enderite:chiseled_enderite_bricks",
     "enderite:enderite_brick_stairs",
-    "enderite:enderite_brick_slab"
+    "enderite:enderite_brick_slab",
+    "enderite:quicksand",
+    "enderite:magnet",
+    "enderite:engineering_table"
   ]
 }

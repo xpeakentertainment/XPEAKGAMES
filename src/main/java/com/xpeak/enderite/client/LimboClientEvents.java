@@ -31,6 +31,7 @@ public final class LimboClientEvents {
     private static LimboAmbientSound ambient;
     private static int heartbeatCooldown;
     private static boolean jumpWasDown;
+    private static int clingTicks;
 
     @SubscribeEvent
     public static void onClientTick(TickEvent.ClientTickEvent event) {
@@ -89,10 +90,13 @@ public final class LimboClientEvents {
             }
         }
 
-        // Salto extra desde la pared
-        boolean jumpDown = mc.options.keyJump.isDown();
-        if (player.getVehicle() instanceof StuckToolEntity && jumpDown && !jumpWasDown && mc.screen == null) {
-            ModNetwork.sendClingJump();
+        // Salto extra desde la pared (pulsa saltar mientras cuelgas)
+        boolean jumpDown = mc.screen == null && (mc.options.keyJump.isDown() || player.input.jumping);
+        if (player.getVehicle() instanceof StuckToolEntity) {
+            clingTicks++;
+            if (jumpDown && !jumpWasDown && clingTicks > 3) ModNetwork.sendClingJump();
+        } else {
+            clingTicks = 0;
         }
         jumpWasDown = jumpDown;
     }

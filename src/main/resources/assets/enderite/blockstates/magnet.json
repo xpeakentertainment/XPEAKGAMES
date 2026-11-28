@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "enderite:block/magnet"
+    },
+    "powered=true": {
+      "model": "enderite:block/magnet_on"
+    }
+  }
+}

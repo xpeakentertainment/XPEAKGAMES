@@ -43,6 +43,27 @@ public class StuckToolEntity extends Entity {
     private BlockPos attachedPos;
     @Nullable
     private UUID ownerId;
+    private int riddenTicks;
+    private boolean riderJumpLast = true;
+
+    /** Campo protegido LivingEntity.jumping (f_20899_): el servidor lo recibe del cliente mientras vas montado. */
+    private static final java.lang.reflect.Field JUMPING = findJumping();
+
+    private static java.lang.reflect.Field findJumping() {
+        try {
+            return net.minecraftforge.fml.util.ObfuscationReflectionHelper.findField(LivingEntity.class, "f_20899_");
+        } catch (Throwable t) {
+            return null;
+        }
+    }
+
+    private static boolean isJumping(LivingEntity e) {
+        try {
+            return JUMPING != null && JUMPING.getBoolean(e);
+        } catch (Throwable t) {
+            return false;
+        }
+    }
 
     public StuckToolEntity(EntityType<? extends StuckToolEntity> type, Level level) {
         super(type, level);
@@ -87,6 +108,21 @@ public class StuckToolEntity extends Entity {
     @Override
     public void tick() {
         super.tick();
+        // Salto extra: si pulsas saltar mientras cuelgas (el servidor recibe tu tecla de salto)
+        if (!this.level().isClientSide) {
+            Entity rider = this.getFirstPassenger();
+            if (rider instanceof net.minecraft.server.level.ServerPlayer sp) {
+                riddenTicks++;
+                boolean jump = isJumping(sp);
+                if (jump && !riderJumpLast && riddenTicks > 3) {
+                    com.xpeak.enderite.cling.WallCling.wallJump(sp);
+                }
+                riderJumpLast = jump;
+            } else {
+                riddenTicks = 0;
+                riderJumpLast = true;
+            }
+        }
         if (!this.level().isClientSide && this.tickCount % 10 == 0) {
             if (attachedPos == null) attachedPos = BlockPos.containing(this.getX() - getFace().getStepX() * 0.5D,
                     this.getY() + 0.25D, this.getZ() - getFace().getStepZ() * 0.5D);

@@ -48,10 +48,10 @@
     "subtitle": "subtitles.enderite.crawler.step",
     "sounds": [
       {
-        "name": "minecraft:entity.warden.step",
-        "type": "event",
-        "pitch": 1.25,
-        "volume": 0.8
+        "name": "enderite:crawler/step1"
+      },
+      {
+        "name": "enderite:crawler/step2"
       }
     ]
   },
@@ -138,6 +138,127 @@
         "name": "minecraft:item.trident.return",
         "type": "event",
         "pitch": 1.2,
+        "volume": 1.0
+      }
+    ]
+  },
+  "entity.crawler.see": {
+    "subtitle": "subtitles.enderite.crawler.see",
+    "sounds": [
+      {
+        "name": "enderite:crawler/i_see_you",
+        "attenuation_distance": 48
+      }
+    ]
+  },
+  "item.robot.chainsaw": {
+    "subtitle": "subtitles.enderite.robot.chainsaw",
+    "sounds": [
+      {
+        "name": "enderite:robot/chainsaw"
+      }
+    ]
+  },
+  "item.robot.rocket_launch": {
+    "subtitle": "subtitles.enderite.robot.rocket_launch",
+    "sounds": [
+      {
+        "name": "minecraft:entity.firework_rocket.launch",
+        "type": "event",
+        "pitch": 0.7,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:entity.blaze.shoot",
+        "type": "event",
+        "pitch": 1.4,
+        "volume": 0.6
+      }
+    ]
+  },
+  "item.robot.rocket_explode": {
+    "subtitle": "subtitles.enderite.robot.rocket_explode",
+    "sounds": [
+      {
+        "name": "minecraft:entity.generic.explode",
+        "type": "event",
+        "pitch": 1.3,
+        "volume": 0.8
+      }
+    ]
+  },
+  "item.robot.no_ammo": {
+    "subtitle": "subtitles.enderite.robot.no_ammo",
+    "sounds": [
+      {
+        "name": "minecraft:block.dispenser.fail",
+        "type": "event",
+        "pitch": 1.2,
+        "volume": 1.0
+      }
+    ]
+  },
+  "item.robot.short_circuit": {
+    "subtitle": "subtitles.enderite.robot.short_circuit",
+    "sounds": [
+      {
+        "name": "minecraft:block.fire.extinguish",
+        "type": "event",
+        "pitch": 1.6,
+        "volume": 1.0
+      }
+    ]
+  },
+  "item.robot.equip": {
+    "subtitle": "subtitles.enderite.robot.equip",
+    "sounds": [
+      {
+        "name": "minecraft:item.armor.equip_iron",
+        "type": "event",
+        "pitch": 0.8,
+        "volume": 1.0
+      }
+    ]
+  },
+  "block.engineering_table.build": {
+    "subtitle": "subtitles.enderite.engineering.build",
+    "sounds": [
+      {
+        "name": "minecraft:block.smithing_table.use",
+        "type": "event",
+        "pitch": 1.1,
+        "volume": 1.0
+      }
+    ]
+  },
+  "block.magnet.hum": {
+    "sounds": [
+      {
+        "name": "minecraft:block.beacon.ambient",
+        "type": "event",
+        "pitch": 1.7,
+        "volume": 0.6
+      }
+    ]
+  },
+  "item.magnet.on": {
+    "subtitle": "subtitles.enderite.magnet.on",
+    "sounds": [
+      {
+        "name": "minecraft:block.beacon.activate",
+        "type": "event",
+        "pitch": 1.7,
+        "volume": 1.0
+      }
+    ]
+  },
+  "item.magnet.off": {
+    "subtitle": "subtitles.enderite.magnet.off",
+    "sounds": [
+      {
+        "name": "minecraft:block.beacon.deactivate",
+        "type": "event",
+        "pitch": 1.7,
         "volume": 1.0
       }
     ]

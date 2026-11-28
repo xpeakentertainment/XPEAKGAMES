@@ -76,6 +76,8 @@ public class CrawlerEntity extends Monster {
     private Vec3 lastCheckPos = Vec3.ZERO;
     private double bestDistance = Double.MAX_VALUE;
     private int ownerMissingTicks;
+    private boolean sawTargetLastTick;
+    private int seeCooldown;
 
     public CrawlerEntity(EntityType<? extends Monster> type, Level level) {
         super(type, level);
@@ -169,6 +171,10 @@ public class CrawlerEntity extends Monster {
         super.tick();
         if (!this.level().isClientSide) {
             this.setFlag(FLAG_CLIMBING, this.horizontalCollision);
+            // Escalar suena igual que los pasos
+            if (this.isClimbing() && this.getDeltaMovement().y > 0.01D && this.tickCount % 7 == 0) {
+                this.playSound(ModSounds.CRAWLER_STEP.get(), 0.9F, 0.85F + this.random.nextFloat() * 0.3F);
+            }
         }
     }
 
@@ -192,9 +198,22 @@ public class CrawlerEntity extends Monster {
         }
 
         LivingEntity target = this.getTarget();
+        if (inLimbo) tickSeeSound(level, target);
         updateSpeed(target);
         tickDigging(level, target, inLimbo);
         if (inLimbo && target instanceof ServerPlayer player) tickRelocation(level, player);
+    }
+
+    /** "I see you": suena cuando te ve en el Limbo (y otra vez si te pierde de vista y te vuelve a encontrar). */
+    private void tickSeeSound(ServerLevel level, @Nullable LivingEntity target) {
+        if (seeCooldown > 0) seeCooldown--;
+        boolean sees = target instanceof Player && target.isAlive() && this.distanceToSqr(target) < 56.0D * 56.0D
+                && this.hasLineOfSight(target);
+        if (sees && !sawTargetLastTick && seeCooldown <= 0) {
+            level.playSound(null, this.getX(), this.getEyeY(), this.getZ(), ModSounds.CRAWLER_SEE.get(), SoundSource.HOSTILE, 4.0F, 1.0F);
+            seeCooldown = 20 * 25;
+        }
+        sawTargetLastTick = sees;
     }
 
     /** Lento si lo miras, rapido si no. */

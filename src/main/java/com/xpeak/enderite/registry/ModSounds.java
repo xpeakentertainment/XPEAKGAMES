@@ -16,6 +16,17 @@ public final class ModSounds {
     public static final RegistryObject<SoundEvent> CRAWLER_STEP = sound("entity.crawler.step");
     public static final RegistryObject<SoundEvent> CRAWLER_HURT = sound("entity.crawler.hurt");
     public static final RegistryObject<SoundEvent> CRAWLER_DEATH = sound("entity.crawler.death");
+    public static final RegistryObject<SoundEvent> CRAWLER_SEE = sound("entity.crawler.see");
+    public static final RegistryObject<SoundEvent> ROBOT_CHAINSAW = sound("item.robot.chainsaw");
+    public static final RegistryObject<SoundEvent> ROBOT_ROCKET_LAUNCH = sound("item.robot.rocket_launch");
+    public static final RegistryObject<SoundEvent> ROBOT_ROCKET_EXPLODE = sound("item.robot.rocket_explode");
+    public static final RegistryObject<SoundEvent> ROBOT_NO_AMMO = sound("item.robot.no_ammo");
+    public static final RegistryObject<SoundEvent> ROBOT_SHORT_CIRCUIT = sound("item.robot.short_circuit");
+    public static final RegistryObject<SoundEvent> ROBOT_EQUIP = sound("item.robot.equip");
+    public static final RegistryObject<SoundEvent> ENGINEERING_BUILD = sound("block.engineering_table.build");
+    public static final RegistryObject<SoundEvent> MAGNET_HUM = sound("block.magnet.hum");
+    public static final RegistryObject<SoundEvent> MAGNET_ON = sound("item.magnet.on");
+    public static final RegistryObject<SoundEvent> MAGNET_OFF = sound("item.magnet.off");
     public static final RegistryObject<SoundEvent> LIMBO_AMBIENT = sound("ambient.limbo.loop");
     public static final RegistryObject<SoundEvent> LIMBO_ENTER = sound("ambient.limbo.enter");
     public static final RegistryObject<SoundEvent> LIMBO_HEARTBEAT = sound("ambient.limbo.heartbeat");
