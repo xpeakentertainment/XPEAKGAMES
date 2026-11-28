@@ -75,6 +75,8 @@ public class CrawlerEntity extends Monster {
     private int noProgressTicks;
     private Vec3 lastCheckPos = Vec3.ZERO;
     private double bestDistance = Double.MAX_VALUE;
+    private double digBestDistance = Double.MAX_VALUE;
+    private int digNoProgressTicks;
     private int ownerMissingTicks;
     private boolean sawTargetLastTick;
     private int seeCooldown;
@@ -286,16 +288,26 @@ public class CrawlerEntity extends Monster {
                 setFlag(FLAG_DIGGING, false);
                 stuckTicks = 0;
                 noProgressTicks = 0;
+                digNoProgressTicks = 0;
+                digBestDistance = this.distanceTo(target);
             }
             return;
         }
 
         double dist = this.distanceTo(target);
         if (dist < 1.6D) return;
+        // Si en 3 segundos no se ha acercado ni un bloque (da vueltas, sube y baja una pared...) y no te ve: abre camino
+        if (dist < digBestDistance - 1.0D) {
+            digBestDistance = dist;
+            digNoProgressTicks = 0;
+        } else {
+            digNoProgressTicks++;
+        }
         Path path = this.getNavigation().getPath();
         boolean cantReach = path == null || !path.canReach() || this.getNavigation().isDone();
-        boolean wantDig = stuckTicks >= 20 || (cantReach && !this.hasLineOfSight(target) && stuckTicks >= 10)
-                || (this.horizontalCollision && stuckTicks >= 10 && !this.isClimbing());
+        boolean noLos = !this.hasLineOfSight(target);
+        boolean wantDig = stuckTicks >= 20 || (cantReach && noLos && stuckTicks >= 10)
+                || (digNoProgressTicks >= 60 && noLos);
         if (wantDig && this.tickCount % 4 == 0) {
             BlockPos p = findBlockToBreak(level, target);
             if (p != null) {
@@ -384,6 +396,8 @@ public class CrawlerEntity extends Monster {
             this.teleportTo(p.x, p.y, p.z);
             this.getNavigation().stop();
             noProgressTicks = 0;
+            digNoProgressTicks = 0;
+            digBestDistance = Double.MAX_VALUE;
             bestDistance = this.distanceToSqr(player);
             level.playSound(null, this.getX(), this.getY(), this.getZ(), ModSounds.CRAWLER_AMBIENT.get(), SoundSource.HOSTILE, 3.0F, 0.6F);
         }

@@ -67,6 +67,8 @@ public final class ClientTest {
     private static BlockPos bed;
     private static double quickY, hangY;
     private static volatile int serverPhase = -99;
+    private static int chaseStart = -1;
+    private static volatile boolean chaseDone;
 
     private static void check(String name, boolean ok, String detail) {
         if (ok) passed++;
@@ -483,19 +485,40 @@ public final class ClientTest {
                 next();
             }
             case 26 -> {
-                if (!after(200)) return;
-                shot("13_limbo_crawler_tercera");
-                mc.options.setCameraType(CameraType.FIRST_PERSON);
+                // 10 s y captura; despues se le dan hasta 20 s mas para llegar (el jugador esta dentro de una casa cerrada)
+                if (chaseStart < 0) {
+                    if (!after(200)) return;
+                    shot("13_limbo_crawler_tercera");
+                    mc.options.setCameraType(CameraType.FIRST_PERSON);
+                    chaseStart = t;
+                }
+                if (chaseDone) {
+                    chaseStart = -1;
+                    chaseDone = false;
+                    waitStart = t;
+                    next();
+                    return;
+                }
+                if (t % 10 != 0) return;
+                final int elapsed = t - chaseStart;
                 server(sp -> {
+                    if (chaseDone) return;
                     CrawlerEntity c = null;
                     for (Entity e : sp.serverLevel().getAllEntities()) if (e instanceof CrawlerEntity ce) c = ce;
-                    note(String.format("tras 10 s: vida jugador=%.1f, crawler a %.1f bloques",
-                            sp.getHealth(), c == null ? -1.0F : c.distanceTo(sp)));
-                    check("el Crawler persigue al jugador", c != null && (c.distanceTo(sp) < 6.0F || sp.getHealth() < 20.0F),
-                            c == null ? "sin crawler" : String.format("%.1f", c.distanceTo(sp)));
-                    sp.setHealth(20.0F);
+                    float d = c == null ? -1.0F : c.distanceTo(sp);
+                    boolean caught = c != null && (d < 4.0F || sp.getHealth() < 20.0F);
+                    if (elapsed % 40 == 0 || caught) {
+                        note(String.format("a los %d s: crawler a %.1f bloques%s, vida jugador=%.1f", 10 + elapsed / 20, d,
+                                c == null ? "" : String.format(" (pos %.1f %.1f %.1f, escalando=%s, rompiendo=%s)",
+                                        c.getX(), c.getY(), c.getZ(), c.isClimbing(), c.isDigging()), sp.getHealth()));
+                    }
+                    if (caught || elapsed >= 400) {
+                        chaseDone = true;
+                        check("el Crawler persigue al jugador y entra en la casa", caught,
+                                c == null ? "sin crawler" : String.format("%.1f bloques a los %d s", d, 10 + elapsed / 20));
+                        sp.setHealth(20.0F);
+                    }
                 });
-                next();
             }
             case 27 -> {
                 if (!after(20)) return;
