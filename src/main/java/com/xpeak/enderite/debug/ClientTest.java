@@ -66,6 +66,7 @@ public final class ClientTest {
     private static BlockPos base;
     private static BlockPos bed;
     private static double quickY, hangY;
+    private static volatile int serverPhase = -99;
 
     private static void check(String name, boolean ok, String detail) {
         if (ok) passed++;
@@ -409,8 +410,14 @@ public final class ClientTest {
                 next();
             }
             case 20 -> {
-                if (ClientLimboState.phase() == Limbo.PHASE_ACTIVE) {
+                // Se espera a que el SERVIDOR pase de "cargando" a "activo" (el cliente puede ir por delante si el servidor va lento)
+                if (t % 5 == 0) server(sp -> {
+                    LimboManager.Session ses = LimboManager.getSession(sp);
+                    serverPhase = ses == null ? -1 : ses.phase();
+                });
+                if (serverPhase == Limbo.PHASE_ACTIVE && ClientLimboState.phase() == Limbo.PHASE_ACTIVE) {
                     check("el Limbo termina de copiar el mundo", true, "tras " + (t - waitStart) + " ticks");
+                    serverPhase = -99;
                     next();
                 } else if (t - waitStart > 900) {
                     check("el Limbo termina de copiar el mundo", false, "sigue cargando");

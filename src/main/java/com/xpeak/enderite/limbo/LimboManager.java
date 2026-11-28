@@ -127,6 +127,8 @@ public final class LimboManager {
         SESSIONS.put(player.getUUID(), s);
         saveSession(player, s);
 
+        // Se avisa al cliente ANTES del viaje: asi la pantalla de carga sale desde el primer fotograma en el Limbo
+        ModNetwork.sendLimboState(player, Limbo.PHASE_LOADING, 0);
         player.teleportTo(limbo, s.standPos.x, s.standPos.y, s.standPos.z, player.getYRot(), player.getXRot());
         player.setDeltaMovement(Vec3.ZERO);
         player.resetFallDistance();

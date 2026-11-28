@@ -78,6 +78,11 @@ public final class SelfTest {
         EnderiteMod.LOGGER.info("[SELFTEST] {}", line);
     }
 
+    private static void note(String s) {
+        LOG.add("INFO " + s);
+        EnderiteMod.LOGGER.info("[SELFTEST] {}", s);
+    }
+
     @SubscribeEvent
     public static void onStarted(ServerStartedEvent event) {
         server = event.getServer();
@@ -103,7 +108,8 @@ public final class SelfTest {
             if (tick == 84) quicksandCheck();
             if (tick == 86) robotCheck();
             if (tick == 88) startMagnetCheck();
-            if (tick == 88 + 140) endMagnetCheck();
+            if (tick == 98) spawnMagnetItems();
+            if (tick == 98 + 140) endMagnetCheck();
             if (tick == 90) startRocketCheck();
             if (tick == 90 + 60) endRocketCheck();
             if (portableTicks > 0) tickPortable();
@@ -551,8 +557,15 @@ public final class SelfTest {
     private static void startMagnetCheck() {
         ServerLevel ow = server.overworld();
         int bx = 700, bz = 700;
-        for (int cx = (bx - 32) >> 4; cx <= (bx + 32) >> 4; cx++) for (int cz = (bz - 32) >> 4; cz <= (bz + 32) >> 4; cz++) ow.setChunkForced(cx, cz, true);
-        int y = ow.getHeight(Heightmap.Types.MOTION_BLOCKING, bx, bz) + 1;
+        int maxY = ow.getMinBuildHeight();
+        for (int cx = (bx - 32) >> 4; cx <= (bx + 32) >> 4; cx++) for (int cz = (bz - 32) >> 4; cz <= (bz + 32) >> 4; cz++) {
+            ow.setChunkForced(cx, cz, true);
+            ow.getChunk(cx, cz); // cargarlo ya: sin esto getHeight devuelve el fondo del mundo
+        }
+        for (int dx = -26; dx <= 26; dx++) for (int dz = -3; dz <= 3; dz++)
+            maxY = Math.max(maxY, ow.getHeight(Heightmap.Types.MOTION_BLOCKING, bx + dx, bz + dz));
+        // Pasillo flotando por encima del terreno: nada de cuevas, agua ni lava que molesten
+        int y = maxY + 3;
         for (int dx = -26; dx <= 26; dx++) for (int dz = -3; dz <= 3; dz++) {
             ow.setBlock(new BlockPos(bx + dx, y - 1, bz + dz), Blocks.STONE.defaultBlockState(), 3);
             for (int dy = 0; dy < 5; dy++) ow.setBlock(new BlockPos(bx + dx, y + dy, bz + dz), Blocks.AIR.defaultBlockState(), 3);
@@ -562,18 +575,27 @@ public final class SelfTest {
         ow.setBlock(magnetPos.below(), Blocks.REDSTONE_BLOCK.defaultBlockState(), 3);
         // pared que tapa el lado oeste
         for (int dz = -3; dz <= 3; dz++) for (int dy = 0; dy < 5; dy++) ow.setBlock(new BlockPos(bx - 8, y + dy, bz + dz), Blocks.STONE.defaultBlockState(), 3);
+        check("iman: se enciende con redstone", ow.getBlockState(magnetPos).getValue(com.xpeak.enderite.magnet.MagnetBlock.POWERED), "");
+    }
+
+    private static void spawnMagnetItems() {
+        ServerLevel ow = server.overworld();
+        int bx = magnetPos.getX(), y = magnetPos.getY(), bz = magnetPos.getZ();
         itemFree = new net.minecraft.world.entity.item.ItemEntity(ow, bx + 20.5D, y + 0.1D, bz + 0.5D, new ItemStack(Items.DIAMOND));
         itemWalled = new net.minecraft.world.entity.item.ItemEntity(ow, bx - 15.5D, y + 0.1D, bz + 0.5D, new ItemStack(Items.EMERALD));
         itemFree.setDeltaMovement(0, 0, 0);
         itemWalled.setDeltaMovement(0, 0, 0);
         ow.addFreshEntity(itemFree);
         ow.addFreshEntity(itemWalled);
-        check("iman: se enciende con redstone", ow.getBlockState(magnetPos).getValue(com.xpeak.enderite.magnet.MagnetBlock.POWERED), "");
     }
 
     private static void endMagnetCheck() {
         Vec3 c = Vec3.atCenterOf(magnetPos);
         double dFree = itemFree.position().distanceTo(c), dWall = itemWalled.position().distanceTo(c);
+        ServerLevel lvl = server.overworld();
+        note(String.format("iman en %s, encendido=%s, bloques activos=%s, objeto vivo=%s ticks=%d, entidades activas=%s",
+                magnetPos.toShortString(), lvl.getBlockState(magnetPos).getValue(com.xpeak.enderite.magnet.MagnetBlock.POWERED),
+                lvl.shouldTickBlocksAt(magnetPos), itemFree.isAlive(), itemFree.tickCount, lvl.isPositionEntityTicking(itemFree.blockPosition())));
         check("iman: atrae objetos a 20 bloques", dFree < 3.0D, String.format("distancia=%.1f", dFree));
         check("iman: no atrae a traves de paredes", dWall > 14.0D, String.format("distancia=%.1f", dWall));
         // iman portatil
